@@ -7,7 +7,7 @@ The detailed, task-level implementation plan is
 ## Live status
 
 - [x] Repository governance and directory layout.
-- [ ] Shared profiles, legacy staging, and manifests.
+- [x] Shared profiles, legacy staging, and manifests.
 - [ ] PTC-enabled runtime/lattice smoke check.
 - [ ] Step 1: phase-space stability.
 - [ ] Step 2: tunes without sextupole.
