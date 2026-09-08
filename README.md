@@ -17,7 +17,8 @@ Primary historical references:
 | Governance, plan, and repository layout | complete |
 | Shared configuration and legacy manifests | complete |
 | PTC runtime and lattice smoke check | complete |
-| Steps 1–5 smoke/reference comparisons | pending |
+| Step 1 smoke/reference comparison | complete |
+| Steps 2–5 smoke/reference comparisons | pending |
 | Steps 6–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
