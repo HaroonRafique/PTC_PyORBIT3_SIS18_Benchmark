@@ -35,8 +35,10 @@ under `docs/superpowers/` before non-trivial work.
 - Before claiming a milestone or committing a completed task, follow
   `skills/verification-before-completion/SKILL.md` and retain fresh command
   evidence.
-- Use an isolated Git worktree after the initial baseline exists. Keep commits
-  small and logical.
+- This repository uses **one working branch only: `main`**. Do not create,
+  switch to, or ask the user to use feature branches or Git worktrees unless
+  the user explicitly changes this rule. Keep commits small and logical on
+  `main`, and leave the default checkout directly runnable.
 
 ## Repository rules
 
