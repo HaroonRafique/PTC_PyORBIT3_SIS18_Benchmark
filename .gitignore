@@ -1,0 +1,13 @@
+.venv/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.worktrees/
+step_*/input/staged_legacy/
+step_*/input/generated/
+step_*/output/
+!step_*/output/.gitkeep
+*.flt
+*.mat
+*.npz
+*.log

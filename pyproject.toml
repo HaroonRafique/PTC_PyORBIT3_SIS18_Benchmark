@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sis18-ptc-pyorbit3-benchmark"
+version = "0.1.0"
+description = "Reproduction of the PTC-PyORBIT SIS18 benchmark with PyORBIT3"
+requires-python = ">=3.11"
+dependencies = ["numpy", "matplotlib"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
