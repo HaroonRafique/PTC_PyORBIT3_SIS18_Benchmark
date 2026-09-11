@@ -2,22 +2,22 @@
   "source_page": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/1-benchmarking-phase-space.html",
   "plots": [
     {
-      "label": "MICROMAP",
+      "label": "MICROMAP & SIMPSONS",
       "file": "micromap_phase_space.jpg",
       "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/phase-space.jpg",
       "sha256": "da192bdf2c41bee1c3a636e7b0e148c0c7c2ca08e7cc14d0324e86df31058b70"
-    },
-    {
-      "label": "MADX+ORBITPTC",
-      "file": "madx_orbitptc_phase_space.jpg",
-      "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/trackone-fs-r.jpg",
-      "sha256": "318ff8c087931fb1f7c8fbfe36f7cb7cf562a2848f443667fbb5e97f4c6e0bf5"
     },
     {
       "label": "ORBIT",
       "file": "orbit_phase_space.jpg",
       "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/step1-orbit-JHolmes.jpg",
       "sha256": "e8f5d5d786f5136654ce8e699df9799292678b7b94f928a8f84a72ad490f76e2"
+    },
+    {
+      "label": "MADX+ORBITPTC",
+      "file": "madx_orbitptc_phase_space.jpg",
+      "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/trackone-fs-r.jpg",
+      "sha256": "318ff8c087931fb1f7c8fbfe36f7cb7cf562a2848f443667fbb5e97f4c6e0bf5"
     }
   ]
 }
