@@ -25,7 +25,7 @@ from common.reference_artifacts import maybe_reference_root, sha256_file, stage_
 from common.sis18_comparison import compare_tune_tables
 from common.sis18_config import load_step_config
 from common.sis18_lattice import in_workdir, load_sis18_lattice
-from common.sis18_plots import BENCHMARK_COLORS, CURRENT_MARKER, CURRENT_SCATTER_SIZE, plt
+from common.sis18_plots import BENCHMARK_COLORS, layered_overlay_style, plt
 
 STEP_DIR = Path(__file__).resolve().parent
 WEBSITE_REFERENCE_DIR = ROOT / "shared_inputs" / "reference_plots" / "step_02"
@@ -148,8 +148,8 @@ def _write_table(path: Path, amplitudes: np.ndarray, pynaff: np.ndarray, fft: np
 def _current_plot(path: Path, *, plane: str, amplitudes: np.ndarray, pynaff: np.ndarray, fft: np.ndarray, bare_tune: float) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     figure, axis = plt.subplots(figsize=(6, 6), constrained_layout=True)
-    axis.scatter(amplitudes[1:, 0], absolute_tunes(bare_tune, pynaff), color=BENCHMARK_COLORS["current"], marker=CURRENT_MARKER, s=CURRENT_SCATTER_SIZE, label="PTC-PyORBIT3 PyNAFF")
-    axis.scatter(amplitudes[1:, 0], absolute_tunes(bare_tune, fft), color="#D55E00", marker="s", s=CURRENT_SCATTER_SIZE, label="PTC-PyORBIT3 FFT")
+    axis.scatter(amplitudes[1:, 0], absolute_tunes(bare_tune, pynaff), color=BENCHMARK_COLORS["current"], label="PTC-PyORBIT3 PyNAFF", **layered_overlay_style(0))
+    axis.scatter(amplitudes[1:, 0], absolute_tunes(bare_tune, fft), color="#D55E00", label="PTC-PyORBIT3 FFT", **layered_overlay_style(1))
     axis.set(xlabel=rf"${plane}_0/\sigma_{plane}$", ylabel=rf"$Q_{plane}$", xlim=(0.0, 5.0), ylim=(4.235, 4.340) if plane == "x" else (3.050, 3.205))
     axis.set_box_aspect(1)
     axis.grid(True, alpha=0.3)
@@ -162,9 +162,9 @@ def _current_plot(path: Path, *, plane: str, amplitudes: np.ndarray, pynaff: np.
 def _overlay_plot(path: Path, *, plane: str, legacy: np.ndarray, amplitudes: np.ndarray, pynaff: np.ndarray, fft: np.ndarray) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     figure, axis = plt.subplots(figsize=(6, 6), constrained_layout=True)
-    axis.scatter(legacy[:, 0], legacy[:, 1], color=BENCHMARK_COLORS["legacy"], marker="o", s=CURRENT_SCATTER_SIZE, label="Legacy PTC-PyORBIT")
-    axis.scatter(amplitudes[1:, 1], pynaff, color=BENCHMARK_COLORS["current"], marker=CURRENT_MARKER, s=CURRENT_SCATTER_SIZE, label="PTC-PyORBIT3 PyNAFF")
-    axis.scatter(amplitudes[1:, 1], fft, color="#D55E00", marker="s", s=CURRENT_SCATTER_SIZE, label="PTC-PyORBIT3 FFT")
+    axis.scatter(legacy[:, 0], legacy[:, 1], color=BENCHMARK_COLORS["legacy"], label="Legacy PTC-PyORBIT", **layered_overlay_style(0))
+    axis.scatter(amplitudes[1:, 1], pynaff, color=BENCHMARK_COLORS["current"], label="PTC-PyORBIT3 PyNAFF", **layered_overlay_style(1))
+    axis.scatter(amplitudes[1:, 1], fft, color="#D55E00", label="PTC-PyORBIT3 FFT", **layered_overlay_style(2))
     axis.set(xlabel=rf"effective {plane} amplitude [$\sigma_{plane}$]", ylabel=rf"fractional $Q_{plane}$", xlim=(0.0, 6.5) if plane == "x" else (0.0, 4.5), ylim=(0.2325, 0.3375) if plane == "x" else (0.05, 0.20625))
     axis.set_box_aspect(1)
     axis.grid(True, alpha=0.3)

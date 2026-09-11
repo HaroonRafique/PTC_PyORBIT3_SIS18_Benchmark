@@ -23,6 +23,20 @@ BENCHMARK_COLORS = {
 CURRENT_MARKER = "x"
 CURRENT_LINE_MARKER_SIZE = 1.75
 CURRENT_SCATTER_SIZE = 2.0
+OVERLAY_MARKERS = ("o", "x", "s", "^", "D")
+OVERLAY_SCATTER_SIZES = (16.0, 10.0, 6.0, 4.0, 3.0)
+
+
+def layered_overlay_style(layer: int) -> dict[str, float | int | str]:
+    """Return the explicit marker style for one bottom-to-top data layer."""
+
+    if layer < 0 or layer >= len(OVERLAY_MARKERS):
+        raise ValueError(f"overlay layer must be in [0, {len(OVERLAY_MARKERS) - 1}]")
+    return {
+        "marker": OVERLAY_MARKERS[layer],
+        "s": OVERLAY_SCATTER_SIZES[layer],
+        "zorder": layer + 1,
+    }
 
 
 def plot_sampled_series(

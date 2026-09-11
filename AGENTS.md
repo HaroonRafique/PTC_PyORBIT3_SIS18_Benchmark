@@ -73,6 +73,9 @@ under `docs/superpowers/` before non-trivial work.
   debugging before investigating a runtime failure.
 - Comparison plots must use identical axis limits and axis ratios for matching
   observables, with distinct colours and marker styles for each implementation.
+  In any layered data overlay, draw bottom-to-top series with strictly
+  decreasing marker sizes, increasing z-order, and distinct marker shapes so
+  underlayers remain inspectable.
   Plot transverse positions in mm and transverse slopes in mrad by default;
   retain SI units only where the observable specifically requires them.
   When a legacy output has numeric data, write both a labelled side-by-side

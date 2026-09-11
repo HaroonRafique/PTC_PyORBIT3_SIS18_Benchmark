@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from common.sis18_plots import CURRENT_LINE_MARKER_SIZE, plot_sampled_series
+from common.sis18_plots import CURRENT_LINE_MARKER_SIZE, layered_overlay_style, plot_sampled_series
 
 
 def test_plot_sampled_series_writes_requested_png(tmp_path: Path):
@@ -9,3 +9,11 @@ def test_plot_sampled_series_writes_requested_png(tmp_path: Path):
     assert output.is_file()
     assert output.stat().st_size > 0
     assert CURRENT_LINE_MARKER_SIZE == 1.75
+
+
+def test_layered_overlay_styles_use_distinct_markers_with_descending_sizes():
+    bottom, middle, top = (layered_overlay_style(layer) for layer in range(3))
+
+    assert [bottom["marker"], middle["marker"], top["marker"]] == ["o", "x", "s"]
+    assert bottom["s"] > middle["s"] > top["s"]
+    assert bottom["zorder"] < middle["zorder"] < top["zorder"]
