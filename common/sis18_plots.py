@@ -24,7 +24,7 @@ CURRENT_MARKER = "x"
 CURRENT_LINE_MARKER_SIZE = 1.75
 CURRENT_SCATTER_SIZE = 2.0
 OVERLAY_MARKERS = ("o", "x", "s", "^", "D")
-OVERLAY_SCATTER_SIZES = (16.0, 10.0, 6.0, 4.0, 3.0)
+OVERLAY_SCATTER_SIZES = (64.0, 24.0, 8.0, 4.0, 2.0)
 
 
 def layered_overlay_style(layer: int) -> dict[str, float | int | str]:

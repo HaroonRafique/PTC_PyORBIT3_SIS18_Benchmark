@@ -16,4 +16,6 @@ def test_layered_overlay_styles_use_distinct_markers_with_descending_sizes():
 
     assert [bottom["marker"], middle["marker"], top["marker"]] == ["o", "x", "s"]
     assert bottom["s"] > middle["s"] > top["s"]
+    assert bottom["s"] >= 2 * middle["s"]
+    assert middle["s"] >= 2 * top["s"]
     assert bottom["zorder"] < middle["zorder"] < top["zorder"]
