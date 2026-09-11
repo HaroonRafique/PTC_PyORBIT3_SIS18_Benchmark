@@ -96,7 +96,7 @@ def main(argv: list[str] | None = None) -> int:
         full_comparison = plot_legacy_comparison(full_reference, full, plots / "legacy_vs_current_full.png", title="SIS18 Step 1 Poincare stability")
         zoom_comparison = plot_legacy_comparison(zoom_reference, zoom, plots / "legacy_vs_current_zoom.png", title="SIS18 Step 1 horizontal phase-space zoom")
         website_manifest = json.loads((WEBSITE_REFERENCE_DIR / "reference_manifest.json").read_text(encoding="utf-8"))
-        website_references = [(entry["label"], WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"]]
+        website_references = [("PTC-PyORBIT2", zoom_reference), *((entry["label"], WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"])]
         website_comparison = plot_same_axes_references(current=zoom, references=website_references, output=plots / "website_vs_current_horizontal_phase_space.png")
         (output / "comparison.md").write_text(f"# Step 1 comparison\n\n- Legacy full plot: `{full_reference}`\n- Public original references: `{website_manifest['source_page']}`\n- Survivors: {bunch.getSize()}/{particles}\n- New/legacy panels: `{full_comparison.name}`, `{zoom_comparison.name}`, `{website_comparison.name}`\n- Assessment: no-space-charge baseline; inspect phase-space topology and confirm no losses.\n", encoding="utf-8")
         reference_artifacts = {str(path.name): sha256_file(path) for path in (full_reference, zoom_reference, *(path for _, path in website_references))}
