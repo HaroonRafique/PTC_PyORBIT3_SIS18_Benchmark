@@ -19,7 +19,8 @@ under `docs/superpowers/` before non-trivial work.
   configuration, MPI, PTC tracking, diagnostics, plotting, and output
   conventions. Do not import it at runtime or alter its unrelated worktree.
 - `/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark`: read-only historical
-  inputs and result artifacts. Resolve it through `SIS18_LEGACY_ROOT`.
+  result artifacts only. Resolve it through `SIS18_REFERENCE_ROOT`; never
+  write to it or copy its outputs into this repository.
 - `/home/hr/Repositories/superpowers`: required development methodology.
 
 ## Required development method
@@ -47,11 +48,16 @@ under `docs/superpowers/` before non-trivial work.
   the individual step configuration/runner.
 - Every `step_XX_*` directory is independently runnable and contains a local
   `example_config.json`, zero-argument `run_example.sh`, readable Python
-  runner, `input/`, and `output/`. Generated artifacts must stay beneath that
-  step directory.
-- Do not vendor the 155 MB legacy repository or write to it. Stage only
-  required files into a step-local ignored input directory and hash each file
-  in the run manifest.
+  runner, tracked `legacy_input/`, tracked `input/generated/`, and ignored
+  `output/`. Generated artifacts must stay beneath that step directory.
+- Each `legacy_input/` contains the exact historical MAD-X/PTC inputs needed
+  by its step. Copy its files only into that step's tracked
+  `input/generated/<profile>/madx/Input/` workspace; commit both directories
+  after verified generation, including the MAD-X log and PTC flat file.
+- Do not vendor the 155 MB legacy repository or copy/write its outputs. Read
+  historical output data and plots in place through `SIS18_REFERENCE_ROOT`
+  solely to make comparisons, and hash every referenced artifact in the run
+  manifest.
 - Design generic helpers so they can be moved to
   `ptc_pyorbit3_examples/common/` unchanged or with a thin adapter: accept
   explicit paths/configuration, use public docstrings/types, and contain no
@@ -64,8 +70,9 @@ under `docs/superpowers/` before non-trivial work.
 ## Required reproducibility evidence
 
 Each run must record resolved configuration, command, profile, seed, MPI size,
-MAD-X path/version, PyORBIT3 and PTC commit IDs, input/reference hashes, PTC
-lattice summary, structured diagnostics, plots, and comparison outcome.
+MAD-X path/version, PyORBIT3 and PTC commit IDs, packaged/generated
+input hashes, reference-artifact hashes when compared, PTC lattice summary,
+structured diagnostics, plots, and comparison outcome.
 
 ## Benchmark scope
 

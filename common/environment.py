@@ -18,24 +18,20 @@ DEFAULT_MADX = Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_
 class RuntimePaths:
     pyorbit3_root: Path
     madx: Path
-    legacy_root: Path
 
 
 def resolve_runtime_paths(
-    *, pyorbit3_root: Path = DEFAULT_PYORBIT3_ROOT, madx: Path = DEFAULT_MADX, legacy: Path
+    *, pyorbit3_root: Path = DEFAULT_PYORBIT3_ROOT, madx: Path = DEFAULT_MADX
 ) -> RuntimePaths:
-    """Validate and resolve the three external runtime roots."""
+    """Validate and resolve the PyORBIT3 and MAD-X runtime paths."""
 
     pyorbit3_root = pyorbit3_root.resolve()
     madx = madx.resolve()
-    legacy = legacy.resolve()
     if not pyorbit3_root.is_dir():
         raise FileNotFoundError(f"PyORBIT3 root does not exist: {pyorbit3_root}")
-    if not legacy.is_dir():
-        raise FileNotFoundError(f"Legacy benchmark root does not exist: {legacy}")
     if not madx.is_file() or not os.access(madx, os.X_OK):
         raise FileNotFoundError(f"MAD-X executable is unavailable or not executable: {madx}")
-    return RuntimePaths(pyorbit3_root=pyorbit3_root, madx=madx, legacy_root=legacy)
+    return RuntimePaths(pyorbit3_root=pyorbit3_root, madx=madx)
 
 
 def prepare_pyorbit3_runtime(paths: RuntimePaths, runtime_dir: Path) -> Path:

@@ -27,3 +27,14 @@ A step is complete only after its test-first implementation, smoke run,
 required plots, reference comparison, manifest, and README status update have
 fresh verification evidence. Record blockers and physics discrepancies here
 before changing the next step.
+
+## Input and reference artifact policy
+
+Each step versions its exact legacy MAD-X/PTC source files in `legacy_input/`
+and its verified generated MAD-X/PTC workspace in `input/generated/`.
+Historical result artifacts are not copied: comparisons read them in place from
+`SIS18_REFERENCE_ROOT` and record their hashes in the run manifest.
+
+Step 1's smoke and reference MAD-X/PTC workspaces were regenerated from its
+versioned local inputs on 2026-09-11; both record the 504-node,
+216.7199934718 m SIS18 PTC lattice.

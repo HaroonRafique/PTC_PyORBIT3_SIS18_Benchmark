@@ -3,5 +3,5 @@
   "n_sigma": 6.42,
   "space_charge": false,
   "snapshot_turns": "all",
-  "reference_plot": "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step1/output/Poincare_Dist_SIS18_Step1.png"
+  "reference_root_env": "SIS18_REFERENCE_ROOT"
 }

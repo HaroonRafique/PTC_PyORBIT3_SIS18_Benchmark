@@ -1,0 +1,3 @@
+# Preserve historical and generated MAD-X/PTC evidence byte-for-byte.
+step_*/legacy_input/** -text -whitespace
+step_*/input/generated/** -text -whitespace

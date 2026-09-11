@@ -28,25 +28,31 @@ Primary historical references:
 - `shared_inputs/`: shared profiles, artifact manifest, MAD-X/PTC templates.
 - `common/`: portable helpers designed against the active examples suite.
 - `step_01_*` through `step_09_*`: independently runnable benchmark cases;
-  each owns its `input/` staging and `output/` artifacts.
+  each owns versioned `legacy_input/`, versioned generated `input/`, and
+  ignored `output/` artifacts.
 - `BENCHMARK_PLAN.md`: live execution/checklist status.
 - `docs/superpowers/`: approved design and detailed implementation plan.
 
-## Runtime policy
+## Runtime and reference policy
 
-The legacy checkout is read only. Set `SIS18_LEGACY_ROOT` to override the
-default `/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark`. The default MAD-X
-binary is `../ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00`; it can
-be overridden in an example configuration. Every run writes its configuration,
-input hashes, command, MPI size, seed, and code revisions to its step-local
-manifest.
+Each step tracks its historical MAD-X/PTC sources in `legacy_input/` and the
+verified generated MAD-X/PTC workspace in `input/generated/`; no historical
+input checkout is required to run it. Historical output artifacts remain
+read-only and external. Set `SIS18_REFERENCE_ROOT` to override the default
+`/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark` when generating comparison
+plots. The default MAD-X binary is
+`../ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00`; it can be
+overridden in an example configuration. Every run writes its configuration,
+input hashes, command, MPI size, seed, code revisions, and reference hashes
+when used to its step-local manifest.
 
 The normal interface, once the runners exist, is:
 
 ```bash
 cd step_01_phase_space_stability
 ./run_example.sh --profile smoke
-./run_example.sh --profile reference --mpi-procs 2
+./run_example.sh --profile reference
+./run_example.sh --profile smoke --skip-reference-comparison
 ```
 
 Use smoke profiles before reference profiles. Steps 8 and 9 remain gated until
