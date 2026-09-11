@@ -1,6 +1,6 @@
 import numpy as np
 
-from step_02_tunes_no_sextupole.run_tunes_no_sextupole import _write_table, absolute_tunes
+from step_02_tunes_no_sextupole.run_tunes_no_sextupole import _write_table, absolute_tunes, tracking_parameters
 
 
 def test_step_2_absolute_tunes_preserve_the_bare_tune_integer_part():
@@ -21,3 +21,11 @@ def test_step_2_writes_separate_pynaff_and_fft_tune_tables(tmp_path):
     assert (tmp_path / "tunes_x_pynaff.csv").is_file()
     assert (tmp_path / "tunes_x_fft.csv").is_file()
     assert "4.237" in table.read_text(encoding="utf-8")
+
+
+def test_step_2_tracking_parameters_include_the_aperture_lost_bunch():
+    assert tracking_parameters(bunch="main", lostbunch="lost", length_m=12.5) == {
+        "bunch": "main",
+        "lostbunch": "lost",
+        "length": 12.5,
+    }

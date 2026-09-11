@@ -71,6 +71,12 @@ def _apply_restoring_force(bunch) -> None:
         bunch.dE(index, bunch.dE(index) + bunch.z(index) * RESTORING_FORCE)
 
 
+def tracking_parameters(*, bunch, lostbunch, length_m: float) -> dict:
+    """Return the PTC tracking context required by lattice and aperture nodes."""
+
+    return {"bunch": bunch, "lostbunch": lostbunch, "length": length_m}
+
+
 def _plane_values(lattice, bunch, plane: str, particles: int) -> tuple[np.ndarray, np.ndarray, float]:
     beta = lattice.betax0 if plane == "x" else lattice.betay0
     alpha = lattice.alphax0 if plane == "x" else lattice.alphay0
@@ -173,8 +179,14 @@ def _run_plane(*, flat: Path, inputs: Path, config, plane: str, particles: int, 
         bunch.addParticle(*coordinate)
     for index in range(bunch.getSize()):
         bunch.partAttrValue("macrosize", index, 0, config.intensity / particles)
+    from orbit.core.bunch import Bunch
+
+    lostbunch = Bunch()
+    bunch.copyEmptyBunchTo(lostbunch)
+    lostbunch.addPartAttr("ParticlePhaseAttributes")
+    lostbunch.addPartAttr("LostParticleAttributes")
     trajectories = [_snapshot(bunch)]
-    parameters = {"bunch": bunch, "length": lattice.getLength() / lattice.nHarm}
+    parameters = tracking_parameters(bunch=bunch, lostbunch=lostbunch, length_m=lattice.getLength() / lattice.nHarm)
     for _ in range(turns):
         lattice.trackBunch(bunch, parameters)
         _apply_restoring_force(bunch)

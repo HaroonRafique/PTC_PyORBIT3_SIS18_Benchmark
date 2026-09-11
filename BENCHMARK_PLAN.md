@@ -11,8 +11,8 @@ The detailed, task-level implementation plan is
 - [x] PTC-enabled runtime/lattice smoke check: MAD-X 5.02 generated and PTC
   loaded the Step 1 lattice (504 nodes, 216.7199934718 m, gamma 1.01215003).
 - [x] Step 1: phase-space stability (smoke and 20-particle/1,024-turn reference run).
-- [ ] Step 2: frozen-space-charge tunes without sextupole (implemented;
-  awaiting user smoke/reference runs and review).
+- [ ] Step 2: frozen-space-charge tunes without sextupole (smoke complete;
+  reference run and review pending).
 - [ ] Step 3: tunes with sextupole.
 - [ ] Step 4: resonance-crossing tunes.
 - [ ] Step 5: phase-space island.
@@ -51,3 +51,8 @@ historical numeric `Tunes_OnData.txt` tables remain external and are read via
 their URLs and SHA-256 digests. A verified run must stage and commit its local
 `input/generated/<profile>/madx/` workspace before this checklist item can be
 completed.
+
+The Step 2 smoke profile completed on 2026-09-11 with 8 particles per plane
+for 32 turns, a 504-node / 216.7199934718 m PTC lattice, and 504 frozen-SC
+nodes per plane. It writes both PyNAFF and FFT tune tables plus the required
+numeric and visual comparisons; its reference-profile run remains pending.

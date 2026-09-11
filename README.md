@@ -18,7 +18,7 @@ Primary historical references:
 | Shared configuration and legacy manifests | complete |
 | PTC runtime and lattice smoke check | complete |
 | Step 1 smoke/reference comparison | complete |
-| Step 2 frozen-space-charge tune scan | implemented; awaiting user run |
+| Step 2 frozen-space-charge tune scan | smoke complete; reference pending |
 | Steps 2–5 smoke/reference comparisons | pending |
 | Steps 6–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |
