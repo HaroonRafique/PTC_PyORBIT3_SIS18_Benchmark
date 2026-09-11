@@ -7,7 +7,8 @@ name = "sis18-ptc-pyorbit3-benchmark"
 version = "0.1.0"
 description = "Reproduction of the PTC-PyORBIT SIS18 benchmark with PyORBIT3"
 requires-python = ">=3.11"
-dependencies = ["numpy", "matplotlib"]
+dependencies = ["numpy", "matplotlib", "PyNAFF"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]

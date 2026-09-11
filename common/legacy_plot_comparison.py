@@ -12,13 +12,28 @@ from .sis18_plots import plt
 def plot_legacy_comparison(legacy: Path, current: Path, output: Path, *, title: str) -> Path:
     """Write a labelled legacy/current side-by-side PNG without copying inputs."""
 
-    if not legacy.is_file():
-        raise FileNotFoundError(f"Legacy comparison plot is missing: {legacy}")
-    if not current.is_file():
-        raise FileNotFoundError(f"Current comparison plot is missing: {current}")
+    return plot_labeled_comparison(
+        legacy,
+        current,
+        output,
+        title=title,
+        left_label="Legacy PTC-PyORBIT",
+        right_label="PTC-PyORBIT3",
+    )
+
+
+def plot_labeled_comparison(
+    left: Path, right: Path, output: Path, *, title: str, left_label: str, right_label: str
+) -> Path:
+    """Write a labelled two-panel visual comparison without copying inputs."""
+
+    if not left.is_file():
+        raise FileNotFoundError(f"Left comparison plot is missing: {left}")
+    if not right.is_file():
+        raise FileNotFoundError(f"Right comparison plot is missing: {right}")
     output.parent.mkdir(parents=True, exist_ok=True)
     figure, axes = plt.subplots(1, 2, figsize=(14, 7), constrained_layout=True)
-    for axis, image, label in ((axes[0], legacy, "Legacy PTC-PyORBIT"), (axes[1], current, "PTC-PyORBIT3")):
+    for axis, image, label in ((axes[0], left, left_label), (axes[1], right, right_label)):
         axis.imshow(plt.imread(image))
         axis.set(title=label)
         axis.axis("off")

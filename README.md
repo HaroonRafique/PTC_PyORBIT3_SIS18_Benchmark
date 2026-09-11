@@ -18,6 +18,7 @@ Primary historical references:
 | Shared configuration and legacy manifests | complete |
 | PTC runtime and lattice smoke check | complete |
 | Step 1 smoke/reference comparison | complete |
+| Step 2 frozen-space-charge tune scan | implemented; awaiting user run |
 | Steps 2–5 smoke/reference comparisons | pending |
 | Steps 6–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |
@@ -53,7 +54,16 @@ cd step_01_phase_space_stability
 ./run_example.sh --profile smoke
 ./run_example.sh --profile reference
 ./run_example.sh --profile smoke --skip-reference-comparison
+
+cd ../step_02_tunes_no_sextupole
+SIS18_REFERENCE_ROOT=/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark ./run_example.sh --profile smoke
+SIS18_REFERENCE_ROOT=/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark ./run_example.sh --profile reference
 ```
 
 Use smoke profiles before reference profiles. Steps 8 and 9 remain gated until
 their prior steps have verified reference outputs.
+
+Step 2 requires the declared `PyNAFF` dependency. It tracks the horizontal and
+vertical frozen-space-charge scans sequentially, writes PyNAFF-compatible
+numeric comparisons plus an FFT cross-check, and packages original GSI plot
+references with source URLs and SHA-256 digests.

@@ -1,0 +1,17 @@
+{
+  "source_page": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/2-benchmarking-tunes_vs_xy.html",
+  "plots": [
+    {
+      "label": "Horizontal tune vs x",
+      "file": "qx_vs_x_sex-off.jpg",
+      "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/qx_vs_x_sex-off.jpg",
+      "sha256": "618b21f44a69d45f0f06a3df50c6a68da4ca1faf4e04492e5e0281acfb3310b5"
+    },
+    {
+      "label": "Vertical tune vs y",
+      "file": "qy_vs_y_sex-off.jpg",
+      "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/qy_vs_y_sex-off.jpg",
+      "sha256": "7ad5a51dce9b1ed58259c396673832e962c2e092daffd2486b0cbfee27b3d969"
+    }
+  ]
+}

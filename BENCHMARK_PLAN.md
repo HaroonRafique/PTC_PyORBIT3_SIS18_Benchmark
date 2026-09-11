@@ -11,7 +11,8 @@ The detailed, task-level implementation plan is
 - [x] PTC-enabled runtime/lattice smoke check: MAD-X 5.02 generated and PTC
   loaded the Step 1 lattice (504 nodes, 216.7199934718 m, gamma 1.01215003).
 - [x] Step 1: phase-space stability (smoke and 20-particle/1,024-turn reference run).
-- [ ] Step 2: tunes without sextupole.
+- [ ] Step 2: frozen-space-charge tunes without sextupole (implemented;
+  awaiting user smoke/reference runs and review).
 - [ ] Step 3: tunes with sextupole.
 - [ ] Step 4: resonance-crossing tunes.
 - [ ] Step 5: phase-space island.
@@ -42,3 +43,11 @@ versioned local inputs on 2026-09-11; both record the 504-node,
 Step 1's external reference retains PNG plots but no `.mat` particle data, so
 its comparison remains side-by-side visual panels. The legacy Python 2.7
 PTC-PyORBIT environment is not rerun to reconstruct those artifacts.
+
+Step 2 uses frozen analytical Gaussian space charge at `z=dE=0`, with the
+sextupole disabled and public bare tunes `(Qx, Qy) = (4.338, 3.2)`. Its
+historical numeric `Tunes_OnData.txt` tables remain external and are read via
+`SIS18_REFERENCE_ROOT`; the two original GSI raster plots are versioned with
+their URLs and SHA-256 digests. A verified run must stage and commit its local
+`input/generated/<profile>/madx/` workspace before this checklist item can be
+completed.

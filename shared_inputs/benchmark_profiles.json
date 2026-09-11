@@ -1,7 +1,7 @@
 {
   "steps": {
     "1": {"intensity": 2.95e10, "n_macroparticles": 20, "turns": 1024, "sextupole_enabled": true, "qx": 3.2, "qy": 4.338, "distribution": "poincare", "profile_overrides": {"smoke": {"n_macroparticles": 8, "turns": 16}}},
-    "2": {"intensity": 2.95e10, "n_macroparticles": 100, "turns": 1024, "sextupole_enabled": false, "qx": 3.2, "qy": 4.338, "distribution": "amplitude_scan", "profile_overrides": {"smoke": {"n_macroparticles": 8, "turns": 32}}},
+    "2": {"intensity": 2.95e10, "n_macroparticles": 100, "turns": 1024, "sextupole_enabled": false, "qx": 4.338, "qy": 3.2, "distribution": "amplitude_scan", "profile_overrides": {"smoke": {"n_macroparticles": 8, "turns": 32}}},
     "3": {"intensity": 2.95e10, "n_macroparticles": 100, "turns": 1024, "sextupole_enabled": true, "qx": 3.2, "qy": 4.338, "distribution": "amplitude_scan", "profile_overrides": {"smoke": {"n_macroparticles": 8, "turns": 32}}},
     "4": {"intensity": 2.95e10, "n_macroparticles": 100, "turns": 1024, "sextupole_enabled": true, "qx": 3.2, "qy": 4.3504, "distribution": "amplitude_scan", "profile_overrides": {"smoke": {"n_macroparticles": 8, "turns": 32}}},
     "5": {"intensity": 2.95e10, "n_macroparticles": 16, "turns": 1500, "sextupole_enabled": true, "qx": 3.2, "qy": 4.3504, "distribution": "poincare", "profile_overrides": {"smoke": {"n_macroparticles": 8, "turns": 32}}},

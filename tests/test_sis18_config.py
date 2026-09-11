@@ -5,6 +5,9 @@ import pytest
 from common.sis18_config import load_step_config
 
 
+ROOT = Path(__file__).resolve().parents[1]
+
+
 def test_smoke_profile_preserves_step_physics_and_reduces_cost(tmp_path: Path):
     profiles = tmp_path / "profiles.json"
     profiles.write_text(
@@ -40,3 +43,10 @@ def test_unknown_profile_is_rejected(tmp_path: Path):
 
     with pytest.raises(ValueError, match="profile"):
         load_step_config(profiles, step=1, profile="fast")
+
+
+def test_step_2_uses_public_bare_tunes():
+    reference = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=2, profile="reference")
+
+    assert reference.qx == 4.338
+    assert reference.qy == 3.2
