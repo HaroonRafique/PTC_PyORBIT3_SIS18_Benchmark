@@ -19,13 +19,14 @@ from common.environment import prepare_pyorbit3_runtime, resolve_runtime_paths
 from common.reference_artifacts import maybe_reference_root, sha256_file, stage_packaged_inputs
 from common.madx import generate_flat_file
 from common.manifest import write_run_manifest
-from common.legacy_plot_comparison import plot_legacy_comparison
+from common.legacy_plot_comparison import plot_legacy_comparison, plot_same_axes_references
 from common.poincare_distribution import horizontal_poincare_coordinates
 from common.poincare_plots import plot_poincare_views
 from common.sis18_config import load_step_config
 from common.sis18_lattice import load_sis18_lattice
 
 STEP_DIR = Path(__file__).resolve().parent
+WEBSITE_REFERENCE_DIR = ROOT / "shared_inputs" / "reference_plots" / "step_01"
 
 
 @contextmanager
@@ -94,9 +95,12 @@ def main(argv: list[str] | None = None) -> int:
         zoom_reference = reference_output / "Poincare_Dist_SIS18_Step1_zoom.png"
         full_comparison = plot_legacy_comparison(full_reference, full, plots / "legacy_vs_current_full.png", title="SIS18 Step 1 Poincare stability")
         zoom_comparison = plot_legacy_comparison(zoom_reference, zoom, plots / "legacy_vs_current_zoom.png", title="SIS18 Step 1 horizontal phase-space zoom")
-        (output / "comparison.md").write_text(f"# Step 1 comparison\n\n- Legacy full plot: `{full_reference}`\n- Survivors: {bunch.getSize()}/{particles}\n- New/legacy panels: `{full_comparison.name}`, `{zoom_comparison.name}`\n- Assessment: no-space-charge baseline; inspect phase-space topology and confirm no losses.\n", encoding="utf-8")
-        reference_artifacts = {str(path.name): sha256_file(path) for path in (full_reference, zoom_reference)}
-        plot_paths.extend((str(full_comparison), str(zoom_comparison)))
+        website_manifest = json.loads((WEBSITE_REFERENCE_DIR / "reference_manifest.json").read_text(encoding="utf-8"))
+        website_references = [(entry["label"], WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"]]
+        website_comparison = plot_same_axes_references(current=zoom, references=website_references, output=plots / "website_vs_current_horizontal_phase_space.png")
+        (output / "comparison.md").write_text(f"# Step 1 comparison\n\n- Legacy full plot: `{full_reference}`\n- Public original references: `{website_manifest['source_page']}`\n- Survivors: {bunch.getSize()}/{particles}\n- New/legacy panels: `{full_comparison.name}`, `{zoom_comparison.name}`, `{website_comparison.name}`\n- Assessment: no-space-charge baseline; inspect phase-space topology and confirm no losses.\n", encoding="utf-8")
+        reference_artifacts = {str(path.name): sha256_file(path) for path in (full_reference, zoom_reference, *(path for _, path in website_references))}
+        plot_paths.extend((str(full_comparison), str(zoom_comparison), str(website_comparison)))
     manifest = write_run_manifest(output / "manifest.json", {"step": 1, "profile": args.profile, "particles": particles, "turns": turns, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {str(path.name): sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "lattice": {"nodes": lattice.nNodes, "length_m": lattice.getLength()}, "plots": plot_paths})
     (output / "tracking_summary.json").write_text(json.dumps({"survivors": bunch.getSize(), "turns": turns, "max_initial_x_m": float(coords[:, 0].max())}, indent=2) + "\n", encoding="utf-8")
     print(f"Step 1 {args.profile} complete: {manifest}")

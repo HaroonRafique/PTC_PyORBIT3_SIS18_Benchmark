@@ -58,6 +58,9 @@ under `docs/superpowers/` before non-trivial work.
   historical output data and plots in place through `SIS18_REFERENCE_ROOT`
   solely to make comparisons, and hash every referenced artifact in the run
   manifest.
+- Public original-code reference plots may be versioned under
+  `shared_inputs/reference_plots/` only with their source URL and SHA-256
+  digest recorded beside them; do not treat a raster image as numeric data.
 - Design generic helpers so they can be moved to
   `ptc_pyorbit3_examples/common/` unchanged or with a thin adapter: accept
   explicit paths/configuration, use public docstrings/types, and contain no
