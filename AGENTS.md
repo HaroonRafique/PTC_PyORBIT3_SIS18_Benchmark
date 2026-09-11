@@ -64,6 +64,18 @@ under `docs/superpowers/` before non-trivial work.
   SIS18 absolute paths or step-number assumptions.
 - Mirror the Examples repository’s sampled-line marker policy and its MPI
   global-count semantics. Keep PTC dispersion/unit conversions explicit.
+- From Step 2 onward, the user runs example commands to conserve agent-token
+  budget. Do not launch a Step 2–9 runtime command unless the user explicitly
+  requests it; wait for the user to report runtime results and request
+  debugging before investigating a runtime failure.
+- Comparison plots must use identical axis limits and axis ratios for matching
+  observables, with distinct colours and marker styles for each implementation.
+  When a legacy output has numeric data, write both a labelled side-by-side
+  comparison and a separate same-axis data overlay for inspection. Do not
+  digitize a legacy raster image and represent it as numeric data.
+- Step 1's retained historical output has no `.mat` particle data. Keep its
+  comparison as labelled side-by-side PNG panels; do not rerun the legacy
+  Python 2.7 PTC-PyORBIT stack to reconstruct data.
 - Update the root README and `BENCHMARK_PLAN.md` after every verified smoke,
   reference, comparison, or blocking discovery.
 

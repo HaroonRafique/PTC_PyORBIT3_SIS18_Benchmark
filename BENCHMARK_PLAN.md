@@ -38,3 +38,7 @@ Historical result artifacts are not copied: comparisons read them in place from
 Step 1's smoke and reference MAD-X/PTC workspaces were regenerated from its
 versioned local inputs on 2026-09-11; both record the 504-node,
 216.7199934718 m SIS18 PTC lattice.
+
+Step 1's external reference retains PNG plots but no `.mat` particle data, so
+its comparison remains side-by-side visual panels. The legacy Python 2.7
+PTC-PyORBIT environment is not rerun to reconstruct those artifacts.
