@@ -14,6 +14,15 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
+# Always select benchmark implementation colours explicitly; never rely on
+# Matplotlib's mutable default cycle for comparison figures.
+BENCHMARK_COLORS = {
+    "legacy": "#CC00CC",
+    "current": "#0072B2",
+}
+CURRENT_MARKER = "x"
+
+
 def plot_sampled_series(
     x: Sequence[float], y: Sequence[float], *, xlabel: str, ylabel: str, output: Path, label: str | None = None
 ) -> Path:
@@ -21,7 +30,15 @@ def plot_sampled_series(
 
     output.parent.mkdir(parents=True, exist_ok=True)
     figure, axis = plt.subplots(figsize=(7, 4.5), constrained_layout=True)
-    axis.plot(x, y, marker="o", markersize=3.5, linewidth=1.25, label=label)
+    axis.plot(
+        x,
+        y,
+        color=BENCHMARK_COLORS["current"],
+        marker=CURRENT_MARKER,
+        markersize=3.5,
+        linewidth=1.25,
+        label=label,
+    )
     axis.set(xlabel=xlabel, ylabel=ylabel)
     axis.grid(True, alpha=0.3)
     if label:
