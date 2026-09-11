@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from common.sis18_plots import plot_sampled_series
+from common.sis18_plots import CURRENT_LINE_MARKER_SIZE, plot_sampled_series
 
 
 def test_plot_sampled_series_writes_requested_png(tmp_path: Path):
@@ -8,3 +8,4 @@ def test_plot_sampled_series_writes_requested_png(tmp_path: Path):
 
     assert output.is_file()
     assert output.stat().st_size > 0
+    assert CURRENT_LINE_MARKER_SIZE == 1.75

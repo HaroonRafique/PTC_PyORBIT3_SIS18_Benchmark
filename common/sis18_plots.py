@@ -21,6 +21,8 @@ BENCHMARK_COLORS = {
     "current": "#0072B2",
 }
 CURRENT_MARKER = "x"
+CURRENT_LINE_MARKER_SIZE = 1.75
+CURRENT_SCATTER_SIZE = 2.0
 
 
 def plot_sampled_series(
@@ -35,7 +37,7 @@ def plot_sampled_series(
         y,
         color=BENCHMARK_COLORS["current"],
         marker=CURRENT_MARKER,
-        markersize=3.5,
+        markersize=CURRENT_LINE_MARKER_SIZE,
         linewidth=1.25,
         label=label,
     )

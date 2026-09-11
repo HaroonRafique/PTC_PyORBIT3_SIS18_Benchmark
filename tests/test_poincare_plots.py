@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 
 from common.poincare_plots import plot_poincare_views
-from common.sis18_plots import BENCHMARK_COLORS, CURRENT_MARKER
+from common.sis18_plots import BENCHMARK_COLORS, CURRENT_MARKER, CURRENT_SCATTER_SIZE
 
 
 def test_plot_poincare_views_writes_full_and_zoom(tmp_path: Path):
@@ -25,4 +25,5 @@ def test_poincare_views_use_the_explicit_current_colour_and_square_zoom(tmp_path
 
     assert BENCHMARK_COLORS["current"] == "#0072B2"
     assert CURRENT_MARKER == "x"
+    assert CURRENT_SCATTER_SIZE == 2.0
     assert Image.open(zoom).size[0] == Image.open(zoom).size[1]

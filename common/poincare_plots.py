@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import numpy as np
-from .sis18_plots import BENCHMARK_COLORS, CURRENT_MARKER, plt
+from .sis18_plots import BENCHMARK_COLORS, CURRENT_MARKER, CURRENT_SCATTER_SIZE, plt
 
 
 HORIZONTAL_X_LIMITS = (-0.095, 0.060)
@@ -20,7 +20,7 @@ def plot_poincare_views(snapshots: np.ndarray, output_dir: Path) -> tuple[Path, 
     figure, axes = plt.subplots(3, 2, figsize=(6, 10))
     figure.subplots_adjust(wspace=0.3, hspace=0.3, left=0.1, right=0.99, top=0.95, bottom=0.05)
     for axis, (x, y, xlabel, ylabel, title) in zip(axes.flat, pairs):
-        axis.scatter(values[:, x], values[:, y], s=4, color=BENCHMARK_COLORS["current"], marker=CURRENT_MARKER)
+        axis.scatter(values[:, x], values[:, y], s=CURRENT_SCATTER_SIZE, color=BENCHMARK_COLORS["current"], marker=CURRENT_MARKER)
         axis.set(xlabel=xlabel, ylabel=ylabel, title=title)
         axis.set_box_aspect(1)
         axis.grid(True, alpha=0.3)
@@ -31,7 +31,7 @@ def plot_poincare_views(snapshots: np.ndarray, output_dir: Path) -> tuple[Path, 
     figure.savefig(full, dpi=600)
     plt.close(figure)
     figure, axis = plt.subplots(figsize=(6, 6))
-    axis.scatter(values[:, 0], values[:, 1], s=5, color=BENCHMARK_COLORS["current"], marker=CURRENT_MARKER)
+    axis.scatter(values[:, 0], values[:, 1], s=CURRENT_SCATTER_SIZE * 1.25, color=BENCHMARK_COLORS["current"], marker=CURRENT_MARKER)
     axis.set(xlabel="x [m]", ylabel="xp", title="Horizontal phase space (zoom)", xlim=HORIZONTAL_X_LIMITS, ylim=HORIZONTAL_XP_LIMITS)
     axis.set_box_aspect(1)
     axis.grid(True, alpha=0.3)
