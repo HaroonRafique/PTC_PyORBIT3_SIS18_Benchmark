@@ -1,6 +1,6 @@
 import numpy as np
 
-from step_02_tunes_no_sextupole.run_tunes_no_sextupole import _write_table, absolute_tunes, tracking_parameters
+from step_02_tunes_no_sextupole.run_tunes_no_sextupole import _write_table, absolute_tunes, effective_amplitude_sigma, tracking_parameters
 
 
 def test_step_2_absolute_tunes_preserve_the_bare_tune_integer_part():
@@ -29,3 +29,15 @@ def test_step_2_tracking_parameters_include_the_aperture_lost_bunch():
         "lostbunch": "lost",
         "length": 12.5,
     }
+
+
+def test_step_2_effective_amplitude_matches_the_legacy_postprocessor_formula():
+    coordinate = 0.006338535465439272 * 0.04
+    sigma = 0.006338535465439272
+    beta = 12.794261348603627
+    alpha = 1.2833067573742065
+
+    assert np.isclose(
+        effective_amplitude_sigma(coordinate_m=coordinate, sigma_m=sigma, beta_twiss=beta, alpha_twiss=alpha),
+        np.sqrt(beta * ((1.0 + alpha * alpha) / beta)) * coordinate / sigma,
+    )

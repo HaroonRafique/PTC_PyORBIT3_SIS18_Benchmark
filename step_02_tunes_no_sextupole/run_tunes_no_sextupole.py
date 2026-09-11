@@ -77,6 +77,13 @@ def tracking_parameters(*, bunch, lostbunch, length_m: float) -> dict:
     return {"bunch": bunch, "lostbunch": lostbunch, "length": length_m}
 
 
+def effective_amplitude_sigma(*, coordinate_m: np.ndarray | float, sigma_m: float, beta_twiss: float, alpha_twiss: float) -> np.ndarray:
+    """Return the legacy Step 2 effective amplitude in transverse sigma."""
+
+    gamma_twiss = (1.0 + alpha_twiss * alpha_twiss) / beta_twiss
+    return np.sqrt(beta_twiss * gamma_twiss) * np.asarray(coordinate_m, dtype=float) / sigma_m
+
+
 def _plane_values(lattice, bunch, plane: str, particles: int) -> tuple[np.ndarray, np.ndarray, float]:
     beta = lattice.betax0 if plane == "x" else lattice.betay0
     alpha = lattice.alphax0 if plane == "x" else lattice.alphay0
@@ -94,7 +101,9 @@ def _plane_values(lattice, bunch, plane: str, particles: int) -> tuple[np.ndarra
         gamma_rel=bunch.getSyncParticle().gamma(),
     )
     launch_sigma = coordinates[:, 0 if plane == "x" else 2] / sigma
-    effective_sigma = np.sqrt((1.0 + alpha * alpha) / beta) * coordinates[:, 0 if plane == "x" else 2] / sigma
+    effective_sigma = effective_amplitude_sigma(
+        coordinate_m=coordinates[:, 0 if plane == "x" else 2], sigma_m=sigma, beta_twiss=beta, alpha_twiss=alpha
+    )
     return coordinates, np.column_stack((launch_sigma, effective_sigma)), sigma
 
 
