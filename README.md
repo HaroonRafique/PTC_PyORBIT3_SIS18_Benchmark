@@ -21,7 +21,7 @@ Primary historical references:
 | Step 2 frozen-space-charge tune scan | smoke complete; reference pending |
 | Step 3 sextupole-on tune scan | smoke complete; reference pending |
 | Step 4 resonance-crossing tune scan | smoke complete; reference pending |
-| Steps 2, 5 smoke/reference comparisons | pending |
+| Step 5 phase-space island | smoke complete; reference pending |
 | Steps 6–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
@@ -87,3 +87,12 @@ Step 4 uses the same frozen-space-charge and sextupole-on model at bare tunes
 planes launch through `4.0 sigma`; comparison plots retain the historical
 resonance windows and use the external numeric tune tables plus packaged GSI
 rasters.
+
+Step 5 is a horizontal 16-particle Poincare study at `(Qx, Qy) = (4.3504,
+3.2)`. It preserves the historical `i/N × 4 sigma_x` launch, frozen
+space-charge model, 10 m aperture, and restoring force. Its plots use mm and
+mrad over the historical `[-50, 50] mm × [-5, 5] mrad` window, alongside the
+legacy PTC-PyORBIT2 plots and original GSI MICROMAP, SIMPSONS, and Synergia
+rasters. There is no usable historical particle table, so reference completion
+requires visual agreement of the physical extent, central orbit, and the three
+resonance islands.

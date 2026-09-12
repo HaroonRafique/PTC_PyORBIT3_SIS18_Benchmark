@@ -15,7 +15,7 @@ The detailed, task-level implementation plan is
   reference run and review pending).
 - [ ] Step 3: tunes with sextupole (smoke complete; reference run and review pending).
 - [ ] Step 4: resonance-crossing tunes (smoke complete; reference run and review pending).
-- [ ] Step 5: phase-space island.
+- [ ] Step 5: phase-space island (smoke complete; reference run and visual review pending).
 - [ ] Step 6: slow trapping.
 - [ ] Step 7: fast trapping.
 - [ ] Step 8: long-term trapping.
@@ -84,3 +84,15 @@ smoke profile completed on 2026-09-12 with a 504-node, 216.7199934718 m PTC
 lattice, 504 frozen-SC nodes per plane, and no losses. Its short-window
 numeric residuals are diagnostic only; the historical 1,024-turn reference
 run and review remain pending.
+
+Step 5 preserves the historical horizontal `i/N × 4 sigma_x` 16-particle
+Poincare launch at `(Qx, Qy) = (4.3504, 3.2)`, with frozen analytical-Gaussian
+space charge, a 10 m aperture, and the historical restoring force. The
+8-particle/32-turn smoke profile completed on 2026-09-12 with a 504-node,
+216.7199934718 m PTC lattice, 504 frozen-SC nodes, and no losses. It records
+particle-ID-indexed Poincare trajectories and fixed `[-50, 50] mm × [-5, 5]
+mrad` views, plus external legacy PTC-PyORBIT2 and original GSI MICROMAP,
+SIMPSONS, and Synergia visual references. The legacy Step 5 artifacts contain
+only plots, not a usable numeric particle table: reference completion therefore
+requires a visual review that confirms the physical extent, central orbit, and
+three resonance islands.

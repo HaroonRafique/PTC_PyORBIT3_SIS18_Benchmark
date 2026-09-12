@@ -43,3 +43,14 @@ def test_poincare_zoom_reserves_a_left_margin_for_the_y_axis_label(tmp_path: Pat
 def test_poincare_transverse_coordinates_use_mm_and_mrad():
     assert TRANSVERSE_POSITION_SCALE == 1000.0
     assert TRANSVERSE_ANGLE_SCALE == 1000.0
+
+
+def test_poincare_views_accept_step_specific_horizontal_limits(tmp_path: Path):
+    snapshots = np.zeros((1, 2, 6))
+    snapshots[0, :, 0] = [-0.04, 0.03]
+    snapshots[0, :, 1] = [0.004, -0.004]
+
+    full, zoom = plot_poincare_views(snapshots, tmp_path, horizontal_limits=((-50.0, 50.0), (-5.0, 5.0)))
+
+    assert full.is_file()
+    assert zoom.is_file()

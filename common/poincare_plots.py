@@ -13,10 +13,16 @@ HORIZONTAL_X_LIMITS = (-95.0, 60.0)
 HORIZONTAL_XP_LIMITS = (-11.5, 8.0)
 
 
-def plot_poincare_views(snapshots: np.ndarray, output_dir: Path) -> tuple[Path, Path]:
+def plot_poincare_views(
+    snapshots: np.ndarray,
+    output_dir: Path,
+    *,
+    horizontal_limits: tuple[tuple[float, float], tuple[float, float]] | None = None,
+) -> tuple[Path, Path]:
     """Write historical five-panel and horizontal-phase-space zoom plots."""
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    x_limits, xp_limits = horizontal_limits or (HORIZONTAL_X_LIMITS, HORIZONTAL_XP_LIMITS)
     values = np.asarray(snapshots).reshape(-1, 6).copy()
     values[:, (0, 2)] *= TRANSVERSE_POSITION_SCALE
     values[:, (1, 3)] *= TRANSVERSE_ANGLE_SCALE
@@ -28,7 +34,7 @@ def plot_poincare_views(snapshots: np.ndarray, output_dir: Path) -> tuple[Path, 
         axis.set(xlabel=xlabel, ylabel=ylabel, title=title)
         axis.set_box_aspect(1)
         axis.grid(True, alpha=0.3)
-    axes.flat[2].set(xlim=HORIZONTAL_X_LIMITS, ylim=HORIZONTAL_XP_LIMITS)
+    axes.flat[2].set(xlim=x_limits, ylim=xp_limits)
     axes.flat[4].set(ylim=(-5e-6, 5e-6))
     axes.flat[-1].axis("off")
     full = output_dir / "poincare_full.png"
@@ -36,7 +42,7 @@ def plot_poincare_views(snapshots: np.ndarray, output_dir: Path) -> tuple[Path, 
     plt.close(figure)
     figure, axis = plt.subplots(figsize=(6, 6))
     axis.scatter(values[:, 0], values[:, 1], s=CURRENT_SCATTER_SIZE * 1.25, color=BENCHMARK_COLORS["current"], marker=CURRENT_MARKER)
-    axis.set(xlabel="x [mm]", ylabel="xp [mrad]", title="Horizontal phase space (zoom)", xlim=HORIZONTAL_X_LIMITS, ylim=HORIZONTAL_XP_LIMITS)
+    axis.set(xlabel="x [mm]", ylabel="xp [mrad]", title="Horizontal phase space (zoom)", xlim=x_limits, ylim=xp_limits)
     axis.set_box_aspect(1)
     axis.grid(True, alpha=0.3)
     figure.subplots_adjust(left=0.23, right=0.96, top=0.90, bottom=0.14)

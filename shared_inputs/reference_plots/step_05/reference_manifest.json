@@ -1,0 +1,8 @@
+{
+  "source_page": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/5-ps-sc-sex-on.html",
+  "plots": [
+    {"label": "MICROMAP", "file": "phase-space-orbits-sex-on+sc-qx43504.jpg", "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/phase-space-orbits-sex-on+sc-qx43504.jpg", "sha256": "ebd0489f9d8a456d812549842c3feb2a21bd8fcb1200433d42c89ab446ba3bd5"},
+    {"label": "SIMPSONS", "file": "simpson-phase-space-orbits-sex-on+sc-qx43504.jpg", "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/simpson-phase-space-orbits-sex-on+sc-qx43504.jpg", "sha256": "1be098038fff63b52870a2d279ab800adfd0b8d7cee7620fac9aa25db3b9882c"},
+    {"label": "Synergia", "file": "synergia-phase-space-orbits-sex-on+sc-qx43504.jpg", "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/synergia-phase-space-orbits-sex-on+sc-qx43504.jpg", "sha256": "1dd30464cb3f85c22215410df932b5fb75c1fef9412f9a84e5df8d13395309ff"}
+  ]
+}
