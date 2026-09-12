@@ -1,0 +1,16 @@
+{
+  "step": 3,
+  "physics": {
+    "sextupole": true,
+    "space_charge": "analytical_frozen_gaussian",
+    "longitudinal_position_m": 0.0,
+    "energy_deviation_GeV": 0.0,
+    "restoring_force": -1.951e-11
+  },
+  "scan_limits_sigma": {
+    "x": 3.3,
+    "y": 4.0
+  },
+  "tune_estimators": ["PyNAFF", "FFT"],
+  "reference_root_env": "SIS18_REFERENCE_ROOT"
+}

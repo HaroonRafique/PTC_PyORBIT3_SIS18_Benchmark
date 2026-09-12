@@ -19,7 +19,8 @@ Primary historical references:
 | PTC runtime and lattice smoke check | complete |
 | Step 1 smoke/reference comparison | complete |
 | Step 2 frozen-space-charge tune scan | smoke complete; reference pending |
-| Steps 2–5 smoke/reference comparisons | pending |
+| Step 3 sextupole-on tune scan | ready for user smoke run |
+| Steps 2, 4–5 smoke/reference comparisons | pending |
 | Steps 6–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
@@ -67,3 +68,15 @@ Step 2 requires the declared `PyNAFF` dependency. It tracks the horizontal and
 vertical frozen-space-charge scans sequentially, writes PyNAFF-compatible
 numeric comparisons plus an FFT cross-check, and packages original GSI plot
 references with source URLs and SHA-256 digests.
+
+Step 3 is ready to run. It uses the sextupole-on historical lattice, frozen
+analytical Gaussian space charge, and public bare tunes `(Qx, Qy) = (4.338,
+3.2)`. Its horizontal scan launches through `3.3 sigma`; its vertical scan
+launches through `4.0 sigma`. It records aperture losses by particle ID rather
+than silently changing a tune table, compares surviving PyNAFF values to the
+external legacy tables, and packages the two original GSI plots.
+
+```bash
+cd step_03_tunes_with_sextupole
+SIS18_REFERENCE_ROOT=/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark ./run_example.sh --profile smoke
+```
