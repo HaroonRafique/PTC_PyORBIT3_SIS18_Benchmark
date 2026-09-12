@@ -99,6 +99,12 @@ def _snapshot_by_id(bunch, particles: int) -> np.ndarray:
     return snapshot
 
 
+def surviving_particle_ids(snapshot: np.ndarray) -> set[int]:
+    """Return IDs present in an ID-indexed coordinate snapshot."""
+
+    return set(np.flatnonzero(np.isfinite(snapshot[:, 0])))
+
+
 def _extract_tunes(trajectories: np.ndarray, *, plane: str, analysis_turns: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     try:
         from PyNAFF import naff
@@ -174,10 +180,10 @@ def _run_plane(*, flat: Path, inputs: Path, config, plane: str, particles: int, 
     lostbunch.addPartAttr("ParticlePhaseAttributes"); lostbunch.addPartAttr("LostParticleAttributes")
     trajectories, first_lost = [_snapshot_by_id(bunch, particles)], np.full(particles, -1, dtype=int)
     parameters = {"bunch": bunch, "lostbunch": lostbunch, "length": lattice.getLength() / lattice.nHarm}
-    previous_ids = set(np.flatnonzero(np.isfinite(trajectories[-1, :, 0])))
+    previous_ids = surviving_particle_ids(trajectories[-1])
     for turn in range(1, turns + 1):
         lattice.trackBunch(bunch, parameters); _apply_restoring_force(bunch)
-        snapshot = _snapshot_by_id(bunch, particles); current_ids = set(np.flatnonzero(np.isfinite(snapshot[:, 0])))
+        snapshot = _snapshot_by_id(bunch, particles); current_ids = surviving_particle_ids(snapshot)
         for particle_id in previous_ids - current_ids:
             first_lost[particle_id] = turn
         trajectories.append(snapshot); previous_ids = current_ids

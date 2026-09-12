@@ -19,7 +19,7 @@ Primary historical references:
 | PTC runtime and lattice smoke check | complete |
 | Step 1 smoke/reference comparison | complete |
 | Step 2 frozen-space-charge tune scan | smoke complete; reference pending |
-| Step 3 sextupole-on tune scan | ready for user smoke run |
+| Step 3 sextupole-on tune scan | smoke complete; reference pending |
 | Steps 2, 4–5 smoke/reference comparisons | pending |
 | Steps 6–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |

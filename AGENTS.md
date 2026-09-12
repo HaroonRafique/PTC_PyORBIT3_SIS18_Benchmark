@@ -67,10 +67,12 @@ under `docs/superpowers/` before non-trivial work.
   SIS18 absolute paths or step-number assumptions.
 - Mirror the Examples repository’s sampled-line marker policy and its MPI
   global-count semantics. Keep PTC dispersion/unit conversions explicit.
-- From Step 2 onward, the user runs example commands to conserve agent-token
-  budget. Do not launch a Step 2–9 runtime command unless the user explicitly
-  requests it; wait for the user to report runtime results and request
-  debugging before investigating a runtime failure.
+- Before handing off any new or materially changed Step 2–9 runner, the agent
+  must run and debug its deterministic smoke command to a clean result. This
+  first runtime check is mandatory because integration issues are expected.
+  After that verified smoke result, the user normally runs further smoke and
+  reference campaigns to conserve agent-token budget, unless they explicitly
+  request agent execution or debugging.
 - Comparison plots must use identical axis limits and axis ratios for matching
   observables, with distinct colours and marker styles for each implementation.
   In any layered data overlay, draw bottom-to-top series with strictly

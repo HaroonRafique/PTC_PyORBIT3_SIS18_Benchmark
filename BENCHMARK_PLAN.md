@@ -13,7 +13,7 @@ The detailed, task-level implementation plan is
 - [x] Step 1: phase-space stability (smoke and 20-particle/1,024-turn reference run).
 - [ ] Step 2: frozen-space-charge tunes without sextupole (smoke complete;
   reference run and review pending).
-- [ ] Step 3: tunes with sextupole (implementation ready; user smoke run pending).
+- [ ] Step 3: tunes with sextupole (smoke complete; reference run and review pending).
 - [ ] Step 4: resonance-crossing tunes.
 - [ ] Step 5: phase-space island.
 - [ ] Step 6: slow trapping.
@@ -65,4 +65,7 @@ vertically. A run writes ID-indexed trajectories and `lost_particles_<plane>.csv
 only fully tracked IDs are eligible for its PyNAFF/FFT numeric tables. The
 external Step 3 tune tables and original GSI plots are read through
 `SIS18_REFERENCE_ROOT` and `shared_inputs/reference_plots/step_03`,
-respectively. Smoke execution and review remain user-owned.
+respectively. The 8-particle/32-turn smoke profile completed on 2026-09-12:
+both planes used a 504-node, 216.7199934718 m PTC lattice with 504 frozen-SC
+nodes and no losses. Its short-window numeric residuals are diagnostic only;
+reference execution and review remain pending.
