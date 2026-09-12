@@ -1,0 +1,78 @@
+{
+  "code_revisions": {
+    "benchmark": "d171479ebee42ef3419365bf6fd6fe46ba8a2ba1",
+    "ptc": "979d47d3faab60e0c2608e08d259d217148e630e",
+    "pyorbit3": "2fa4be6f0b8d178511ebb4a02989975265c0b123"
+  },
+  "command": [
+    "run_tunes_resonance_crossing.py",
+    "--profile",
+    "reference"
+  ],
+  "comparison": {
+    "x": {
+      "max_abs_residual": 0.001231462174,
+      "rms_residual": 0.000235290396,
+      "samples": 99
+    },
+    "y": {
+      "max_abs_residual": 3.3535448e-05,
+      "rms_residual": 1.96109e-05,
+      "samples": 99
+    }
+  },
+  "comparison_enabled": true,
+  "flat_file": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/input/generated/reference/madx/SIS_18_BENCHMARK.flt",
+  "flat_file_sha256": "809f7ee6a7b05fdd71f3a082f7019a563c8d78d3ba1da024305056a4b5872a41",
+  "lattice": {
+    "x": {
+      "length_m": 216.71999347179633,
+      "lost_particles": 0,
+      "nodes": 504,
+      "sc_nodes": 504,
+      "sigma_m": 0.0063455322731964395,
+      "surviving_tune_particles": 99
+    },
+    "y": {
+      "length_m": 216.71999347179633,
+      "lost_particles": 0,
+      "nodes": 504,
+      "sc_nodes": 504,
+      "sigma_m": 0.005597097853448319,
+      "surviving_tune_particles": 99
+    }
+  },
+  "mpi_size": 1,
+  "packaged_inputs": {
+    "SIS18.madx": "b3cd6a0961e28d177c256c6b015fcfd8779691dd3c5acdee7b0500ef1a09236d",
+    "SIS18.seq": "33b1ef751e12fe4bba7ecb42869b197e0441b5f5a3983b693dcb468193a813b1",
+    "print_flat_file.ptc": "06d261a0ae3858fdfb95711ff4265f4f67d2d25cfc4295d527221898ec78d276",
+    "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
+    "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
+  },
+  "particles_per_plane": 100,
+  "plots": [
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/x_tune_vs_effective_amplitude.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/legacy_vs_current_x_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/legacy_vs_current_x_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/y_tune_vs_effective_amplitude.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/legacy_vs_current_y_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/legacy_vs_current_y_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/website_vs_current_x_same_axes.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_04_tunes_resonance_crossing/output/plots/website_vs_current_y_same_axes.png"
+  ],
+  "profile": "reference",
+  "reference_artifacts": {
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step4/output/SIS18_Step4_x_I=2.95e10_Qx.png": "afcd1bb0bddedefdc4d59a07fa0f879f001bec7a731e8e1437e25159cd9cc845",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step4/output/SIS18_Step4_x_I=2.95e10_Tunes_OnData.txt": "3bb3c2e4d42b4ff5a46d20137097de8615fcbec78fcd5476a32bd01b6cddfe65",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step4/output/SIS18_Step4_y_I=2.95e10_Qy.png": "49483c15372ea5782352d557bb97afcbed5dbfcfa47b1fec6504ad73e9a344e6",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step4/output/SIS18_Step4_y_I=2.95e10_Tunes_OnData.txt": "73e73eb37d9c725150aa1d9a588ab231ed0b741072b8b0123b8fed1f9f1dcb02",
+    "qx_vs_x_sex-on-qx43504.jpg": "7c4fe96f50427bc718cb9361598373a8afd759ae8154a1ced7996b4fbb27d3ce",
+    "qy_vs_y_sex-on-qx43504.jpg": "ef8f9f319724dbeb49ad0c45d0bed31b0ec73a2e6f6a958b90ed5a72d842397b"
+  },
+  "seed": 20260908,
+  "sextupole_enabled": true,
+  "space_charge": "analytical_frozen_gaussian",
+  "step": 4,
+  "turns": 1024
+}

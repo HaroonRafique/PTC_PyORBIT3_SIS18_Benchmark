@@ -1,0 +1,12 @@
+{
+  "x": {
+    "max_abs_residual": 0.001231462174,
+    "rms_residual": 0.000235290396,
+    "samples": 99
+  },
+  "y": {
+    "max_abs_residual": 3.3535448e-05,
+    "rms_residual": 1.96109e-05,
+    "samples": 99
+  }
+}
