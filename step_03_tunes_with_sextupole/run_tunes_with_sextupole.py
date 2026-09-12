@@ -139,12 +139,19 @@ def _write_table(path: Path, ids: np.ndarray, amplitudes: np.ndarray, pynaff: np
     return path.with_name(f"{path.stem}_pynaff{path.suffix}")
 
 
+def current_plot_amplitudes(amplitudes: np.ndarray, ids: np.ndarray) -> np.ndarray:
+    """Return historical effective amplitudes for the GSI-matched current plot."""
+
+    return np.asarray(amplitudes)[np.asarray(ids), 1]
+
+
 def _current_plot(path: Path, *, plane: str, amplitudes: np.ndarray, ids: np.ndarray, pynaff: np.ndarray, fft: np.ndarray, bare_tune: float) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     figure, axis = plt.subplots(figsize=(6, 6), constrained_layout=True)
-    axis.scatter(amplitudes[ids, 0], _absolute_tunes(bare_tune, pynaff), color=BENCHMARK_COLORS["current"], label="PTC-PyORBIT3 PyNAFF", **layered_overlay_style(0))
-    axis.scatter(amplitudes[ids, 0], _absolute_tunes(bare_tune, fft), color="#D55E00", label="PTC-PyORBIT3 FFT", **layered_overlay_style(1))
-    axis.set(xlabel=rf"${plane}_0/\sigma_{plane}$", ylabel=rf"$Q_{plane}$", xlim=(0, 7) if plane == "x" else (0, 5), ylim=(4.235, 4.345) if plane == "x" else (3.05, 3.205))
+    effective = current_plot_amplitudes(amplitudes, ids)
+    axis.scatter(effective, _absolute_tunes(bare_tune, pynaff), color=BENCHMARK_COLORS["current"], label="PTC-PyORBIT3 PyNAFF", **layered_overlay_style(0))
+    axis.scatter(effective, _absolute_tunes(bare_tune, fft), color="#D55E00", label="PTC-PyORBIT3 FFT", **layered_overlay_style(1))
+    axis.set(xlabel=rf"effective {plane} amplitude [$\sigma_{plane}$]", ylabel=rf"$Q_{plane}$", xlim=(0, 7) if plane == "x" else (0, 5), ylim=(4.235, 4.345) if plane == "x" else (3.05, 3.205))
     axis.set_box_aspect(1); axis.grid(True, alpha=0.3); axis.legend(markerscale=2)
     figure.savefig(path, dpi=160); plt.close(figure)
     return path

@@ -101,5 +101,9 @@ structured diagnostics, plots, and comparison outcome.
 Implement all legacy Steps 1–9. Run deterministic smoke profiles before
 historical reference profiles. Compare stored tune/particle/MAT data
 numerically where available, and use documented qualitative/derived-boundary
-comparisons for plots without tabular source data. Full Steps 8 and 9 are
-gated by passing smoke results and prior reference review.
+comparisons for plots without tabular source data. A step is not complete
+until its available numeric data agrees with the external legacy artifacts and
+its matching plots agree with the original GSI website references; record any
+disagreement as a blocker rather than treating a successful runtime as
+completion. Full Steps 8 and 9 are gated by passing smoke results and prior
+reference review.

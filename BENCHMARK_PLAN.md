@@ -26,8 +26,11 @@ The detailed, task-level implementation plan is
 
 A step is complete only after its test-first implementation, smoke run,
 required plots, reference comparison, manifest, and README status update have
-fresh verification evidence. Record blockers and physics discrepancies here
-before changing the next step.
+fresh verification evidence. Its available numeric data must agree with the
+external legacy artifacts and its matching plots must agree with the original
+GSI website references; otherwise record the discrepancy here as a blocker.
+Do not treat a successful runtime as benchmark completion. Record blockers and
+physics discrepancies here before changing the next step.
 
 ## Input and reference artifact policy
 
@@ -68,7 +71,11 @@ external Step 3 tune tables and original GSI plots are read through
 respectively. The 8-particle/32-turn smoke profile completed on 2026-09-12:
 both planes used a 504-node, 216.7199934718 m PTC lattice with 504 frozen-SC
 nodes and no losses. Its short-window numeric residuals are diagnostic only;
-reference execution and review remain pending.
+the 100-particle/1,024-turn reference run numerically agrees with the external
+tables (horizontal maximum residual `1.18e-4`; vertical `3.36e-5`). The
+current/GSI comparison plot previously used launch rather than effective
+amplitude on its x axis; that display defect is fixed, but the reference plot
+must be regenerated and visually reviewed before Step 3 can be completed.
 
 Step 4 uses the sextupole-on lattice matched to `(Qx, Qy) = (4.3504, 3.2)` and
 the same frozen analytical-Gaussian SC, `z=dE=0`, 10 m aperture, and restoring
