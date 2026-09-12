@@ -1,0 +1,18 @@
+{
+  "x": {
+    "analysis_turns": 510,
+    "length_m": 216.71999347179633,
+    "nodes": 504,
+    "pynaff_particles": 99,
+    "sc_nodes": 504,
+    "sigma_m": 0.006338535465439272
+  },
+  "y": {
+    "analysis_turns": 510,
+    "length_m": 216.71999347179633,
+    "nodes": 504,
+    "pynaff_particles": 99,
+    "sc_nodes": 504,
+    "sigma_m": 0.005596886375450478
+  }
+}
