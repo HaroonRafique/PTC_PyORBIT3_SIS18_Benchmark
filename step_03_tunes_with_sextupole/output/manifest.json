@@ -1,0 +1,78 @@
+{
+  "code_revisions": {
+    "benchmark": "d171479ebee42ef3419365bf6fd6fe46ba8a2ba1",
+    "ptc": "979d47d3faab60e0c2608e08d259d217148e630e",
+    "pyorbit3": "2fa4be6f0b8d178511ebb4a02989975265c0b123"
+  },
+  "command": [
+    "run_tunes_with_sextupole.py",
+    "--profile",
+    "reference"
+  ],
+  "comparison": {
+    "x": {
+      "max_abs_residual": 0.000117970686,
+      "rms_residual": 3.3834508e-05,
+      "samples": 99
+    },
+    "y": {
+      "max_abs_residual": 3.3531017e-05,
+      "rms_residual": 1.899971e-05,
+      "samples": 99
+    }
+  },
+  "comparison_enabled": true,
+  "flat_file": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/input/generated/reference/madx/SIS_18_BENCHMARK.flt",
+  "flat_file_sha256": "8378a86bccd0d2b57945c1d39a32b7b11434caf9177ce04ac48b05393483e651",
+  "lattice": {
+    "x": {
+      "length_m": 216.71999347179633,
+      "lost_particles": 0,
+      "nodes": 504,
+      "sc_nodes": 504,
+      "sigma_m": 0.006338535465439263,
+      "surviving_tune_particles": 99
+    },
+    "y": {
+      "length_m": 216.71999347179633,
+      "lost_particles": 0,
+      "nodes": 504,
+      "sc_nodes": 504,
+      "sigma_m": 0.005596886375450472,
+      "surviving_tune_particles": 99
+    }
+  },
+  "mpi_size": 1,
+  "packaged_inputs": {
+    "SIS18.madx": "03341c0a6cc076d6989cbeb52392ec1bb1da5e08e1bf8c71a6145f8934b02f11",
+    "SIS18.seq": "33b1ef751e12fe4bba7ecb42869b197e0441b5f5a3983b693dcb468193a813b1",
+    "print_flat_file.ptc": "06d261a0ae3858fdfb95711ff4265f4f67d2d25cfc4295d527221898ec78d276",
+    "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
+    "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
+  },
+  "particles_per_plane": 100,
+  "plots": [
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/x_tune_vs_launch_amplitude.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/legacy_vs_current_x_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/legacy_vs_current_x_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/y_tune_vs_launch_amplitude.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/legacy_vs_current_y_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/legacy_vs_current_y_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/website_vs_current_x_same_axes.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_03_tunes_with_sextupole/output/plots/website_vs_current_y_same_axes.png"
+  ],
+  "profile": "reference",
+  "reference_artifacts": {
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step3/output/SIS18_Step3_x_I=2.95e10_Qx.png": "71c31063a1ad55042778b0c706bdf6b8bedcb27e43936de6b4b3bc12aff7e390",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step3/output/SIS18_Step3_x_I=2.95e10_Tunes_OnData.txt": "ff719135a7c54ce65e3656cc535c89b1a96cf4aa51205bb0d7193885cc0dcf2c",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step3/output/SIS18_Step3_y_I=2.95e10_Qy.png": "f4937caa1ab832243afe7102fb93a8c94b5de5238d1657e11bf054a643e5d4e6",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step3/output/SIS18_Step3_y_I=2.95e10_Tunes_OnData.txt": "80bdab039e2933ec4ed0d811d07e340730d645bb54b80f6c83f8a7248df1522d",
+    "qx_vs_x_sex-on-qx4338.jpg": "b73f786af466f90e1dc248a34f4f8cb9d5850e5c60bdbca604c4ffb130045642",
+    "qy_vs_y_sex-on-qx4338.jpg": "157af43abb9ac3e549aeb726c4244774fb9bab6425eb1644bfd7773b850aa616"
+  },
+  "seed": 20260908,
+  "sextupole_enabled": true,
+  "space_charge": "analytical_frozen_gaussian",
+  "step": 3,
+  "turns": 1024
+}

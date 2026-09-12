@@ -1,0 +1,18 @@
+{
+  "x": {
+    "length_m": 216.71999347179633,
+    "lost_particles": 0,
+    "nodes": 504,
+    "sc_nodes": 504,
+    "sigma_m": 0.006338535465439263,
+    "surviving_tune_particles": 99
+  },
+  "y": {
+    "length_m": 216.71999347179633,
+    "lost_particles": 0,
+    "nodes": 504,
+    "sc_nodes": 504,
+    "sigma_m": 0.005596886375450472,
+    "surviving_tune_particles": 99
+  }
+}
