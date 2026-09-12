@@ -20,7 +20,8 @@ Primary historical references:
 | Step 1 smoke/reference comparison | complete |
 | Step 2 frozen-space-charge tune scan | smoke complete; reference pending |
 | Step 3 sextupole-on tune scan | smoke complete; reference pending |
-| Steps 2, 4–5 smoke/reference comparisons | pending |
+| Step 4 resonance-crossing tune scan | smoke complete; reference pending |
+| Steps 2, 5 smoke/reference comparisons | pending |
 | Steps 6–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
@@ -80,3 +81,9 @@ external legacy tables, and packages the two original GSI plots.
 cd step_03_tunes_with_sextupole
 SIS18_REFERENCE_ROOT=/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark ./run_example.sh --profile smoke
 ```
+
+Step 4 uses the same frozen-space-charge and sextupole-on model at bare tunes
+`(Qx, Qy) = (4.3504, 3.2)`, near the horizontal third-order resonance. Both
+planes launch through `4.0 sigma`; comparison plots retain the historical
+resonance windows and use the external numeric tune tables plus packaged GSI
+rasters.

@@ -57,3 +57,10 @@ def test_step_3_uses_public_bare_tunes():
 
     assert reference.qx == 4.338
     assert reference.qy == 3.2
+
+
+def test_step_4_uses_the_resonance_crossing_bare_tunes():
+    reference = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=4, profile="reference")
+
+    assert reference.qx == 4.3504
+    assert reference.qy == 3.2

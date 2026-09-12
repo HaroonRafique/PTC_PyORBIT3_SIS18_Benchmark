@@ -14,7 +14,7 @@ The detailed, task-level implementation plan is
 - [ ] Step 2: frozen-space-charge tunes without sextupole (smoke complete;
   reference run and review pending).
 - [ ] Step 3: tunes with sextupole (smoke complete; reference run and review pending).
-- [ ] Step 4: resonance-crossing tunes.
+- [ ] Step 4: resonance-crossing tunes (smoke complete; reference run and review pending).
 - [ ] Step 5: phase-space island.
 - [ ] Step 6: slow trapping.
 - [ ] Step 7: fast trapping.
@@ -69,3 +69,11 @@ respectively. The 8-particle/32-turn smoke profile completed on 2026-09-12:
 both planes used a 504-node, 216.7199934718 m PTC lattice with 504 frozen-SC
 nodes and no losses. Its short-window numeric residuals are diagnostic only;
 reference execution and review remain pending.
+
+Step 4 uses the sextupole-on lattice matched to `(Qx, Qy) = (4.3504, 3.2)` and
+the same frozen analytical-Gaussian SC, `z=dE=0`, 10 m aperture, and restoring
+force as Step 3. Both scans launch through 4 sigma. Its 8-particle/32-turn
+smoke profile completed on 2026-09-12 with a 504-node, 216.7199934718 m PTC
+lattice, 504 frozen-SC nodes per plane, and no losses. Its short-window
+numeric residuals are diagnostic only; the historical 1,024-turn reference
+run and review remain pending.
