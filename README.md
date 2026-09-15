@@ -22,7 +22,8 @@ Primary historical references:
 | Step 3 sextupole-on tune scan | smoke complete; reference pending |
 | Step 4 resonance-crossing tune scan | smoke complete; reference pending |
 | Step 5 phase-space island | smoke complete; reference pending |
-| Steps 6–8 smoke/reference comparisons | pending |
+| Step 6 slow trapping | smoke complete; reference and legacy-artifact runs pending |
+| Steps 7–8 smoke/reference comparisons | pending |
 | Step 9 smoke/reference comparison | pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
 
@@ -96,3 +97,11 @@ legacy PTC-PyORBIT2 plots and original GSI MICROMAP, SIMPSONS, and Synergia
 rasters. There is no usable historical particle table, so reference completion
 requires visual agreement of the physical extent, central orbit, and the three
 resonance islands.
+
+Step 6 follows one particle for one 15,000-turn synchrotron oscillation with
+the frozen-Gaussian slow-trapping model. Its published reference launch is
+`x=5 mm`, `z=2.5 sigma_z` at `(Qx, Qy) = (4.3504, 3.2)`. The historical stored
+trajectory instead launches at `x=0`, so `--profile legacy_artifact` reproduces
+that incompatible artifact for numeric diagnostics while `--profile reference`
+remains the scientific benchmark. The original GSI action raster is packaged
+with URL and SHA-256 provenance.

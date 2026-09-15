@@ -16,7 +16,7 @@ The detailed, task-level implementation plan is
 - [ ] Step 3: tunes with sextupole (smoke complete; reference run and review pending).
 - [ ] Step 4: resonance-crossing tunes (smoke complete; reference run and review pending).
 - [ ] Step 5: phase-space island (smoke complete; reference run and visual review pending).
-- [ ] Step 6: slow trapping.
+- [ ] Step 6: slow trapping (smoke complete; reference and legacy-artifact runs pending).
 - [ ] Step 7: fast trapping.
 - [ ] Step 8: long-term trapping.
 - [ ] Step 9: bunch emittance evolution.
@@ -96,3 +96,16 @@ SIMPSONS, and Synergia visual references. The legacy Step 5 artifacts contain
 only plots, not a usable numeric particle table: reference completion therefore
 requires a visual review that confirms the physical extent, central orbit, and
 three resonance islands.
+
+Step 6 tracks one particle for one 15,000-turn synchrotron oscillation with
+the sextupole-on `(Qx, Qy) = (4.3504, 3.2)` lattice, frozen analytical-Gaussian
+SC, 10 m aperture, and restoring force `-1.951e-11`. Its published GSI launch
+is `x=5 mm`, `xp=y=yp=dE=0`, `z=2.5 sigma_z`; the 64-turn smoke completed on
+2026-09-15 with a 504-node, 216.7199934718 m PTC lattice, 504 frozen-SC nodes,
+and no loss. The external `Particles_all.dat` instead starts at `x=0` due to
+the historical generator's one-particle range bug, and its plot filenames also
+retain stale fast-regime text. The `legacy_artifact` profile reproduces that
+zero-launch trajectory for six-decimal numeric comparison; the `reference`
+profile remains authoritative for the GSI action plot. Step completion requires
+both successful artifact numeric comparison and published-plot agreement, with
+the provenance conflict retained in the manifest and comparison report.

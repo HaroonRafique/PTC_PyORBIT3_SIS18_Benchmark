@@ -71,3 +71,15 @@ def test_step_5_uses_the_phase_space_island_bare_tunes():
 
     assert reference.qx == 4.3504
     assert reference.qy == 3.2
+
+
+def test_step_6_published_and_legacy_artifact_profiles_have_distinct_launches():
+    profiles = ROOT / "shared_inputs" / "benchmark_profiles.json"
+
+    reference = load_step_config(profiles, step=6, profile="reference")
+    artifact = load_step_config(profiles, step=6, profile="legacy_artifact")
+
+    assert (reference.qx, reference.qy) == (4.3504, 3.2)
+    assert reference.turns == artifact.turns == 15000
+    assert reference.profile == "reference"
+    assert artifact.profile == "legacy_artifact"

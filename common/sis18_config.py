@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 
-Profile = Literal["smoke", "reference"]
+Profile = Literal["smoke", "reference", "legacy_artifact"]
 
 
 @dataclass(frozen=True)
@@ -31,8 +31,8 @@ class StepConfig:
 def load_step_config(path: Path, *, step: int, profile: str) -> StepConfig:
     """Load a step/profile configuration and apply its explicit overrides."""
 
-    if profile not in {"smoke", "reference"}:
-        raise ValueError(f"Unknown profile {profile!r}; expected 'smoke' or 'reference'.")
+    if profile not in {"smoke", "reference", "legacy_artifact"}:
+        raise ValueError(f"Unknown profile {profile!r}; expected 'smoke', 'reference', or 'legacy_artifact'.")
     payload = json.loads(path.read_text(encoding="utf-8"))
     try:
         raw: dict[str, Any] = dict(payload["steps"][str(step)])
