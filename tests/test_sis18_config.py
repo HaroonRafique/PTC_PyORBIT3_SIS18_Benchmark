@@ -83,3 +83,10 @@ def test_step_6_published_and_legacy_artifact_profiles_have_distinct_launches():
     assert reference.turns == artifact.turns == 15000
     assert reference.profile == "reference"
     assert artifact.profile == "legacy_artifact"
+
+
+def test_step_7_uses_the_fast_scattering_bare_tunes():
+    reference = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=7, profile="reference")
+
+    assert (reference.qx, reference.qy) == (4.3504, 3.2)
+    assert reference.turns == 2000

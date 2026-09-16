@@ -7,6 +7,7 @@ from common.trapping_diagnostics import (
     legacy_particle_records,
     single_particle_coordinates,
     trajectory_comparison,
+    single_particle_coordinates_at,
 )
 
 
@@ -20,6 +21,12 @@ def test_legacy_artifact_single_particle_launch_preserves_zero_x():
     coordinates = single_particle_coordinates(launch="legacy_artifact", bunch_length_rms_m=40.206868)
 
     np.testing.assert_allclose(coordinates, [0.0, 0.0, 0.0, 0.0, 100.51717, 0.0])
+
+
+def test_single_particle_coordinates_accept_the_exact_historical_launch_position():
+    coordinates = single_particle_coordinates_at(x_m=0.0051, bunch_length_rms_m=2.680419244)
+
+    np.testing.assert_allclose(coordinates, [0.0051, 0.0, 0.0, 0.0, 6.70104811, 0.0])
 
 
 def test_horizontal_action_uses_the_historical_twiss_constants():

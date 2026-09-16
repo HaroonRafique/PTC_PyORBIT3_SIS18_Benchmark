@@ -17,7 +17,7 @@ The detailed, task-level implementation plan is
 - [ ] Step 4: resonance-crossing tunes (smoke complete; reference run and review pending).
 - [ ] Step 5: phase-space island (smoke complete; reference run and visual review pending).
 - [ ] Step 6: slow trapping (smoke complete; reference and legacy-artifact runs pending).
-- [ ] Step 7: fast trapping.
+- [ ] Step 7: fast trapping (smoke complete; reference run and visual review pending).
 - [ ] Step 8: long-term trapping.
 - [ ] Step 9: bunch emittance evolution.
 - [ ] Reference campaign and examples-helper promotion audit.
@@ -109,3 +109,15 @@ zero-launch trajectory for six-decimal numeric comparison; the `reference`
 profile remains authoritative for the GSI action plot. Step completion requires
 both successful artifact numeric comparison and published-plot agreement, with
 the provenance conflict retained in the manifest and comparison report.
+
+Step 7 is the fast-synchrotron case: the sextupole-on `(Qx, Qy) = (4.3504,
+3.2)` lattice, frozen analytical-Gaussian SC, 10 m aperture, and restoring
+force `-4.38975e-09` track a single particle from `x=5.1 mm`,
+`xp=y=yp=dE=0`, `z=2.5 sigma_z`. The 64-turn smoke completed on 2026-09-16
+with a 504-node, 216.7199934718 m PTC lattice, 504 frozen-SC nodes, and no
+loss. The scientific profile retains the historical 2,000-turn duration; its
+published action view is deliberately restricted to turns 0--1,000 with the
+GSI `0.9--1.6` normalized-action limits. The external Step 7 artifacts have
+only visual PNGs, not a particle table, so reference completion requires visual
+agreement with the GSI SIMPSONS/MICROMAP and legacy PTC-PyORBIT2 plots, showing
+the expected fast-regime scattering rather than adiabatic trapping.

@@ -23,7 +23,8 @@ Primary historical references:
 | Step 4 resonance-crossing tune scan | smoke complete; reference pending |
 | Step 5 phase-space island | smoke complete; reference pending |
 | Step 6 slow trapping | smoke complete; reference and legacy-artifact runs pending |
-| Steps 7–8 smoke/reference comparisons | pending |
+| Step 7 fast trapping | smoke complete; reference and visual review pending |
+| Step 8 long-term trapping | pending |
 | Step 9 smoke/reference comparison | pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
 
@@ -105,3 +106,12 @@ trajectory instead launches at `x=0`, so `--profile legacy_artifact` reproduces
 that incompatible artifact for numeric diagnostics while `--profile reference`
 remains the scientific benchmark. The original GSI action raster is packaged
 with URL and SHA-256 provenance.
+
+Step 7 is the fast-synchrotron counterpart: one particle launches at
+`x=5.1 mm`, `z=2.5 sigma_z` in the frozen-Gaussian model at `(Qx, Qy) =
+(4.3504, 3.2)` and restoring force `-4.38975e-09`. It tracks 2,000 turns,
+while its public comparison action plot shows the first 1,000 turns at the
+published axes. The historical artifacts contain only PNGs, so comparison is
+visual: a compact panel packages the original GSI SIMPSONS and MICROMAP
+rasters with the legacy PTC-PyORBIT2 and current plots. The expected fast
+regime is scattering rather than adiabatic trapping.

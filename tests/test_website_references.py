@@ -75,3 +75,14 @@ def test_step_6_website_reference_manifest_hashes_downloaded_image():
     entry = manifest["plots"][0]
     assert entry["url"].endswith("trapping-ns-15000_sex-on-qx43504.jpg")
     assert sha256_file(directory / entry["file"]) == entry["sha256"]
+
+
+def test_step_7_website_reference_manifest_hashes_downloaded_images():
+    directory = ROOT / "shared_inputs" / "reference_plots" / "step_07"
+    manifest = json.loads((directory / "reference_manifest.json").read_text(encoding="utf-8"))
+
+    assert manifest["source_page"].endswith("7-benchmarking-trapping-1synch-ns-10d3.html")
+    assert [entry["label"] for entry in manifest["plots"]] == ["SIMPSONS", "MICROMAP"]
+    for entry in manifest["plots"]:
+        assert entry["url"].startswith("http://www-linux.gsi.de/~giuliano/")
+        assert sha256_file(directory / entry["file"]) == entry["sha256"]

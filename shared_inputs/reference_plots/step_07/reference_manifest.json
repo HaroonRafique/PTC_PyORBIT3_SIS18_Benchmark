@@ -1,0 +1,7 @@
+{
+  "source_page": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/7-benchmarking-trapping-1synch-ns-10d3.html",
+  "plots": [
+    {"label": "SIMPSONS", "file": "trapping-ns-1000_sex-on-qx43504.jpg", "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/trapping-ns-1000_sex-on-qx43504.jpg", "sha256": "9f908c542332eb550ad5e35b2a72d1cb7ee896b40c88f93de25a39bddfdd826b"},
+    {"label": "MICROMAP", "file": "shinji-step7.jpg", "url": "http://www-linux.gsi.de/~giuliano/research_activity/trapping_benchmarking/shinji-step7.jpg", "sha256": "ea55efb83165de8aa8c15c83a2998be07594e1d25c0682d26e2bac91057f284d"}
+  ]
+}

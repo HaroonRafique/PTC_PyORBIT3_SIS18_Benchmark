@@ -19,7 +19,13 @@ def single_particle_coordinates(*, launch: str, bunch_length_rms_m: float) -> np
         x = launches[launch]
     except KeyError as error:
         raise ValueError(f"unknown single-particle launch {launch!r}") from error
-    return np.asarray((x, 0.0, 0.0, 0.0, 2.5 * bunch_length_rms_m, 0.0))
+    return single_particle_coordinates_at(x_m=x, bunch_length_rms_m=bunch_length_rms_m)
+
+
+def single_particle_coordinates_at(*, x_m: float, bunch_length_rms_m: float) -> np.ndarray:
+    """Return a deterministic horizontal launch at ``z=2.5 sigma_z``."""
+
+    return np.asarray((x_m, 0.0, 0.0, 0.0, 2.5 * bunch_length_rms_m, 0.0))
 
 
 def horizontal_action(x: float | np.ndarray, xp: float | np.ndarray) -> float | np.ndarray:
