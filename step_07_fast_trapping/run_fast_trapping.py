@@ -23,13 +23,13 @@ from common.reference_artifacts import maybe_reference_root, sha256_file, stage_
 from common.sis18_config import load_step_config
 from common.sis18_lattice import in_workdir, load_sis18_lattice
 from common.sis18_plots import BENCHMARK_COLORS, CURRENT_LINE_MARKER_SIZE, CURRENT_MARKER, plt
-from common.trapping_diagnostics import horizontal_action, single_particle_coordinates_at
+from common.trapping_diagnostics import horizontal_action
 
 STEP_DIR = Path(__file__).resolve().parent
 WEBSITE_REFERENCE_DIR = ROOT / "shared_inputs" / "reference_plots" / "step_07"
 EPSN_X, EPSN_Y = 4.91e-7, 3.635e-7
 DPP_RMS, BUNCH_LENGTH_RMS_M = 2.5e-4 / 3.0, 2.680419244
-SC_PATH_LENGTH_MIN_M, LAUNCH_X_M = 1.0e-8, 5.1e-3
+SC_PATH_LENGTH_MIN_M = 1.0e-8
 
 
 def public_action_plot_limits() -> tuple[tuple[float, float], tuple[float, float]]:
@@ -78,7 +78,7 @@ def _record(turn: int, bunch) -> np.ndarray:
     return np.asarray((turn, bunch.x(0), bunch.xp(0), bunch.y(0), bunch.yp(0), bunch.z(0), bunch.dE(0)))
 
 
-def _run(*, flat: Path, inputs: Path, config, turns: int):
+def _run(*, flat: Path, inputs: Path, config, turns: int, coordinates: np.ndarray):
     lattice, bunch = load_sis18_lattice(flat)
     from ext.ptc_orbit.ptc_orbit import readScriptPTC
 
@@ -87,7 +87,7 @@ def _run(*, flat: Path, inputs: Path, config, turns: int):
     sc_nodes = _install_historical_model(lattice, config)
     bunch.addPartAttr("macrosize")
     bunch.addPartAttr("ParticleIdNumber")
-    bunch.addParticle(*single_particle_coordinates_at(x_m=LAUNCH_X_M, bunch_length_rms_m=BUNCH_LENGTH_RMS_M))
+    bunch.addParticle(*coordinates)
     bunch.partAttrValue("macrosize", 0, 0, config.intensity)
     bunch.partAttrValue("ParticleIdNumber", 0, 0, 0)
     from orbit.core.bunch import Bunch
@@ -153,17 +153,19 @@ def _write_records(path: Path, records: np.ndarray) -> Path:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke"); parser.add_argument("--turns", type=int)
+    parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke")
     parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output"); parser.add_argument("--reference-root", type=Path)
     parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
-    args = parser.parse_args(argv); config = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=7, profile=args.profile); turns = args.turns or config.turns
+    args = parser.parse_args(argv); config_path = STEP_DIR / "config.json"; config = load_step_config(config_path, step=7, profile=args.profile); turns = config.turns
     if turns < 1: raise ValueError("Step 7 requires at least one turn")
     output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"
     paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
     staged = stage_packaged_inputs(source=STEP_DIR / "legacy_input", destination=inputs / "Input")
     flat = generate_flat_file(madx=paths.madx, workdir=inputs, madx_input=inputs / "Input" / "SIS18.madx")
     prepare_pyorbit3_runtime(paths, Path("/tmp/sis18_ptc_runtime"))
-    records, summary = _run(flat=flat, inputs=inputs, config=config, turns=turns)
+    case_config = json.loads(config_path.read_text(encoding="utf-8")); launch = case_config["launch"]
+    coordinates = np.asarray((launch["x_m"], launch["xp_rad"], launch["y_m"], launch["yp_rad"], launch["z_sigma"] * BUNCH_LENGTH_RMS_M, launch["dE_GeV"]))
+    records, summary = _run(flat=flat, inputs=inputs, config=config, turns=turns, coordinates=coordinates)
     plots, tables, trajectories = output / "plots", output / "tables", output / "trajectories"; trajectories.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(trajectories / "single_particle_turn_records.npz", records=records)
     diagnostics = _write_records(tables / "turn_diagnostics.csv", records)
@@ -182,8 +184,8 @@ def main(argv: list[str] | None = None) -> int:
         reference_artifacts.update({entry["file"]: sha256_file(WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"]})
     (output / "comparison.json").write_text(json.dumps(comparison, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     (output / "comparison.md").write_text("# Step 7 comparison\n\n- Visual-only: the GSI reference identifies fast synchrotron scattering, not adiabatic trapping.\n- The legacy archive has no numeric trajectory table.\n", encoding="utf-8")
-    (output / "tracking_summary.json").write_text(json.dumps({**summary, "turns": turns, "launch_x_m": LAUNCH_X_M}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    manifest = write_run_manifest(output / "manifest.json", {"step": 7, "profile": args.profile, "command": sys.argv, "turns": turns, "mpi_size": 1, "seed": config.seed, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {path.name: sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "comparison": comparison, "lattice": summary, "space_charge": "analytical_frozen_gaussian", "sextupole_enabled": True, "code_revisions": {"benchmark": _revision(ROOT), "pyorbit3": _revision(paths.pyorbit3_root), "ptc": _revision(paths.pyorbit3_root.parent / "PTC")}, "plots": generated_plots, "diagnostics": str(diagnostics)})
+    (output / "tracking_summary.json").write_text(json.dumps({**summary, "turns": turns, "launch": launch}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    manifest = write_run_manifest(output / "manifest.json", {"step": 7, "profile": args.profile, "config_path": str(config_path), "config_sha256": sha256_file(config_path), "command": sys.argv, "turns": turns, "mpi_size": 1, "seed": config.seed, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {path.name: sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "comparison": comparison, "lattice": summary, "space_charge": "analytical_frozen_gaussian", "sextupole_enabled": True, "code_revisions": {"benchmark": _revision(ROOT), "pyorbit3": _revision(paths.pyorbit3_root), "ptc": _revision(paths.pyorbit3_root.parent / "PTC")}, "plots": generated_plots, "diagnostics": str(diagnostics)})
     print(f"Step 7 {args.profile} complete: {manifest}")
     return 0
 

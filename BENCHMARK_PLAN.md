@@ -8,6 +8,7 @@ The detailed, task-level implementation plan is
 
 - [x] Repository governance and directory layout.
 - [x] Shared profiles, legacy staging, and manifests.
+- [ ] Migrate Steps 8--9 to standalone local `config.json`; Steps 1--7 use local configs.
 - [x] PTC-enabled runtime/lattice smoke check: MAD-X 5.02 generated and PTC
   loaded the Step 1 lattice (504 nodes, 216.7199934718 m, gamma 1.01215003).
 - [x] Step 1: phase-space stability (smoke and 20-particle/1,024-turn reference run).

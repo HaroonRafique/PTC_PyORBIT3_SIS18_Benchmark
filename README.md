@@ -30,10 +30,10 @@ Primary historical references:
 
 ## Layout
 
-- `shared_inputs/`: shared profiles, artifact manifest, MAD-X/PTC templates.
+- `shared_inputs/`: artifact manifest, MAD-X/PTC templates, and public plot references.
 - `common/`: portable helpers designed against the active examples suite.
 - `step_01_*` through `step_09_*`: independently runnable benchmark cases;
-  each owns versioned `legacy_input/`, versioned generated `input/`, and
+  each owns authoritative `config.json`, versioned `legacy_input/`, versioned generated `input/`, and
   ignored `output/` artifacts.
 - `BENCHMARK_PLAN.md`: live execution/checklist status.
 - `docs/superpowers/`: approved design and detailed implementation plan.

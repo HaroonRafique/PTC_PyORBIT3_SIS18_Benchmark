@@ -43,13 +43,17 @@ under `docs/superpowers/` before non-trivial work.
 
 ## Repository rules
 
-- `shared_inputs/` contains shared configuration and non-generated common
-  inputs. Generic helpers live in `common/`; step-specific policy belongs in
-  the individual step configuration/runner.
+- `shared_inputs/` contains non-generated common inputs. Generic helpers live
+  in `common/`; step-specific policy belongs in the individual step
+  configuration/runner.
 - Every `step_XX_*` directory is independently runnable and contains a local
-  `example_config.json`, zero-argument `run_example.sh`, readable Python
+  `config.json`, zero-argument `run_example.sh`, readable Python
   runner, tracked `legacy_input/`, tracked `input/generated/`, and ignored
   `output/`. Generated artifacts must stay beneath that step directory.
+- A step's `config.json` is its sole authoritative source of benchmark
+  settings: profiles, beam and physics values, launches/distributions,
+  plotting policy, and comparison policy. Runners may use generic helpers but
+  must not obtain hidden step defaults from shared configuration.
 - Each `legacy_input/` contains the exact historical MAD-X/PTC inputs needed
   by its step. Copy its files only into that step's tracked
   `input/generated/<profile>/madx/Input/` workspace; commit both directories
