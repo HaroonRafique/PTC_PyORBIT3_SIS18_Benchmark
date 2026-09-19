@@ -1,0 +1,11 @@
+{
+  "step": 5,
+  "profiles": {
+    "reference": {"intensity": 2.95e10, "n_macroparticles": 16, "turns": 1500, "sextupole_enabled": true, "qx": 4.3504, "qy": 3.2, "restoring_force": -1.951e-11, "distribution": "poincare"},
+    "smoke": {"n_macroparticles": 8, "turns": 32}
+  },
+  "physics": {"sextupole": true, "space_charge": "analytical_frozen_gaussian", "longitudinal_position_m": 0.0, "energy_deviation_GeV": 0.0, "restoring_force": -1.951e-11},
+  "distribution_policy": {"plane": "x", "n_sigma": 4.0, "spacing": "i_over_n"},
+  "phase_space_limits": {"x_mm": [-50.0, 50.0], "xp_mrad": [-5.0, 5.0]},
+  "reference_root_env": "SIS18_REFERENCE_ROOT"
+}
