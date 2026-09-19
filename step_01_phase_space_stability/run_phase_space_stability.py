@@ -46,17 +46,15 @@ def snapshot(bunch) -> np.ndarray:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke")
-    parser.add_argument("--particles", type=int)
-    parser.add_argument("--turns", type=int)
     parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output")
     parser.add_argument("--reference-root", type=Path)
     parser.add_argument("--skip-reference-comparison", action="store_true")
     parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv)
 
-    config = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=1, profile=args.profile)
-    particles = args.particles if args.particles is not None else config.n_macroparticles
-    turns = args.turns if args.turns is not None else config.turns
+    config = load_step_config(STEP_DIR / "config.json", step=1, profile=args.profile)
+    case_config = json.loads((STEP_DIR / "config.json").read_text(encoding="utf-8"))
+    particles, turns = config.n_macroparticles, config.turns
     output = args.output_dir.resolve()
     inputs = STEP_DIR / "input" / "generated" / args.profile / "madx"
     paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
@@ -68,7 +66,7 @@ def main(argv: list[str] | None = None) -> int:
 
     with workdir(inputs / "Input"):
         readScriptPTC("time.ptc")
-    coords = horizontal_poincare_coordinates(n_particles=particles, n_sigma=6.42, betax=lattice.betax0, epsn_x=4.91e-7, beta_rel=bunch.getSyncParticle().beta(), gamma_rel=bunch.getSyncParticle().gamma())
+    coords = horizontal_poincare_coordinates(n_particles=particles, n_sigma=case_config["n_sigma"], betax=lattice.betax0, epsn_x=4.91e-7, beta_rel=bunch.getSyncParticle().beta(), gamma_rel=bunch.getSyncParticle().gamma())
     bunch.addPartAttr("macrosize")
     for row in coords:
         bunch.addParticle(*row)
@@ -101,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
         (output / "comparison.md").write_text(f"# Step 1 comparison\n\n- Legacy full plot: `{full_reference}`\n- Public original references: `{website_manifest['source_page']}`\n- Survivors: {bunch.getSize()}/{particles}\n- New/legacy panels: `{full_comparison.name}`, `{zoom_comparison.name}`, `{website_comparison.name}`\n- Assessment: no-space-charge baseline; inspect phase-space topology and confirm no losses.\n", encoding="utf-8")
         reference_artifacts = {str(path.name): sha256_file(path) for path in (full_reference, zoom_reference, *(path for _, path in website_references))}
         plot_paths.extend((str(full_comparison), str(zoom_comparison), str(website_comparison)))
-    manifest = write_run_manifest(output / "manifest.json", {"step": 1, "profile": args.profile, "particles": particles, "turns": turns, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {str(path.name): sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "lattice": {"nodes": lattice.nNodes, "length_m": lattice.getLength()}, "plots": plot_paths})
+    manifest = write_run_manifest(output / "manifest.json", {"step": 1, "profile": args.profile, "config_path": str(STEP_DIR / "config.json"), "config_sha256": sha256_file(STEP_DIR / "config.json"), "particles": particles, "turns": turns, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {str(path.name): sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "lattice": {"nodes": lattice.nNodes, "length_m": lattice.getLength()}, "plots": plot_paths})
     (output / "tracking_summary.json").write_text(json.dumps({"survivors": bunch.getSize(), "turns": turns, "max_initial_x_m": float(coords[:, 0].max())}, indent=2) + "\n", encoding="utf-8")
     print(f"Step 1 {args.profile} complete: {manifest}")
     return 0

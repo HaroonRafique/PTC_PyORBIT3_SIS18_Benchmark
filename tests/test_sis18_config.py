@@ -45,6 +45,26 @@ def test_unknown_profile_is_rejected(tmp_path: Path):
         load_step_config(profiles, step=1, profile="fast")
 
 
+def test_standalone_step_config_inherits_reference_profile(tmp_path: Path):
+    config_path = tmp_path / "config.json"
+    config_path.write_text(
+        '''{
+  "step": 6,
+  "profiles": {
+    "reference": {"intensity": 2.95e10, "n_macroparticles": 1, "turns": 15000, "sextupole_enabled": true, "qx": 4.3504, "qy": 3.2, "restoring_force": -1.951e-11, "distribution": "single_particle"},
+    "smoke": {"turns": 64}
+  }
+}''',
+        encoding="utf-8",
+    )
+
+    smoke = load_step_config(config_path, step=6, profile="smoke")
+
+    assert smoke.turns == 64
+    assert smoke.intensity == 2.95e10
+    assert (smoke.qx, smoke.qy) == (4.3504, 3.2)
+
+
 def test_step_2_uses_public_bare_tunes():
     reference = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=2, profile="reference")
 

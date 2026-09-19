@@ -1,7 +1,0 @@
-{
-  "step": 1,
-  "n_sigma": 6.42,
-  "space_charge": false,
-  "snapshot_turns": "all",
-  "reference_root_env": "SIS18_REFERENCE_ROOT"
-}

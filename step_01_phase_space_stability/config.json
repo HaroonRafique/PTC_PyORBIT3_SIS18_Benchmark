@@ -1,0 +1,11 @@
+{
+  "step": 1,
+  "profiles": {
+    "reference": {"intensity": 2.95e10, "n_macroparticles": 20, "turns": 1024, "sextupole_enabled": true, "qx": 3.2, "qy": 4.338, "distribution": "poincare"},
+    "smoke": {"n_macroparticles": 8, "turns": 16}
+  },
+  "n_sigma": 6.42,
+  "space_charge": false,
+  "snapshot_turns": "all",
+  "reference_root_env": "SIS18_REFERENCE_ROOT"
+}
