@@ -188,12 +188,12 @@ def _write_records(path: Path, records: np.ndarray) -> Path:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", choices=("smoke", "reference", "legacy_artifact", "exploratory"), default="smoke")
-    parser.add_argument("--turns", type=int); parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output")
+    parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output")
     parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv)
     config_path = STEP_DIR / "config.json"
     config = load_step_config(config_path, step=6, profile=args.profile)
-    turns = args.turns or config.turns
+    turns = config.turns
     if turns < 1: raise ValueError("Step 6 requires at least one turn")
     launch = load_profile_payload(config_path, step=6, profile=args.profile)["launch"]
     coordinates = np.asarray((launch["x_m"], launch["xp_rad"], launch["y_m"], launch["yp_rad"], launch["z_sigma"] * BUNCH_LENGTH_RMS_M, launch["dE_GeV"]))
