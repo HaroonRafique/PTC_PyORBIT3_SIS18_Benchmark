@@ -1,7 +1,0 @@
-{
-  "step": 6,
-  "published_reference": {"qx": 4.3504, "qy": 3.2, "x_m": 0.005, "xp_rad": 0.0, "y_m": 0.0, "yp_rad": 0.0, "z_sigma": 2.5, "dE_GeV": 0.0},
-  "legacy_artifact": {"x_m": 0.0, "reason": "stored legacy trajectory launch differs from GSI Step 6"},
-  "physics": {"space_charge": "analytical_frozen_gaussian", "restoring_force": -1.951e-11, "aperture_m": 10.0},
-  "reference_root_env": "SIS18_REFERENCE_ROOT"
-}
