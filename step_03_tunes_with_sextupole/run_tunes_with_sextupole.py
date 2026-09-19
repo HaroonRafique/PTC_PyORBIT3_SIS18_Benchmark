@@ -199,11 +199,11 @@ def _run_plane(*, flat: Path, inputs: Path, config, plane: str, particles: int, 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke"); parser.add_argument("--particles", type=int); parser.add_argument("--turns", type=int)
+    parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke")
     parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output"); parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv)
-    config = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=3, profile=args.profile)
-    particles, turns = args.particles or config.n_macroparticles, args.turns or config.turns
+    config = load_step_config(STEP_DIR / "config.json", step=3, profile=args.profile)
+    particles, turns = config.n_macroparticles, config.turns
     if particles < 2 or turns < 4: raise ValueError("Step 3 requires at least 2 particles and 4 turns")
     output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"
     paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
