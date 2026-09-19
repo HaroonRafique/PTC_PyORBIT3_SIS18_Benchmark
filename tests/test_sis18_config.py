@@ -66,7 +66,7 @@ def test_standalone_step_config_inherits_reference_profile(tmp_path: Path):
 
 
 def test_step_2_uses_public_bare_tunes():
-    reference = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=2, profile="reference")
+    reference = load_step_config(ROOT / "step_02_tunes_no_sextupole" / "config.json", step=2, profile="reference")
 
     assert reference.qx == 4.338
     assert reference.qy == 3.2

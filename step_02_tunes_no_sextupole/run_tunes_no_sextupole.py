@@ -215,7 +215,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--skip-reference-comparison", action="store_true")
     parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv)
-    config = load_step_config(ROOT / "shared_inputs" / "benchmark_profiles.json", step=2, profile=args.profile)
+    config = load_step_config(STEP_DIR / "config.json", step=2, profile=args.profile)
     particles = args.particles if args.particles is not None else config.n_macroparticles
     turns = args.turns if args.turns is not None else config.turns
     if turns < 4 or particles < 2:

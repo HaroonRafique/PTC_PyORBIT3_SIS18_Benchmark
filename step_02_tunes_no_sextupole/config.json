@@ -1,0 +1,10 @@
+{
+  "step": 2,
+  "profiles": {
+    "reference": {"intensity": 2.95e10, "n_macroparticles": 100, "turns": 1024, "sextupole_enabled": false, "qx": 4.338, "qy": 3.2, "distribution": "amplitude_scan"},
+    "smoke": {"n_macroparticles": 8, "turns": 32}
+  },
+  "physics": {"sextupole": false, "space_charge": "analytical_frozen_gaussian", "longitudinal_position_m": 0.0, "energy_deviation_GeV": 0.0},
+  "tune_estimators": ["PyNAFF", "FFT"],
+  "reference_root_env": "SIS18_REFERENCE_ROOT"
+}
