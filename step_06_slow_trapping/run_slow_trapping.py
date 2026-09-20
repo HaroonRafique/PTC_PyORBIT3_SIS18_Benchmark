@@ -20,7 +20,7 @@ from common.legacy_plot_comparison import plot_legacy_comparison, plot_same_axes
 from common.madx import generate_flat_file
 from common.manifest import write_run_manifest
 from common.reference_artifacts import maybe_reference_root, sha256_file, stage_packaged_inputs
-from common.sis18_config import load_profile_payload, load_step_config
+from common.sis18_config import format_resolved_config, load_profile_payload, load_step_config
 from common.sis18_lattice import in_workdir, load_sis18_lattice
 from common.sis18_plots import BENCHMARK_COLORS, CURRENT_LINE_MARKER_SIZE, CURRENT_MARKER, layered_overlay_style, plt
 from common.trapping_diagnostics import horizontal_action, legacy_particle_records, trajectory_comparison
@@ -193,6 +193,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     config_path = STEP_DIR / "config.json"
     config = load_step_config(config_path, step=6, profile=args.profile)
+    print(format_resolved_config(config_path, step=6, profile=args.profile), flush=True)
     turns = config.turns
     if turns < 1: raise ValueError("Step 6 requires at least one turn")
     launch = load_profile_payload(config_path, step=6, profile=args.profile)["launch"]

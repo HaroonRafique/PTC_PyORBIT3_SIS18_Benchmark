@@ -50,6 +50,11 @@ under `docs/superpowers/` before non-trivial work.
   `config.json`, zero-argument `run_example.sh`, readable Python
   runner, tracked `legacy_input/`, tracked `input/generated/`, and ignored
   `output/`. Generated artifacts must stay beneath that step directory.
+- Before staging inputs or starting MAD-X/PTC tracking, every runner must print
+  a stable, fully resolved summary of its selected local `config.json` profile,
+  including all top-level step inputs and inherited/overridden profile values.
+  This is the operator's confirmation of the exact physics, launch, particle
+  count, and turn count about to run.
 - A step's `config.json` is its sole authoritative source of benchmark
   settings: profiles, beam and physics values, launches/distributions,
   plotting policy, and comparison policy. Runners may use generic helpers but

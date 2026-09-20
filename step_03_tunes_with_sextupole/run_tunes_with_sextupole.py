@@ -22,7 +22,7 @@ from common.manifest import write_run_manifest
 from common.poincare_distribution import amplitude_scan_coordinates, dominant_fft_tune
 from common.reference_artifacts import maybe_reference_root, sha256_file, stage_packaged_inputs
 from common.sis18_comparison import compare_tune_tables
-from common.sis18_config import load_step_config
+from common.sis18_config import format_resolved_config, load_step_config
 from common.sis18_lattice import in_workdir, load_sis18_lattice
 from common.sis18_plots import BENCHMARK_COLORS, layered_overlay_style, plt
 
@@ -202,7 +202,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke")
     parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output"); parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv)
-    config = load_step_config(STEP_DIR / "config.json", step=3, profile=args.profile)
+    config_path = STEP_DIR / "config.json"
+    config = load_step_config(config_path, step=3, profile=args.profile)
+    print(format_resolved_config(config_path, step=3, profile=args.profile), flush=True)
     particles, turns = config.n_macroparticles, config.turns
     if particles < 2 or turns < 4: raise ValueError("Step 3 requires at least 2 particles and 4 turns")
     output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"

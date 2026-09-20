@@ -22,7 +22,7 @@ from common.manifest import write_run_manifest
 from common.poincare_distribution import horizontal_poincare_coordinates
 from common.poincare_plots import plot_poincare_views
 from common.reference_artifacts import maybe_reference_root, sha256_file, stage_packaged_inputs
-from common.sis18_config import load_step_config
+from common.sis18_config import format_resolved_config, load_step_config
 from common.sis18_lattice import in_workdir, load_sis18_lattice
 
 STEP_DIR = Path(__file__).resolve().parent
@@ -114,7 +114,7 @@ def _run(*, flat: Path, inputs: Path, config, particles: int, turns: int):
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke"); parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output"); parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
-    args = parser.parse_args(argv); config = load_step_config(STEP_DIR / "config.json", step=5, profile=args.profile); particles, turns = config.n_macroparticles, config.turns
+    args = parser.parse_args(argv); config_path = STEP_DIR / "config.json"; config = load_step_config(config_path, step=5, profile=args.profile); print(format_resolved_config(config_path, step=5, profile=args.profile), flush=True); particles, turns = config.n_macroparticles, config.turns
     if particles < 1 or turns < 1: raise ValueError("Step 5 requires at least one particle and one turn")
     output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"; paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
     staged = stage_packaged_inputs(source=STEP_DIR / "legacy_input", destination=inputs / "Input"); flat = generate_flat_file(madx=paths.madx, workdir=inputs, madx_input=inputs / "Input" / "SIS18.madx"); prepare_pyorbit3_runtime(paths, Path("/tmp/sis18_ptc_runtime"))

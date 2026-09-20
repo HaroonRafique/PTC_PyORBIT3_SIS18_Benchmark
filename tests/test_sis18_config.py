@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from common.sis18_config import load_step_config
+from common.sis18_config import format_resolved_config, load_step_config
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -63,6 +63,28 @@ def test_standalone_step_config_inherits_reference_profile(tmp_path: Path):
     assert smoke.turns == 64
     assert smoke.intensity == 2.95e10
     assert (smoke.qx, smoke.qy) == (4.3504, 3.2)
+
+
+def test_resolved_config_display_includes_merged_profile_and_step_inputs(tmp_path: Path):
+    config_path = tmp_path / "config.json"
+    config_path.write_text(
+        '''{
+  "step": 6,
+  "profiles": {
+    "reference": {"turns": 15000, "launch": {"x_m": 0.005}},
+    "smoke": {"turns": 64}
+  },
+  "physics": {"space_charge": "analytical_frozen_gaussian"}
+}''',
+        encoding="utf-8",
+    )
+
+    display = format_resolved_config(config_path, step=6, profile="smoke")
+
+    assert '"profile": "smoke"' in display
+    assert '"turns": 64' in display
+    assert '"x_m": 0.005' in display
+    assert '"space_charge": "analytical_frozen_gaussian"' in display
 
 
 def test_step_2_uses_public_bare_tunes():

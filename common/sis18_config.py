@@ -70,3 +70,19 @@ def load_profile_payload(path: Path, *, step: int, profile: str) -> dict[str, An
             else:
                 resolved[key] = value
     return resolved
+
+
+def format_resolved_config(path: Path, *, step: int, profile: str) -> str:
+    """Format every local input used by a selected step/profile before a run."""
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    resolved_profile = load_profile_payload(path, step=step, profile=profile)
+    step_inputs = {key: value for key, value in payload.items() if key not in {"step", "profiles"}}
+    display = {
+        "config_path": str(path.resolve()),
+        "profile": profile,
+        "step": step,
+        "step_inputs": step_inputs,
+        "resolved_profile": resolved_profile,
+    }
+    return "Resolved SIS18 run configuration:\n" + json.dumps(display, indent=2, sort_keys=True)

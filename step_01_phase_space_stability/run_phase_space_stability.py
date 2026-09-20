@@ -22,7 +22,7 @@ from common.manifest import write_run_manifest
 from common.legacy_plot_comparison import plot_legacy_comparison, plot_same_axes_references
 from common.poincare_distribution import horizontal_poincare_coordinates
 from common.poincare_plots import plot_poincare_views
-from common.sis18_config import load_step_config
+from common.sis18_config import format_resolved_config, load_step_config
 from common.sis18_lattice import load_sis18_lattice
 
 STEP_DIR = Path(__file__).resolve().parent
@@ -52,7 +52,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv)
 
-    config = load_step_config(STEP_DIR / "config.json", step=1, profile=args.profile)
+    config_path = STEP_DIR / "config.json"
+    config = load_step_config(config_path, step=1, profile=args.profile)
+    print(format_resolved_config(config_path, step=1, profile=args.profile), flush=True)
     case_config = json.loads((STEP_DIR / "config.json").read_text(encoding="utf-8"))
     particles, turns = config.n_macroparticles, config.turns
     output = args.output_dir.resolve()

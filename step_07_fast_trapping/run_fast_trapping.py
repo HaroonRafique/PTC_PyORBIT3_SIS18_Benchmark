@@ -20,7 +20,7 @@ from common.legacy_plot_comparison import plot_legacy_comparison, plot_same_axes
 from common.madx import generate_flat_file
 from common.manifest import write_run_manifest
 from common.reference_artifacts import maybe_reference_root, sha256_file, stage_packaged_inputs
-from common.sis18_config import load_step_config
+from common.sis18_config import format_resolved_config, load_step_config
 from common.sis18_lattice import in_workdir, load_sis18_lattice
 from common.sis18_plots import BENCHMARK_COLORS, CURRENT_LINE_MARKER_SIZE, CURRENT_MARKER, plt
 from common.trapping_diagnostics import horizontal_action
@@ -156,7 +156,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke")
     parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output"); parser.add_argument("--reference-root", type=Path)
     parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
-    args = parser.parse_args(argv); config_path = STEP_DIR / "config.json"; config = load_step_config(config_path, step=7, profile=args.profile); turns = config.turns
+    args = parser.parse_args(argv); config_path = STEP_DIR / "config.json"; config = load_step_config(config_path, step=7, profile=args.profile); print(format_resolved_config(config_path, step=7, profile=args.profile), flush=True); turns = config.turns
     if turns < 1: raise ValueError("Step 7 requires at least one turn")
     output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"
     paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
