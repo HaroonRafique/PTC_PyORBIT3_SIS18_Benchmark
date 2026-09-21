@@ -1,0 +1,19 @@
+{
+  "source_page": "https://web-docs.gsi.de/~giuliano/research_activity/trapping_benchmarking/THBW01.pdf",
+  "plots": [
+    {
+      "label": "Official GSI Step 9 emittance-evolution slide (full page)",
+      "file": "gsi_step9_emittance_slide.png",
+      "pdf_page_number": 19,
+      "description": "Full PDF page containing the Step 9 full-bunch reference, rendered at 160 dpi without cropping.",
+      "sha256": "7424c3cef301898ea44f67c33b086573da900dd538882547f70e71fed4aeba48"
+    },
+    {
+      "label": "Official GSI Step 9 emittance-estimate slide (full page)",
+      "file": "gsi_step9_estimate_slide.png",
+      "pdf_page_number": 20,
+      "description": "Full PDF page containing the Step 9 emittance-growth estimate, rendered at 160 dpi without cropping.",
+      "sha256": "f0d875b9c3dd950d48231126d880f1392c56aafe2eb548685dfda918b8b1d8e4"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ The detailed, task-level implementation plan is
 
 - [x] Repository governance and directory layout.
 - [x] Shared profiles, legacy staging, and manifests.
-- [ ] Migrate Steps 8--9 to standalone local `config.json`; Steps 1--7 use local configs.
+- [x] Migrate Steps 8--9 to standalone local `config.json`; Steps 1--7 use local configs.
 - [x] PTC-enabled runtime/lattice smoke check: MAD-X 5.02 generated and PTC
   loaded the Step 1 lattice (504 nodes, 216.7199934718 m, gamma 1.01215003).
 - [x] Step 1: phase-space stability (smoke and 20-particle/1,024-turn reference run).
@@ -20,7 +20,7 @@ The detailed, task-level implementation plan is
 - [ ] Step 6: slow trapping (smoke complete; reference and legacy-artifact runs pending).
 - [ ] Step 7: fast trapping (smoke complete; reference run and visual review pending).
 - [ ] Step 8: long-term trapping (smoke complete; reference and legacy-artifact runs pending).
-- [ ] Step 9: bunch emittance evolution.
+- [ ] Step 9: bunch emittance evolution (smoke complete; reference and legacy-artifact runs pending).
 - [ ] Reference campaign and examples-helper promotion audit.
 
 ## Completion rule
@@ -137,3 +137,17 @@ a blocker. The full official GSI Step 8 slide is versioned with source and
 digest provenance, without digitizing it as numeric data; its heading states
 100,000 turns but its plotted x-axis reaches 200,000, so that source conflict
 is retained in the comparison report.
+
+Step 9 uses a local `config.json` and a seeded matched six-dimensional
+Gaussian bunch because the historical tomoscope file cannot be recovered. Its
+64-turn / 32-particle smoke completed on 2026-09-21 with a 504-node,
+216.7199934718 m PTC lattice, 504 frozen analytical-Gaussian SC nodes, and no
+losses. It records sampled `BunchTwissAnalysis` diagnostics, external
+read-only `output.mat` comparison hashes, labelled side-by-side and numeric
+overlay plots, and full official GSI Step 9 slides. The scientific reference
+is 1,000 particles at `(Qx, Qy) = (4.3504, 3.2)` for 100,000 turns; its
+published final horizontal-emittance estimate is 2.08 and is deliberately
+report-only pending manual review. The archival MAT curve is a distinct
+10,000-particle `(Qx, Qy) = (4.3604, 3.2)` tomoscope ensemble (final archived
+ratio 1.96456), so it must remain a diagnostic rather than a turn-by-turn
+equivalence criterion.

@@ -1,0 +1,15 @@
+{
+  "step": 9,
+  "profiles": {
+    "reference": {"intensity": 1.95e9, "n_macroparticles": 1000, "turns": 100000, "sextupole_enabled": true, "qx": 4.3504, "qy": 3.2, "restoring_force": -4.38975e-09, "distribution": "seeded_matched_gaussian_6d", "seed": 20260909},
+    "smoke": {"n_macroparticles": 32, "turns": 64},
+    "legacy_artifact": {"n_macroparticles": 10000, "turns": 100000, "qx": 4.3604}
+  },
+  "beam": {"beta_rel": 0.15448, "gamma_rel": 1.012149995, "particle_mass_GeV": 0.9382720813, "epsn_x": 4.91e-7, "epsn_y": 3.635e-7, "dpp_rms": 8.333333333333333e-05},
+  "longitudinal": {"bunch_length_rms_m": 2.680419244, "synchrotron_tune": 0.001, "synchrotron_period_turns": 1000},
+  "distribution": {"transverse_cut_sigma": 5.0, "longitudinal_model": "independent_zero_centred_gaussian", "historical_tomoscope_available": false},
+  "physics": {"space_charge": "analytical_frozen_gaussian", "aperture_m": 10.0, "sc_path_length_min_m": 1e-08},
+  "diagnostics": {"sample_stride_turns": 100},
+  "comparison": {"website_expected_final_epsn_x_ratio": 2.08, "website_slide_files": ["gsi_step9_emittance_slide.png", "gsi_step9_estimate_slide.png"], "legacy_output_mat": "Step9/final_output/output.mat", "legacy_case": "10000 macroparticles, Qx=4.3604; unavailable tomoscope distribution"},
+  "reference_root_env": "SIS18_REFERENCE_ROOT"
+}

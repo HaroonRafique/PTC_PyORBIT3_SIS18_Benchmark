@@ -25,7 +25,7 @@ Primary historical references:
 | Step 6 slow trapping | smoke complete; reference and legacy-artifact runs pending |
 | Step 7 fast trapping | smoke complete; reference and visual review pending |
 | Step 8 long-term trapping | smoke complete; reference and legacy-artifact runs pending |
-| Step 9 smoke/reference comparison | pending |
+| Step 9 full-bunch emittance evolution | smoke complete; reference and legacy-artifact runs pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
 
 ## Layout
@@ -124,3 +124,13 @@ is instead 200,000 turns long, so `reference` compares the matching
 official GSI Step 8 slide labels 100,000 turns but its plotted x-axis reaches
 200,000 turns; this source conflict is retained in the comparison report.
 Numeric trajectory data remains external and read-only.
+
+Step 9 is the full-bunch emittance-evolution case. Its website-authoritative
+`reference` profile tracks 1,000 seeded matched-Gaussian macroparticles for
+100,000 turns at `(Qx, Qy) = (4.3504, 3.2)`, with the historical frozen
+analytical space-charge and restoring-force model. The original tomoscope
+input is unavailable, so this deterministic replacement is explicitly
+recorded rather than presented as a replay. The archived external `.mat`
+artifact instead used 10,000 particles at `Qx=4.3604`; it is plotted as a
+numeric diagnostic only. The official GSI final-emittance estimate is 2.08;
+the reference result is report-only pending scientific review.
