@@ -1,0 +1,12 @@
+{
+  "source_page": "https://web-docs.gsi.de/~giuliano/research_activity/trapping_benchmarking/THBW01.pdf",
+  "plots": [
+    {
+      "label": "Official GSI Step 8 slide (full page)",
+      "file": "gsi_step8_full_slide.png",
+      "pdf_page_number": 18,
+      "description": "Full PDF page containing the Step 8 scattering/trapping reference; rendered at 160 dpi without cropping.",
+      "sha256": "e25718dc0ec822024752fb4192b73cc894fddd85f8ae8cc33eec277d9507c2e8"
+    }
+  ]
+}

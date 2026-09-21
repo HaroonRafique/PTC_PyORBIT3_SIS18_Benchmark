@@ -132,3 +132,12 @@ def test_step_7_uses_the_fast_scattering_bare_tunes():
 
     assert (reference.qx, reference.qy) == (4.3504, 3.2)
     assert reference.turns == 2000
+
+
+def test_step_8_reference_profile_uses_the_published_one_hundred_thousand_turn_case():
+    reference = load_step_config(ROOT / "step_08_long_term_trapping" / "config.json", step=8, profile="reference")
+    artifact = load_step_config(ROOT / "step_08_long_term_trapping" / "config.json", step=8, profile="legacy_artifact")
+
+    assert (reference.qx, reference.qy) == (4.3504, 3.2)
+    assert reference.turns == 100_000
+    assert artifact.turns == 200_000

@@ -19,7 +19,7 @@ The detailed, task-level implementation plan is
 - [ ] Step 5: phase-space island (smoke complete; reference run and visual review pending).
 - [ ] Step 6: slow trapping (smoke complete; reference and legacy-artifact runs pending).
 - [ ] Step 7: fast trapping (smoke complete; reference run and visual review pending).
-- [ ] Step 8: long-term trapping.
+- [ ] Step 8: long-term trapping (smoke complete; reference and legacy-artifact runs pending).
 - [ ] Step 9: bunch emittance evolution.
 - [ ] Reference campaign and examples-helper promotion audit.
 
@@ -122,3 +122,18 @@ GSI `0.9--1.6` normalized-action limits. The external Step 7 artifacts have
 only visual PNGs, not a particle table, so reference completion requires visual
 agreement with the GSI SIMPSONS/MICROMAP and legacy PTC-PyORBIT2 plots, showing
 the expected fast-regime scattering rather than adiabatic trapping.
+
+Step 8 is the website-authoritative 100,000-turn long-term scattering/trapping
+case at `Qs=1e-3`, with the Step 7 published launch `x=5 mm`,
+`xp=y=yp=dE=0`, `z=2.5 sigma_z`, and `(Qx, Qy) = (4.3504, 3.2)`. Its
+128-turn smoke completed on 2026-09-20 with a 504-node,
+216.7199934718 m PTC lattice, 504 frozen analytical-Gaussian SC nodes, and no
+particle loss. The archived `Particle_0.dat` trajectory has 200,000 tracked
+turns plus its pre-tracking record; the `reference` profile compares the
+matching 100,000-turn prefix, while `legacy_artifact` performs the full run.
+The smoke-prefix residual is diagnostic only (maximum absolute residuals:
+`x=1.6e-5 m`, `xp=2e-6 rad`, `z=3e-6 m`); reference disagreement must remain
+a blocker. The full official GSI Step 8 slide is versioned with source and
+digest provenance, without digitizing it as numeric data; its heading states
+100,000 turns but its plotted x-axis reaches 200,000, so that source conflict
+is retained in the comparison report.

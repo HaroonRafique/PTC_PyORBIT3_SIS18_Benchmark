@@ -24,7 +24,7 @@ Primary historical references:
 | Step 5 phase-space island | smoke complete; reference pending |
 | Step 6 slow trapping | smoke complete; reference and legacy-artifact runs pending |
 | Step 7 fast trapping | smoke complete; reference and visual review pending |
-| Step 8 long-term trapping | pending |
+| Step 8 long-term trapping | smoke complete; reference and legacy-artifact runs pending |
 | Step 9 smoke/reference comparison | pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
 
@@ -115,3 +115,12 @@ published axes. The historical artifacts contain only PNGs, so comparison is
 visual: a compact panel packages the original GSI SIMPSONS and MICROMAP
 rasters with the legacy PTC-PyORBIT2 and current plots. The expected fast
 regime is scattering rather than adiabatic trapping.
+
+Step 8 extends the scattering/trapping study to the published 100,000-turn
+case at `Qs=1e-3`, using the published Step 7 launch `x=5 mm`,
+`z=2.5 sigma_z` and `(Qx, Qy) = (4.3504, 3.2)`. Its archived legacy trajectory
+is instead 200,000 turns long, so `reference` compares the matching
+100,000-turn prefix while `legacy_artifact` runs all 200,000 turns. The full
+official GSI Step 8 slide labels 100,000 turns but its plotted x-axis reaches
+200,000 turns; this source conflict is retained in the comparison report.
+Numeric trajectory data remains external and read-only.

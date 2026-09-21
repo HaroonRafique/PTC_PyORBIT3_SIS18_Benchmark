@@ -86,3 +86,14 @@ def test_step_7_website_reference_manifest_hashes_downloaded_images():
     for entry in manifest["plots"]:
         assert entry["url"].startswith("http://www-linux.gsi.de/~giuliano/")
         assert sha256_file(directory / entry["file"]) == entry["sha256"]
+
+
+def test_step_8_website_reference_manifest_hashes_the_full_gsi_slide():
+    directory = ROOT / "shared_inputs" / "reference_plots" / "step_08"
+    manifest = json.loads((directory / "reference_manifest.json").read_text(encoding="utf-8"))
+
+    assert manifest["source_page"].endswith("THBW01.pdf")
+    entry = manifest["plots"][0]
+    assert entry["label"] == "Official GSI Step 8 slide (full page)"
+    assert entry["pdf_page_number"] == 18
+    assert sha256_file(directory / entry["file"]) == entry["sha256"]

@@ -1,0 +1,15 @@
+{
+  "step": 8,
+  "profiles": {
+    "reference": {"intensity": 1.95e9, "n_macroparticles": 1, "turns": 100000, "sextupole_enabled": true, "qx": 4.3504, "qy": 3.2, "restoring_force": -4.38975e-09, "distribution": "single_particle"},
+    "smoke": {"turns": 128},
+    "legacy_artifact": {"turns": 200000}
+  },
+  "beam": {"beta_rel": 0.15448, "gamma_rel": 1.012149995, "epsn_x": 4.91e-7, "epsn_y": 3.635e-7, "dpp_rms": 8.333333333333333e-05},
+  "longitudinal": {"bunch_length_rms_m": 2.680419244, "synchrotron_tune": 0.001, "synchrotron_period_turns": 1000, "restoring_force": -4.38975e-09},
+  "physics": {"space_charge": "analytical_frozen_gaussian", "aperture_m": 10.0, "sc_path_length_min_m": 1e-08},
+  "launch": {"x_m": 0.005, "xp_rad": 0.0, "y_m": 0.0, "yp_rad": 0.0, "z_sigma": 2.5, "dE_GeV": 0.0},
+  "diagnostics": {"record_every_turn": true, "plot_sample_stride": 100},
+  "comparison": {"legacy_turns": 200000, "legacy_decimal_places": 6, "website_text_turns": 100000, "website_slide_x_axis_turns": 200000, "website_slide": "gsi_step8_full_slide.png"},
+  "reference_root_env": "SIS18_REFERENCE_ROOT"
+}
