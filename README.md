@@ -136,4 +136,7 @@ replay. The archived external `.mat` artifact used 10,000 particles at the
 same tune and remains a numeric diagnostic only. The separate official GSI
 final-emittance estimate of 2.08 applies to an analytical estimate at
 `Qx=4.3504`, not to the empirical 1,000-particle website plot; the reference
-result is report-only pending scientific review.
+result is report-only pending scientific review. Each comparison also includes
+the archived PyORBIT2.7 multi-code overlay (MICROMAP, SIMPSONS, and
+MADX+fsc3d) beside PTC-PyORBIT3 drawn on the same historical raster and axes;
+the external source PNGs are hashed in the run manifest.

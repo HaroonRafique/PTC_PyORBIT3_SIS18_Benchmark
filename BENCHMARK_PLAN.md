@@ -154,4 +154,7 @@ published 2.08 horizontal-emittance ratio is an analytical estimate at
 target. The archival MAT curve is a distinct 10,000-particle
 `(Qx, Qy) = (4.3604, 3.2)` tomoscope ensemble (final archived ratio 1.96456),
 so it must remain a diagnostic rather than a turn-by-turn equivalence
-criterion.
+criterion. The comparison additionally retains the historical PyORBIT2.7
+composite plot with its MICROMAP, SIMPSONS, and MADX+fsc3d background beside a
+current-data panel drawn over the identical background and axes; both external
+PNG sources are read in place and recorded by hash.

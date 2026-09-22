@@ -218,6 +218,47 @@ def _overlay(path: Path, *, legacy_turns: np.ndarray, legacy_epsn_x: np.ndarray,
     return path
 
 
+def plot_multicode_overlay_side_by_side(
+    *, legacy_overlay: Path, historical_background: Path, current_turns: np.ndarray, current_epsn_x: np.ndarray, output: Path
+) -> Path:
+    """Compare the archived PyORBIT2.7 overlay with current data on its source raster.
+
+    The left panel is the externally stored historical composition: its
+    PTC-PyORBIT2 curve was drawn over the MICROMAP, SIMPSONS, and MADX+fsc3d
+    reference raster.  The right panel draws only the current numeric series
+    over that same raster and coordinate system.  The legacy images are read
+    in place and are never copied into this repository.
+    """
+
+    for name, path in (("legacy overlay", legacy_overlay), ("historical background", historical_background)):
+        if not path.is_file():
+            raise FileNotFoundError(f"Step 9 {name} is missing: {path}")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    figure, axes = plt.subplots(1, 2, figsize=(14, 7), constrained_layout=True)
+    axes[0].imshow(plt.imread(legacy_overlay))
+    axes[0].set(title="Historical PTC-PyORBIT2.7 overlay")
+    axes[0].axis("off")
+    axis = axes[1]
+    axis.imshow(plt.imread(historical_background), origin="upper", aspect="auto", extent=(0.0, 100.0, 1.0, 2.2), zorder=0)
+    axis.plot(
+        np.asarray(current_turns, dtype=float) / 1000.0,
+        normalised_emittance_history(np.asarray(current_epsn_x, dtype=float)),
+        color=BENCHMARK_COLORS["current"], marker="x", markersize=1.75, linewidth=1.25, zorder=3, label="PTC-PyORBIT3",
+    )
+    axis.set(
+        title="PTC-PyORBIT3 over the same multi-code reference",
+        xlabel="synchrotron oscillations",
+        ylabel=r"$\epsilon_x / \epsilon_{x0}$",
+        xlim=(0.0, 100.0), ylim=(1.0, 2.2),
+    )
+    axis.set_box_aspect(1)
+    axis.grid(True, alpha=0.3)
+    axis.legend()
+    figure.savefig(output, dpi=160)
+    plt.close(figure)
+    return output
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", choices=("smoke", "reference", "legacy_artifact"), default="smoke")
@@ -253,9 +294,12 @@ def main(argv: list[str] | None = None) -> int:
         legacy_turns, legacy_epsn_x = legacy_emittance_history(legacy_path)
         legacy_plot = _plot_history(plots / "legacy_epsn_x_vs_synchrotron_oscillations.png", legacy_turns, legacy_epsn_x, label="Legacy PTC-PyORBIT2 artifact")
         plot_paths.extend((str(legacy_plot), str(plot_labeled_comparison(legacy_plot, current_plot, plots / "legacy_vs_current_epsn_x_side_by_side.png", title="SIS18 Step 9 normalized horizontal emittance", left_label="Legacy PTC-PyORBIT2 artifact", right_label="PTC-PyORBIT3")), str(_overlay(plots / "legacy_vs_current_epsn_x_numeric_overlay.png", legacy_turns=legacy_turns, legacy_epsn_x=legacy_epsn_x, current=records))))
+        legacy_multicode_overlay = reference / payload["comparison"]["legacy_multicode_overlay"]
+        legacy_multicode_background = reference / payload["comparison"]["legacy_multicode_background"]
+        plot_paths.append(str(plot_multicode_overlay_side_by_side(legacy_overlay=legacy_multicode_overlay, historical_background=legacy_multicode_background, current_turns=records[:, 0], current_epsn_x=records[:, 3], output=plots / "legacy_multicode_overlay_vs_current.png")))
         slides = [(name, WEBSITE_REFERENCE_DIR / name) for name in payload["comparison"]["website_slide_files"]]
         plot_paths.append(str(plot_same_axes_references(current=current_plot, references=slides, output=plots / "website_slides_and_current_grid.png")))
-        reference_artifacts = {str(path): sha256_file(path) for path in (legacy_path, *(path for _, path in slides))}
+        reference_artifacts = {str(path): sha256_file(path) for path in (legacy_path, legacy_multicode_overlay, legacy_multicode_background, *(path for _, path in slides))}
         comparison["legacy_final_epsn_x_ratio"] = float(normalised_emittance_history(legacy_epsn_x)[-1])
     comparison["current_final_epsn_x_ratio"] = float(normalised_emittance_history(records[:, 3])[-1])
     (output / "comparison.json").write_text(json.dumps(comparison, indent=2, sort_keys=True) + "\n", encoding="utf-8")

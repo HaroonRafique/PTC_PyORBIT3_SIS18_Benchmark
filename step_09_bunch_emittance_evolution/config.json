@@ -11,6 +11,6 @@
   "mpi": {"default_processes": 4},
   "physics": {"space_charge": "analytical_frozen_gaussian", "aperture_m": 10.0, "sc_path_length_min_m": 1e-08},
   "diagnostics": {"sample_stride_turns": 100, "progress_stride_turns": 1000},
-  "comparison": {"website_empirical_qx": 4.3604, "website_analytical_estimate_qx": 4.3504, "website_analytical_estimate_epsn_x_ratio": 2.08, "website_slide_files": ["gsi_step9_emittance_slide.png", "gsi_step9_estimate_slide.png"], "legacy_output_mat": "Step9/final_output/output.mat", "legacy_case": "10000 macroparticles, Qx=4.3604; unavailable tomoscope distribution"},
+  "comparison": {"website_empirical_qx": 4.3604, "website_analytical_estimate_qx": 4.3504, "website_analytical_estimate_epsn_x_ratio": 2.08, "website_slide_files": ["gsi_step9_emittance_slide.png", "gsi_step9_estimate_slide.png"], "legacy_output_mat": "Step9/final_output/output.mat", "legacy_multicode_overlay": "Step9/final_output/SIS18_Step9.png", "legacy_multicode_background": "Step9/final_output/step9.png", "legacy_case": "10000 macroparticles, Qx=4.3604; unavailable tomoscope distribution"},
   "reference_root_env": "SIS18_REFERENCE_ROOT"
 }
