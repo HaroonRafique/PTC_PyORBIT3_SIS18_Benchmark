@@ -1,0 +1,51 @@
+{
+  "code_revisions": {
+    "benchmark": "2b548d711aecb7d5ab130b63d349aa222f8c7296",
+    "ptc": "979d47d3faab60e0c2608e08d259d217148e630e",
+    "pyorbit3": "2fa4be6f0b8d178511ebb4a02989975265c0b123"
+  },
+  "command": [
+    "run_phase_space_island.py",
+    "--profile",
+    "reference"
+  ],
+  "comparison": "visual_topology_only",
+  "comparison_enabled": true,
+  "flat_file": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/input/generated/reference/madx/SIS_18_BENCHMARK.flt",
+  "flat_file_sha256": "809f7ee6a7b05fdd71f3a082f7019a563c8d78d3ba1da024305056a4b5872a41",
+  "lattice": {
+    "length_m": 216.71999347179633,
+    "nodes": 504,
+    "sc_nodes": 504,
+    "survivors": 16
+  },
+  "mpi_size": 1,
+  "packaged_inputs": {
+    "SIS18.madx": "15dd3ffd73c5b105301f3ba7701a371223320e9f32049bc4cdc799b4b39ef25d",
+    "SIS18.seq": "33b1ef751e12fe4bba7ecb42869b197e0441b5f5a3983b693dcb468193a813b1",
+    "print_flat_file.ptc": "06d261a0ae3858fdfb95711ff4265f4f67d2d25cfc4295d527221898ec78d276",
+    "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
+    "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
+  },
+  "particles": 16,
+  "plots": [
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/output/plots/poincare_full.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/output/plots/poincare_x_xp_zoom.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/output/plots/legacy_vs_current_full.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/output/plots/legacy_vs_current_zoom.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/output/plots/website_vs_current_horizontal_phase_space.png"
+  ],
+  "profile": "reference",
+  "reference_artifacts": {
+    "Poincare_Dist_SIS18_Step5.png": "e3e82e30ed7e802728c3ddd087fc12aa4253d7c66806e313fec573af5e37165d",
+    "Poincare_Dist_SIS18_Step5_zoom.png": "ac86ad4223a7bef3ab9ba373e8a94137466c0b10611931beed185d945aeacde4",
+    "phase-space-orbits-sex-on+sc-qx43504.jpg": "ebd0489f9d8a456d812549842c3feb2a21bd8fcb1200433d42c89ab446ba3bd5",
+    "simpson-phase-space-orbits-sex-on+sc-qx43504.jpg": "1be098038fff63b52870a2d279ab800adfd0b8d7cee7620fac9aa25db3b9882c",
+    "synergia-phase-space-orbits-sex-on+sc-qx43504.jpg": "1dd30464cb3f85c22215410df932b5fb75c1fef9412f9a84e5df8d13395309ff"
+  },
+  "seed": 20260908,
+  "sextupole_enabled": true,
+  "space_charge": "analytical_frozen_gaussian",
+  "step": 5,
+  "turns": 1500
+}
