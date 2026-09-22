@@ -1,0 +1,80 @@
+{
+  "code_revisions": {
+    "benchmark": "860ba3b9a1218a212636272a12265e262c7c158d",
+    "ptc": "979d47d3faab60e0c2608e08d259d217148e630e",
+    "pyorbit3": "2fa4be6f0b8d178511ebb4a02989975265c0b123"
+  },
+  "command": [
+    "run_long_term_trapping.py",
+    "--profile",
+    "reference"
+  ],
+  "comparison": {
+    "legacy_duration_turns": 200000,
+    "numeric": {
+      "agreement": false,
+      "max_abs_residual": {
+        "dE_GeV": 1.0000000000000006e-06,
+        "x_m": 0.066638,
+        "xp_rad": 0.008519,
+        "y_m": 0.033031,
+        "yp_rad": 0.0026449999999999998,
+        "z_m": 0.45482999999999985
+      },
+      "samples": 100001
+    },
+    "published_case": true,
+    "website_case": "Qs=1e-3, 100000 turns, Step 7 launch",
+    "website_slide_duration_discrepancy": "the slide heading says 100000 turns while its plotted horizontal axis reaches 200000 turns"
+  },
+  "comparison_enabled": true,
+  "config_path": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/config.json",
+  "config_sha256": "316d33cf854734f293e99e7fd9d77ac71fd2ccc9598587603be2f654543b4e86",
+  "diagnostics": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/tables/turn_diagnostics.csv",
+  "flat_file": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/input/generated/reference/madx/SIS_18_BENCHMARK.flt",
+  "flat_file_sha256": "809f7ee6a7b05fdd71f3a082f7019a563c8d78d3ba1da024305056a4b5872a41",
+  "lattice": {
+    "first_lost_turn": -1,
+    "length_m": 216.71999347179633,
+    "nodes": 504,
+    "sc_nodes": 504,
+    "survivors": 1
+  },
+  "mpi_size": 1,
+  "packaged_inputs": {
+    "SIS18.madx": "41e98bf69e14f0f1afb7841453998faea18c92ec6979ee0e436ae5745f8d99df",
+    "SIS18.seq": "33b1ef751e12fe4bba7ecb42869b197e0441b5f5a3983b693dcb468193a813b1",
+    "print_flat_file.ptc": "06d261a0ae3858fdfb95711ff4265f4f67d2d25cfc4295d527221898ec78d276",
+    "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
+    "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
+  },
+  "plots": [
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/action_x_vs_synchrotron_oscillations.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/z_vs_turn.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/poincare_x_xp.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/poincare_z_dE.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_action_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_action_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_z_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_z_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_x_xp_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_x_xp_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_z_dE_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_z_dE_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/website_slide_vs_current_action.png"
+  ],
+  "profile": "reference",
+  "reference_artifacts": {
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/shared_inputs/reference_plots/step_08/gsi_step8_full_slide.png": "e25718dc0ec822024752fb4192b73cc894fddd85f8ae8cc33eec277d9507c2e8",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step8/final_output/Particle_0.dat": "0c18c1cfb4d52d8dbd09b9c4ada572197d2a37886e691ec18b424edadfcd009a",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step8/final_output/Particle_trapping_SIS18_Step_8.png": "89fed551aa96f051755b44316507f67c7f2e06622f4315f23f23f93c4302522f",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step8/final_output/Particle_trapping_z_SIS18_Step_8.png": "5093639d2b7be4caac54ed1d9703e9e8cb7e35471c7a960b2b9972ff7effc6ed",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step8/final_output/Poincare_x_xp_SIS18_Step_8.png": "10aa9c79f286b4e29821c5049b916826692661f7ab67fdcc4af2a538677a6982",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step8/final_output/Poincare_z_dE_SIS18_Step_8.png": "0198ebcab251613818262e3e80bd4c463182717f784b801a8c8f6220cf3ee587"
+  },
+  "seed": 20260908,
+  "sextupole_enabled": true,
+  "space_charge": "analytical_frozen_gaussian",
+  "step": 8,
+  "turns": 100000
+}
