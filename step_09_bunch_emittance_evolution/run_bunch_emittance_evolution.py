@@ -30,7 +30,9 @@ from common.sis18_plots import BENCHMARK_COLORS, layered_overlay_style, plt
 STEP_DIR = Path(__file__).resolve().parent
 WEBSITE_REFERENCE_DIR = ROOT / "shared_inputs" / "reference_plots" / "step_09"
 MULTICODE_CURRENT_COLOR = "#FF00FF"
-MULTICODE_LEGACY_COLOR = "#1F77B4"
+MULTICODE_LEGACY_COLOR = "#00A6FF"
+MULTICODE_TITLE = "SIS18 Benchmark Step 9"
+MULTICODE_TEXT_SCALE = 2.5
 
 
 def resolved_payload(*, profile: str) -> dict[str, object]:
@@ -239,9 +241,10 @@ def plot_multicode_overlay_side_by_side(
         if not path.is_file():
             raise FileNotFoundError(f"Step 9 {name} is missing: {path}")
     output.parent.mkdir(parents=True, exist_ok=True)
-    figure, axes = plt.subplots(1, 2, figsize=(14, 7), constrained_layout=True)
+    figure, axes = plt.subplots(1, 2, figsize=(22, 11), constrained_layout=True)
     axes[0].imshow(plt.imread(legacy_overlay))
-    axes[0].set(title="Historical PTC-PyORBIT2.7 overlay",)
+    axes[0].set(title="Historical PTC-PyORBIT2.7 overlay")
+    axes[0].title.set_fontsize(12 * MULTICODE_TEXT_SCALE)
     axes[0].axis("off")
     axis = axes[1]
     axis.imshow(plt.imread(historical_background), origin="upper", aspect="auto", extent=(0.0, 100.0, 1.0, 2.2), zorder=0)
@@ -256,14 +259,18 @@ def plot_multicode_overlay_side_by_side(
         color=MULTICODE_CURRENT_COLOR, marker="x", markersize=1.75, linewidth=2.75, zorder=4, label="PTC-PyORBIT3",
     )
     axis.set(
-        title="PTC-PyORBIT3 over historical PyORBIT2.7",
+        title=MULTICODE_TITLE,
         xlabel="synchrotron oscillations",
         ylabel=r"$\epsilon_x / \epsilon_{x0}$",
         xlim=(0.0, 100.0), ylim=(1.0, 2.2),
     )
+    axis.title.set_fontsize(12 * MULTICODE_TEXT_SCALE)
+    axis.xaxis.label.set_size(10 * MULTICODE_TEXT_SCALE)
+    axis.yaxis.label.set_size(10 * MULTICODE_TEXT_SCALE)
+    axis.tick_params(axis="both", labelsize=10 * MULTICODE_TEXT_SCALE)
     axis.set_box_aspect(1)
     axis.grid(True, alpha=0.3)
-    axis.legend(loc="upper left", framealpha=0.92)
+    axis.legend(loc="center right", framealpha=0.92, fontsize=10 * MULTICODE_TEXT_SCALE)
     figure.savefig(output, dpi=160, bbox_inches="tight", pad_inches=0.08)
     plt.close(figure)
     return output

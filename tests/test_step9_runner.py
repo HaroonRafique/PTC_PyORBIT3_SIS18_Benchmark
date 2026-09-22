@@ -6,6 +6,8 @@ from common.mpi import MPIContext, local_count_for_rank, local_counts_for_size
 from common.bunch_generation import MatchedGaussianConfig, make_configured_particle_bunch
 from step_09_bunch_emittance_evolution.run_bunch_emittance_evolution import (
     MULTICODE_CURRENT_COLOR,
+    MULTICODE_LEGACY_COLOR,
+    MULTICODE_TITLE,
     normalised_emittance_history,
     plot_multicode_overlay_side_by_side,
     resolved_payload,
@@ -54,6 +56,11 @@ def test_step_9_multicode_comparison_reconstructs_the_historical_pyorbit_curve_o
 
 def test_step_9_multicode_current_curve_uses_a_colour_not_in_the_historical_overlay():
     assert MULTICODE_CURRENT_COLOR == "#FF00FF"
+
+
+def test_step_9_multicode_comparison_uses_the_requested_title_and_bright_legacy_blue():
+    assert MULTICODE_TITLE == "SIS18 Benchmark Step 9"
+    assert MULTICODE_LEGACY_COLOR == "#00A6FF"
 
 
 def test_examples_style_mpi_partition_preserves_global_particle_count():
