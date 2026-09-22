@@ -29,6 +29,8 @@ from common.sis18_plots import BENCHMARK_COLORS, layered_overlay_style, plt
 
 STEP_DIR = Path(__file__).resolve().parent
 WEBSITE_REFERENCE_DIR = ROOT / "shared_inputs" / "reference_plots" / "step_09"
+MULTICODE_CURRENT_COLOR = "#FF00FF"
+MULTICODE_LEGACY_COLOR = "#1F77B4"
 
 
 def resolved_payload(*, profile: str) -> dict[str, object]:
@@ -219,15 +221,18 @@ def _overlay(path: Path, *, legacy_turns: np.ndarray, legacy_epsn_x: np.ndarray,
 
 
 def plot_multicode_overlay_side_by_side(
-    *, legacy_overlay: Path, historical_background: Path, current_turns: np.ndarray, current_epsn_x: np.ndarray, output: Path
+    *, legacy_overlay: Path, historical_background: Path, legacy_turns: np.ndarray, legacy_epsn_x: np.ndarray,
+    current_turns: np.ndarray, current_epsn_x: np.ndarray, output: Path
 ) -> Path:
-    """Compare the archived PyORBIT2.7 overlay with current data on its source raster.
+    """Compare the archived PyORBIT2.7 overlay with current data on matching axes.
 
     The left panel is the externally stored historical composition: its
     PTC-PyORBIT2 curve was drawn over the MICROMAP, SIMPSONS, and MADX+fsc3d
-    reference raster.  The right panel draws only the current numeric series
-    over that same raster and coordinate system.  The legacy images are read
-    in place and are never copied into this repository.
+    reference raster.  The right panel starts with the raw multi-code raster,
+    so the raster boundaries are exactly the historical data axes, then redraws
+    both the PyORBIT2.7 numeric curve and the current curve.  This avoids the
+    incorrect coordinate mapping that would result from treating the padded
+    composed PNG as a data raster.  Legacy inputs are read in place.
     """
 
     for name, path in (("legacy overlay", legacy_overlay), ("historical background", historical_background)):
@@ -236,25 +241,30 @@ def plot_multicode_overlay_side_by_side(
     output.parent.mkdir(parents=True, exist_ok=True)
     figure, axes = plt.subplots(1, 2, figsize=(14, 7), constrained_layout=True)
     axes[0].imshow(plt.imread(legacy_overlay))
-    axes[0].set(title="Historical PTC-PyORBIT2.7 overlay")
+    axes[0].set(title="Historical PTC-PyORBIT2.7 overlay",)
     axes[0].axis("off")
     axis = axes[1]
     axis.imshow(plt.imread(historical_background), origin="upper", aspect="auto", extent=(0.0, 100.0, 1.0, 2.2), zorder=0)
     axis.plot(
+        np.asarray(legacy_turns, dtype=float) / 1000.0,
+        normalised_emittance_history(np.asarray(legacy_epsn_x, dtype=float)),
+        color=MULTICODE_LEGACY_COLOR, linewidth=2.0, zorder=3, label="PTC-PyORBIT2.7",
+    )
+    axis.plot(
         np.asarray(current_turns, dtype=float) / 1000.0,
         normalised_emittance_history(np.asarray(current_epsn_x, dtype=float)),
-        color=BENCHMARK_COLORS["current"], marker="x", markersize=1.75, linewidth=1.25, zorder=3, label="PTC-PyORBIT3",
+        color=MULTICODE_CURRENT_COLOR, marker="x", markersize=1.75, linewidth=2.75, zorder=4, label="PTC-PyORBIT3",
     )
     axis.set(
-        title="PTC-PyORBIT3 over the same multi-code reference",
+        title="PTC-PyORBIT3 over historical PyORBIT2.7",
         xlabel="synchrotron oscillations",
         ylabel=r"$\epsilon_x / \epsilon_{x0}$",
         xlim=(0.0, 100.0), ylim=(1.0, 2.2),
     )
     axis.set_box_aspect(1)
     axis.grid(True, alpha=0.3)
-    axis.legend()
-    figure.savefig(output, dpi=160)
+    axis.legend(loc="upper left", framealpha=0.92)
+    figure.savefig(output, dpi=160, bbox_inches="tight", pad_inches=0.08)
     plt.close(figure)
     return output
 
@@ -296,7 +306,7 @@ def main(argv: list[str] | None = None) -> int:
         plot_paths.extend((str(legacy_plot), str(plot_labeled_comparison(legacy_plot, current_plot, plots / "legacy_vs_current_epsn_x_side_by_side.png", title="SIS18 Step 9 normalized horizontal emittance", left_label="Legacy PTC-PyORBIT2 artifact", right_label="PTC-PyORBIT3")), str(_overlay(plots / "legacy_vs_current_epsn_x_numeric_overlay.png", legacy_turns=legacy_turns, legacy_epsn_x=legacy_epsn_x, current=records))))
         legacy_multicode_overlay = reference / payload["comparison"]["legacy_multicode_overlay"]
         legacy_multicode_background = reference / payload["comparison"]["legacy_multicode_background"]
-        plot_paths.append(str(plot_multicode_overlay_side_by_side(legacy_overlay=legacy_multicode_overlay, historical_background=legacy_multicode_background, current_turns=records[:, 0], current_epsn_x=records[:, 3], output=plots / "legacy_multicode_overlay_vs_current.png")))
+        plot_paths.append(str(plot_multicode_overlay_side_by_side(legacy_overlay=legacy_multicode_overlay, historical_background=legacy_multicode_background, legacy_turns=legacy_turns, legacy_epsn_x=legacy_epsn_x, current_turns=records[:, 0], current_epsn_x=records[:, 3], output=plots / "legacy_multicode_overlay_vs_current.png")))
         slides = [(name, WEBSITE_REFERENCE_DIR / name) for name in payload["comparison"]["website_slide_files"]]
         plot_paths.append(str(plot_same_axes_references(current=current_plot, references=slides, output=plots / "website_slides_and_current_grid.png")))
         reference_artifacts = {str(path): sha256_file(path) for path in (legacy_path, legacy_multicode_overlay, legacy_multicode_background, *(path for _, path in slides))}

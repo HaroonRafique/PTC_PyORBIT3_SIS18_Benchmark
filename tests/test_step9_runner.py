@@ -5,6 +5,7 @@ from common.madx import set_madx_bare_tunes
 from common.mpi import MPIContext, local_count_for_rank, local_counts_for_size
 from common.bunch_generation import MatchedGaussianConfig, make_configured_particle_bunch
 from step_09_bunch_emittance_evolution.run_bunch_emittance_evolution import (
+    MULTICODE_CURRENT_COLOR,
     normalised_emittance_history,
     plot_multicode_overlay_side_by_side,
     resolved_payload,
@@ -29,7 +30,7 @@ def test_step_9_resolved_payload_includes_global_beam_settings():
     assert payload["profiles"]["reference"]["qx"] == 4.3604
 
 
-def test_step_9_multicode_comparison_places_current_data_on_the_historical_background(tmp_path):
+def test_step_9_multicode_comparison_reconstructs_the_historical_pyorbit_curve_on_the_raw_axes(tmp_path):
     from common.sis18_plots import plt
 
     historical_overlay = tmp_path / "historical_overlay.png"
@@ -40,6 +41,8 @@ def test_step_9_multicode_comparison_places_current_data_on_the_historical_backg
     output = plot_multicode_overlay_side_by_side(
         legacy_overlay=historical_overlay,
         historical_background=historical_background,
+        legacy_turns=np.array([0.0, 50_000.0, 100_000.0]),
+        legacy_epsn_x=np.array([1.0, 1.5, 2.0]),
         current_turns=np.array([0.0, 50_000.0, 100_000.0]),
         current_epsn_x=np.array([1.0, 1.5, 2.0]),
         output=tmp_path / "comparison.png",
@@ -47,6 +50,10 @@ def test_step_9_multicode_comparison_places_current_data_on_the_historical_backg
 
     assert output.is_file()
     assert plt.imread(output).shape[1] > plt.imread(output).shape[0]
+
+
+def test_step_9_multicode_current_curve_uses_a_colour_not_in_the_historical_overlay():
+    assert MULTICODE_CURRENT_COLOR == "#FF00FF"
 
 
 def test_examples_style_mpi_partition_preserves_global_particle_count():

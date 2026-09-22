@@ -156,5 +156,6 @@ target. The archival MAT curve is a distinct 10,000-particle
 so it must remain a diagnostic rather than a turn-by-turn equivalence
 criterion. The comparison additionally retains the historical PyORBIT2.7
 composite plot with its MICROMAP, SIMPSONS, and MADX+fsc3d background beside a
-current-data panel drawn over the identical background and axes; both external
-PNG sources are read in place and recorded by hash.
+same-axis reconstruction that redraws PyORBIT2.7 in blue and the current data
+in thick magenta over the raw historical raster; both external PNG sources are
+read in place and recorded by hash.
