@@ -1,5 +1,7 @@
 {
   "comparison_enabled": true,
+  "config_path": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_01_phase_space_stability/config.json",
+  "config_sha256": "d996cabd0aa37c791dc276ec4ef7bf154cd5064354fc10ca5614c4c7fae80cee",
   "flat_file": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_01_phase_space_stability/input/generated/reference/madx/SIS_18_BENCHMARK.flt",
   "flat_file_sha256": "8378a86bccd0d2b57945c1d39a32b7b11434caf9177ce04ac48b05393483e651",
   "lattice": {
