@@ -1,0 +1,16 @@
+{
+  "first_lost_turn": -1,
+  "launch": {
+    "dE_GeV": 0.0,
+    "x_m": 0.00501,
+    "xp_rad": 0.0,
+    "y_m": 0.0,
+    "yp_rad": 0.0,
+    "z_sigma": 2.5
+  },
+  "length_m": 216.71999347179633,
+  "nodes": 504,
+  "sc_nodes": 504,
+  "survivors": 1,
+  "turns": 15000
+}

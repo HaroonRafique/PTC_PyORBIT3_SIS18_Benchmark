@@ -1,0 +1,62 @@
+{
+  "code_revisions": {
+    "benchmark": "2b548d711aecb7d5ab130b63d349aa222f8c7296",
+    "ptc": "979d47d3faab60e0c2608e08d259d217148e630e",
+    "pyorbit3": "2fa4be6f0b8d178511ebb4a02989975265c0b123"
+  },
+  "command": [
+    "run_slow_trapping.py",
+    "--profile",
+    "reference"
+  ],
+  "comparison": {
+    "legacy_artifact_discrepancy": "legacy source launches x=0 while GSI Step 6 specifies x=5 mm",
+    "published_case": true
+  },
+  "comparison_enabled": true,
+  "config_path": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/config.json",
+  "config_sha256": "4c905aca62076919eee2a5ab412e37520698528c8b3c55aa7110628fa8c14d95",
+  "diagnostics": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/tables/turn_diagnostics.csv",
+  "flat_file": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/input/generated/reference/madx/SIS_18_BENCHMARK.flt",
+  "flat_file_sha256": "809f7ee6a7b05fdd71f3a082f7019a563c8d78d3ba1da024305056a4b5872a41",
+  "lattice": {
+    "first_lost_turn": -1,
+    "length_m": 216.71999347179633,
+    "nodes": 504,
+    "sc_nodes": 504,
+    "survivors": 1
+  },
+  "mpi_size": 1,
+  "packaged_inputs": {
+    "SIS18.madx": "56f69f54b2ca8a1f9b3a635f552378a69c4fd266590a33e829dd11905f0b8860",
+    "SIS18.seq": "33b1ef751e12fe4bba7ecb42869b197e0441b5f5a3983b693dcb468193a813b1",
+    "print_flat_file.ptc": "06d261a0ae3858fdfb95711ff4265f4f67d2d25cfc4295d527221898ec78d276",
+    "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
+    "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
+  },
+  "plots": [
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/action_x_vs_synchrotron_oscillations.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/z_vs_turn.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/poincare_x_xp.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/poincare_z_dE.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/legacy_vs_current_action_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/legacy_vs_current_z_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/legacy_vs_current_x_xp_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/legacy_vs_current_z_dE_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/website_vs_current_action_same_axes.png"
+  ],
+  "profile": "reference",
+  "reference_artifacts": {
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Particle_trapping_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png": "6c26faedb782cc2679581dc1bc8b347bbc9395c5924cb0b4628463ba2ba4e1b6",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Particle_trapping_z_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png": "dcdaac5382e1134a032e0ff69cf4f803a0c025d8c71869749663047114bf9c3c",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Particles_all.dat": "1743238a99d57587e70956c2273a132eb932b74a1e76c9a63b0529dd4360bdb9",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Poincare_x_xp_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png": "bc6bc702c42b8295156c23fc3908fa4bc3c590a9149ad0be11c89002f381cb71",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Poincare_z_dE_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png": "c634cdd0ea5721f57c0eb37ccc6e6f3b46e27a50be4243de2622972bfffc6194",
+    "trapping-ns-15000_sex-on-qx43504.jpg": "11b4c571dc2693ff1ca16eb756652370d5962a916a30ece35a7bdf811cee7140"
+  },
+  "seed": 20260908,
+  "sextupole_enabled": true,
+  "space_charge": "analytical_frozen_gaussian",
+  "step": 6,
+  "turns": 15000
+}
