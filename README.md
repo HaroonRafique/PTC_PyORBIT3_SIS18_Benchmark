@@ -127,10 +127,13 @@ Numeric trajectory data remains external and read-only.
 
 Step 9 is the full-bunch emittance-evolution case. Its website-authoritative
 `reference` profile tracks 1,000 seeded matched-Gaussian macroparticles for
-100,000 turns at `(Qx, Qy) = (4.3504, 3.2)`, with the historical frozen
-analytical space-charge and restoring-force model. The original tomoscope
-input is unavailable, so this deterministic replacement is explicitly
-recorded rather than presented as a replay. The archived external `.mat`
-artifact instead used 10,000 particles at `Qx=4.3604`; it is plotted as a
-numeric diagnostic only. The official GSI final-emittance estimate is 2.08;
-the reference result is report-only pending scientific review.
+100,000 turns at `(Qx, Qy) = (4.3604, 3.2)`, with the historical frozen
+analytical space-charge and restoring-force model. It uses the examples-style
+MPI launcher (four ranks by default), balanced local particle shares, and a
+global-count macrosize. The original tomoscope input is unavailable, so this
+deterministic replacement is explicitly recorded rather than presented as a
+replay. The archived external `.mat` artifact used 10,000 particles at the
+same tune and remains a numeric diagnostic only. The separate official GSI
+final-emittance estimate of 2.08 applies to an analytical estimate at
+`Qx=4.3504`, not to the empirical 1,000-particle website plot; the reference
+result is report-only pending scientific review.

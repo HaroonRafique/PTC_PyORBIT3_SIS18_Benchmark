@@ -3,7 +3,7 @@
   +    MAD-X 5.02.00  (64 bit, Linux)       +
   +           Production Version            +
   + Code Modification Date: 2014.03.05      +
-  + Execution Time Stamp: 21.09.26 12.20.55 +
+  + Execution Time Stamp: 22.09.26 12.54.03 +
   +++++++++++++++++++++++++++++++++++++++++++
 TITLE, " -- SIS18 with a sextupole -- ";
 
@@ -474,7 +474,7 @@ match, use_macro;
 
   USE_MACRO, name=ptc_twiss_tune_macro_false_split;
 
-  CONSTRAINT, expr=  table(ptc_twiss_summary,Q1)= 0.3504;
+  CONSTRAINT, expr=  table(ptc_twiss_summary,Q1)= 0.3604;
 
   CONSTRAINT, expr=  table(ptc_twiss_summary,Q2)= 0.2;
 
@@ -586,7 +586,7 @@ qx0 =       0.3599115606 ;
 qy0 =       0.1896034001 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
-Initial Penalty Function =   0.1985590753143384E-03
+Initial Penalty Function =   0.1083278623947102E-03
 
 
  Now PTC
@@ -833,55 +833,55 @@ qy0 =       0.1891822897 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.2663545309322579E-10 %
-Deviation from symplecticity  0.2663545309322579E-10 %
+Deviation from symplecticity  0.2423467109267931E-10 %
+Deviation from symplecticity  0.2423467109267931E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839517248       -811.1869556           -1000000 
+       216.7199935      0.03817107595       -811.2975393           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377406381        5.103424434       0.3504129095 
+          -1000000      -0.9379647347        5.118383222       0.3604014089 
 
                 q2                dq1                dq2                 qs 
-      0.1999984173       -24.65625741       -41.75348448                  0 
+      0.2000070308       -24.80601089       -41.81683083                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.829472553         16.2923846        8.637283896        24.84399897 
+       4.798847929        16.33570154        8.636596351        24.86391819 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.829472553         16.2923846                  0                  0 
+       4.798847929        16.33570154                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.637283896        24.84399897                  0                  0 
+       8.636596351        24.86391819                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54680799 
+                 0                  0                  0        17.49783527 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294175516        2.035567162                  0                  0 
+      -4.287608372        2.027517693                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.516001931e-16 
+                 0                  0                  0    9.364512227e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625969862e-16                  0                  0                  0 
+   1.608141224e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875794645e-16                  0    2.482552739e-16 
+                 0    9.875643388e-16                  0    2.484086419e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056475249e-15 
+                 0    1.023516319e-13                  0    1.040176332e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692996358e-16                  0                  0 
+                 0    3.696499837e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -890,11 +890,11 @@ Deviation from symplecticity  0.2663545309322579E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3504129095 ;
-qy0 =       0.1999984173 ;
+qx0 =       0.3604014089 ;
+qy0 =       0.2000070308 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
- Step length   5.319858969624418E-004
+ Step length   1.068058113283548E-003
  Now PTC
  MAD-X Beam Parameters
                   Energy : 0.949672E+00
@@ -935,55 +935,55 @@ qy0 =       0.1999984173 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.2663545309322579E-10 %
-Deviation from symplecticity  0.2663545309322579E-10 %
+Deviation from symplecticity  0.2423467109267931E-10 %
+Deviation from symplecticity  0.2423467109267931E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839517248       -811.1869556           -1000000 
+       216.7199935      0.03817107595       -811.2975393           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377406381        5.103424434       0.3504129095 
+          -1000000      -0.9379647347        5.118383222       0.3604014089 
 
                 q2                dq1                dq2                 qs 
-      0.1999984173       -24.65625741       -41.75348448                  0 
+      0.2000070308       -24.80601089       -41.81683083                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.829472553         16.2923846        8.637283896        24.84399897 
+       4.798847929        16.33570154        8.636596351        24.86391819 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.829472553         16.2923846                  0                  0 
+       4.798847929        16.33570154                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.637283896        24.84399897                  0                  0 
+       8.636596351        24.86391819                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54680799 
+                 0                  0                  0        17.49783527 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294175516        2.035567162                  0                  0 
+      -4.287608372        2.027517693                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.516001931e-16 
+                 0                  0                  0    9.364512227e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625969862e-16                  0                  0                  0 
+   1.608141224e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875794645e-16                  0    2.482552739e-16 
+                 0    9.875643388e-16                  0    2.484086419e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056475249e-15 
+                 0    1.023516319e-13                  0    1.040176332e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692996358e-16                  0                  0 
+                 0    3.696499837e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -992,11 +992,11 @@ Deviation from symplecticity  0.2663545309322579E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3504129095 ;
-qy0 =       0.1999984173 ;
+qx0 =       0.3604014089 ;
+qy0 =       0.2000070308 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
-call:     2 Dx =   0.53198590E-03  Penalty function =  0.1691614810541663E-09
+call:     2 Dx =   0.10680581E-02  Penalty function =  0.5141649130523958E-10
  Now PTC
  MAD-X Beam Parameters
                   Energy : 0.949672E+00
@@ -1037,55 +1037,55 @@ call:     2 Dx =   0.53198590E-03  Penalty function =  0.1691614810541663E-09
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.1083042891691548E-10 %
-Deviation from symplecticity  0.1083042891691548E-10 %
+Deviation from symplecticity  0.3967567015668768E-10 %
+Deviation from symplecticity  0.3967567015668768E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03838875402       -811.1889831           -1000000 
+       216.7199935      0.03816468647       -811.2995607           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377470566        5.103851053       0.3506984731 
+          -1000000      -0.9379711241         5.11881166        0.360688193 
 
                 q2                dq1                dq2                 qs 
-      0.1997356717       -24.66017083       -41.75228117                  0 
+      0.1997438266       -24.80998406       -41.81562596                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.828578365        16.29358706        8.638455187        24.84416048 
+       4.797951723        16.33693546        8.637769597        24.86407981 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.828578365        16.29358706                  0                  0 
+       4.797951723        16.33693546                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.638455187        24.84416048                  0                  0 
+       8.637769597        24.86407981                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54536942 
+                 0                  0                  0        17.49640344 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294175516        2.035278885                  0                  0 
+      -4.287608372        2.027230384                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.511959087e-16 
+                 0                  0                  0     9.35969828e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625373968e-16                  0                  0                  0 
+   1.607727719e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875775093e-16                  0    2.482581064e-16 
+                 0    9.875614481e-16                  0    2.484116605e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0     1.05603253e-15 
+                 0    1.023516319e-13                  0    1.039668266e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.693064856e-16                  0                  0 
+                 0    3.696568431e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1094,8 +1094,8 @@ Deviation from symplecticity  0.1083042891691548E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3506984731 ;
-qy0 =       0.1997356717 ;
+qx0 =        0.360688193 ;
+qy0 =       0.1997438266 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
  Now PTC
@@ -1138,55 +1138,55 @@ qy0 =       0.1997356717 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.1693646417857229E-10 %
-Deviation from symplecticity  0.1693646417857229E-10 %
+Deviation from symplecticity  0.3088511368800360E-10 %
+Deviation from symplecticity  0.3088511368800360E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839192746       -811.1867323           -1000000 
+       216.7199935      0.03816784914       -811.2973171           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377438832        5.103640109       0.3505580231 
+          -1000000      -0.9379679615        5.118599578       0.3605470123 
 
                 q2                dq1                dq2                 qs 
-      0.1995772775       -24.65786575       -41.74957613                  0 
+      0.1995850847       -24.80764687       -41.81291137                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.828998639           16.29297        8.639181704        24.84363431 
+       4.798373438        16.33630251        8.638497624        24.86355233 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.828998639           16.29297                  0                  0 
+       4.798373438        16.33630251                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.639181704        24.84363431                  0                  0 
+       8.638497624        24.86355233                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54604151 
+                 0                  0                  0        17.49707299 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294175516        2.035357961                  0                  0 
+      -4.287608372        2.027309349                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.513852318e-16 
+                 0                  0                  0    9.361974004e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625671952e-16                  0                  0                  0 
+   1.607936104e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875762918e-16                  0    2.482551076e-16 
+                 0    9.875606875e-16                  0    2.484085651e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056241073e-15 
+                 0    1.023516319e-13                  0    1.039909279e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692996358e-16                  0                  0 
+                 0    3.696499837e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1195,12 +1195,12 @@ Deviation from symplecticity  0.1693646417857229E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3505580231 ;
-qy0 =       0.1995772775 ;
+qx0 =       0.3605470123 ;
+qy0 =       0.1995850847 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
  Solve system with            2 con,           2 var
- Rank             2   Condition number    4.19964619417704     
+ Rank             2   Condition number    4.19327546109289     
  Now PTC
  MAD-X Beam Parameters
                   Energy : 0.949672E+00
@@ -1241,55 +1241,55 @@ qy0 =       0.1995772775 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.4177606356799519E-10 %
-Deviation from symplecticity  0.4177606356799519E-10 %
+Deviation from symplecticity  0.3184119634624949E-10 %
+Deviation from symplecticity  0.3184119634624949E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839546327       -811.1868191           -1000000 
+       216.7199935      0.03817110784       -811.2974934           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377403474        5.103405108       0.3504000006 
+          -1000000      -0.9379647028        5.118381083       0.3604000001 
 
                 q2                dq1                dq2                 qs 
-      0.1999999998       -24.65606692       -41.75342086                  0 
+      0.1999999999       -24.80598037       -41.81674123                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.829512278        16.29232935         8.63727757        24.84397567 
+       4.798851769        16.33569474        8.636628278        24.86390445 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.829512278        16.29232935                  0                  0 
+       4.798851769        16.33569474                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-        8.63727757        24.84397567                  0                  0 
+       8.636628278        24.86390445                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54687176 
+                 0                  0                  0        17.49784128 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184553        2.035577951                  0                  0 
+      -4.287608372        2.027517301                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.516180666e-16 
+                 0                  0                  0     9.36453383e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625997163e-16                  0                  0                  0 
+   1.608143337e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875794741e-16                  0    2.482550886e-16 
+                 0     9.87564291e-16                  0    2.484085805e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056494884e-15 
+                 0    1.023516319e-13                  0    1.040178628e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692992015e-16                  0                  0 
+                 0    3.696498495e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1298,11 +1298,11 @@ Deviation from symplecticity  0.4177606356799519E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3504000006 ;
-qy0 =       0.1999999998 ;
+qx0 =       0.3604000001 ;
+qy0 =       0.1999999999 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
- Step length   1.433393217946102E-006
+ Step length   8.403239500331248E-007
  Now PTC
  MAD-X Beam Parameters
                   Energy : 0.949672E+00
@@ -1343,55 +1343,55 @@ qy0 =       0.1999999998 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.4177606356799519E-10 %
-Deviation from symplecticity  0.4177606356799519E-10 %
+Deviation from symplecticity  0.3184119634624949E-10 %
+Deviation from symplecticity  0.3184119634624949E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839546327       -811.1868191           -1000000 
+       216.7199935      0.03817110784       -811.2974934           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377403474        5.103405108       0.3504000006 
+          -1000000      -0.9379647028        5.118381083       0.3604000001 
 
                 q2                dq1                dq2                 qs 
-      0.1999999998       -24.65606692       -41.75342086                  0 
+      0.1999999999       -24.80598037       -41.81674123                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.829512278        16.29232935         8.63727757        24.84397567 
+       4.798851769        16.33569474        8.636628278        24.86390445 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.829512278        16.29232935                  0                  0 
+       4.798851769        16.33569474                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-        8.63727757        24.84397567                  0                  0 
+       8.636628278        24.86390445                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54687176 
+                 0                  0                  0        17.49784128 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184553        2.035577951                  0                  0 
+      -4.287608372        2.027517301                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.516180666e-16 
+                 0                  0                  0     9.36453383e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625997163e-16                  0                  0                  0 
+   1.608143337e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875794741e-16                  0    2.482550886e-16 
+                 0     9.87564291e-16                  0    2.484085805e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056494884e-15 
+                 0    1.023516319e-13                  0    1.040178628e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692992015e-16                  0                  0 
+                 0    3.696498495e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1400,11 +1400,11 @@ Deviation from symplecticity  0.4177606356799519E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3504000006 ;
-qy0 =       0.1999999998 ;
+qx0 =       0.3604000001 ;
+qy0 =       0.1999999999 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
-call:     3 Dx =   0.14333932E-05  Penalty function =  0.3662062349855026E-18
+call:     3 Dx =   0.84032395E-06  Penalty function =  0.2569758623647712E-19
  Now PTC
  MAD-X Beam Parameters
                   Energy : 0.949672E+00
@@ -1445,55 +1445,55 @@ call:     3 Dx =   0.14333932E-05  Penalty function =  0.3662062349855026E-18
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.2678162226838146E-10 %
-Deviation from symplecticity  0.2678162226838146E-10 %
+Deviation from symplecticity  0.2548206675787013E-10 %
+Deviation from symplecticity  0.2548206675787013E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03838904477       -811.1888466           -1000000 
+       216.7199935      0.03816471836       -811.2995147           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377467658        5.103831725       0.3506855626 
+          -1000000      -0.9379710923        5.118809521        0.360686784 
 
                 q2                dq1                dq2                 qs 
-      0.1997372548       -24.65998026       -41.75221754                  0 
+      0.1997367958       -24.80995353       -41.81553638                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.828618093        16.29353177        8.638448857        24.84413718 
+       4.797955564        16.33692866        8.637801526        24.86406609 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.828618093        16.29353177                  0                  0 
+       4.797955564        16.33692866                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.638448857        24.84413718                  0                  0 
+       8.637801526        24.86406609                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54543319 
+                 0                  0                  0        17.49640946 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184553        2.035289672                  0                  0 
+      -4.287608372        2.027229993                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.512139087e-16 
+                 0                  0                  0    9.359718975e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625400976e-16                  0                  0                  0 
+   1.607729851e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875775205e-16                  0    2.482579207e-16 
+                 0    9.875613989e-16                  0    2.484115992e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056052272e-15 
+                 0    1.023516319e-13                  0    1.039670473e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.693060513e-16                  0                  0 
+                 0    3.696567089e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1502,8 +1502,8 @@ Deviation from symplecticity  0.2678162226838146E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3506855626 ;
-qy0 =       0.1997372548 ;
+qx0 =        0.360686784 ;
+qy0 =       0.1997367958 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
  Now PTC
@@ -1546,55 +1546,55 @@ qy0 =       0.1997372548 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.2155077429323910E-10 %
-Deviation from symplecticity  0.2155077429323910E-10 %
+Deviation from symplecticity  0.2251134345974141E-10 %
+Deviation from symplecticity  0.2251134345974141E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839221822       -811.1865958           -1000000 
+       216.7199935      0.03816788103       -811.2972711           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377435924        5.103620782       0.3505451135 
+          -1000000      -0.9379679296         5.11859744       0.3605456034 
 
                 q2                dq1                dq2                 qs 
-      0.1995788609       -24.65767523       -41.74951251                  0 
+      0.1995780545       -24.80761635       -41.81282181                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-       4.829038364        16.29291472        8.639175372        24.84361101 
+       4.798377279        16.33629571        8.638529553        24.86353861 
 
          beta11min          beta11max          beta12min          beta12max 
-       4.829038364        16.29291472                  0                  0 
+       4.798377279        16.33629571                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.639175372        24.84361101                  0                  0 
+       8.638529553        24.86353861                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54610528 
+                 0                  0                  0        17.49707901 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184553        2.035368749                  0                  0 
+      -4.287608372        2.027308957                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.514031787e-16 
+                 0                  0                  0    9.361994806e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625699018e-16                  0                  0                  0 
+   1.607938247e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    9.875763023e-16                  0     2.48254922e-16 
+                 0    9.875606385e-16                  0    2.484085037e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056260765e-15 
+                 0    1.023516319e-13                  0    1.039911498e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692992015e-16                  0                  0 
+                 0    3.696498495e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1603,12 +1603,12 @@ Deviation from symplecticity  0.2155077429323910E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =       0.3505451135 ;
-qy0 =       0.1995788609 ;
+qx0 =       0.3605456034 ;
+qy0 =       0.1995780545 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
  Solve system with            2 con,           2 var
- Rank             2   Condition number    4.19965360555918     
+ Rank             2   Condition number    4.19327997937663     
  Now PTC
  MAD-X Beam Parameters
                   Energy : 0.949672E+00
@@ -1649,55 +1649,55 @@ qy0 =       0.1995788609 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.4168266634758611E-10 %
-Deviation from symplecticity  0.4168266634758611E-10 %
+Deviation from symplecticity  0.2846761658850122E-10 %
+Deviation from symplecticity  0.2846761658850122E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839546328       -811.1868191           -1000000 
+       216.7199935      0.03817110784       -811.2974934           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377403473        5.103405107             0.3504 
+          -1000000      -0.9379647028        5.118381083             0.3604 
 
                 q2                dq1                dq2                 qs 
-               0.2       -24.65606692       -41.75342086                  0 
+               0.2       -24.80598037       -41.81674123                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-        4.82951228        16.29232934        8.637277569        24.84397567 
+        4.79885177        16.33569474        8.636628277        24.86390445 
 
          beta11min          beta11max          beta12min          beta12max 
-        4.82951228        16.29232934                  0                  0 
+        4.79885177        16.33569474                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.637277569        24.84397567                  0                  0 
+       8.636628277        24.86390445                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54687176 
+                 0                  0                  0        17.49784128 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184554        2.035577951                  0                  0 
+      -4.287608372        2.027517301                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.516180563e-16 
+                 0                  0                  0    9.364533902e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625997165e-16                  0                  0                  0 
+   1.608143314e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0     9.87579474e-16                  0    2.482550886e-16 
+                 0    9.875642911e-16                  0    2.484085805e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056494873e-15 
+                 0    1.023516319e-13                  0    1.040178634e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692992015e-16                  0                  0 
+                 0    3.696498495e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1706,11 +1706,11 @@ Deviation from symplecticity  0.4168266634758611E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =             0.3504 ;
+qx0 =             0.3604 ;
 qy0 =                0.2 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
- Step length   5.247955279512150E-011
+ Step length   5.783564584619919E-012
  Now PTC
  MAD-X Beam Parameters
                   Energy : 0.949672E+00
@@ -1751,55 +1751,55 @@ qy0 =                0.2 ;
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.4168266634758611E-10 %
-Deviation from symplecticity  0.4168266634758611E-10 %
+Deviation from symplecticity  0.2846761658850122E-10 %
+Deviation from symplecticity  0.2846761658850122E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839546328       -811.1868191           -1000000 
+       216.7199935      0.03817110784       -811.2974934           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377403473        5.103405107             0.3504 
+          -1000000      -0.9379647028        5.118381083             0.3604 
 
                 q2                dq1                dq2                 qs 
-               0.2       -24.65606692       -41.75342086                  0 
+               0.2       -24.80598037       -41.81674123                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-        4.82951228        16.29232934        8.637277569        24.84397567 
+        4.79885177        16.33569474        8.636628277        24.86390445 
 
          beta11min          beta11max          beta12min          beta12max 
-        4.82951228        16.29232934                  0                  0 
+        4.79885177        16.33569474                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.637277569        24.84397567                  0                  0 
+       8.636628277        24.86390445                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54687176 
+                 0                  0                  0        17.49784128 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184554        2.035577951                  0                  0 
+      -4.287608372        2.027517301                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.516180563e-16 
+                 0                  0                  0    9.364533902e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625997165e-16                  0                  0                  0 
+   1.608143314e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0     9.87579474e-16                  0    2.482550886e-16 
+                 0    9.875642911e-16                  0    2.484085805e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056494873e-15 
+                 0    1.023516319e-13                  0    1.040178634e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692992015e-16                  0                  0 
+                 0    3.696498495e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1808,11 +1808,11 @@ Deviation from symplecticity  0.4168266634758611E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =             0.3504 ;
+qx0 =             0.3604 ;
 qy0 =                0.2 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
-call:     4 Dx =   0.52479553E-10  Penalty function =  0.7056638131113942E-27
+call:     4 Dx =   0.57835646E-11  Penalty function =  0.8237587558133085E-29
  ++++++++++ JACOBIAN ended: converged successfully
  Now PTC
  MAD-X Beam Parameters
@@ -1854,55 +1854,55 @@ call:     4 Dx =   0.52479553E-10  Penalty function =  0.7056638131113942E-27
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
-Deviation from symplecticity  0.4168266634758611E-10 %
-Deviation from symplecticity  0.4168266634758611E-10 %
+Deviation from symplecticity  0.2846761658850122E-10 %
+Deviation from symplecticity  0.2846761658850122E-10 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839546328       -811.1868191           -1000000 
+       216.7199935      0.03817110784       -811.2974934           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377403473        5.103405107             0.3504 
+          -1000000      -0.9379647028        5.118381083             0.3604 
 
                 q2                dq1                dq2                 qs 
-               0.2       -24.65606692       -41.75342086                  0 
+               0.2       -24.80598037       -41.81674123                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-        4.82951228        16.29232934        8.637277569        24.84397567 
+        4.79885177        16.33569474        8.636628277        24.86390445 
 
          beta11min          beta11max          beta12min          beta12max 
-        4.82951228        16.29232934                  0                  0 
+        4.79885177        16.33569474                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.637277569        24.84397567                  0                  0 
+       8.636628277        24.86390445                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54687176 
+                 0                  0                  0        17.49784128 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184554        2.035577951                  0                  0 
+      -4.287608372        2.027517301                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    9.516180563e-16 
+                 0                  0                  0    9.364533902e-16 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-   1.625997165e-16                  0                  0                  0 
+   1.608143314e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0     9.87579474e-16                  0    2.482550886e-16 
+                 0    9.875642911e-16                  0    2.484085805e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0    1.023516319e-13                  0    1.056494873e-15 
+                 0    1.023516319e-13                  0    1.040178634e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    3.692992015e-16                  0                  0 
+                 0    3.696498495e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
                  0   -1.776356839e-15                  0    1.387778781e-16 
@@ -1911,11 +1911,11 @@ Deviation from symplecticity  0.4168266634758611E-10 %
                  0    -1.71094775e-13                  0 
 ++++++ info: qx0 redefined
 ++++++ info: qy0 redefined
-qx0 =             0.3504 ;
+qx0 =             0.3604 ;
 qy0 =                0.2 ;
  Killing LayoutNo name assigned                                                                                                        
  Layout killed 
- Final difference norm:  1.767228120355366E-002
+ Final difference norm:  2.502784772562190E-002
 ENDMATCH;
 
 
@@ -1923,34 +1923,34 @@ MATCH SUMMARY
 
 --------------------------------------------------------------------
 macro: ptc_twiss_tune_macro_false_split
-  constraint: table(ptc_twiss_summary,q1)=0.3504      
-  values:     +3.50400e-01=+3.50400e-01
+  constraint: table(ptc_twiss_summary,q1)=0.3604      
+  values:     +3.60400e-01=+3.60400e-01
   weight:     +1.00000e+00
-  penalty:    +2.47025e-14
+  penalty:    +2.27596e-15
 
   constraint: table(ptc_twiss_summary,q2)=0.2         
   values:     +2.00000e-01=+2.00000e-01
   weight:     +1.00000e+00
-  penalty:    -9.76996e-15
+  penalty:    +1.74860e-15
 
 
 
-Final Penalty Function =   7.05663813e-28
+Final Penalty Function =   8.23758756e-30
 
 
 
 Variable                 Final Value  Initial Value Lower Limit  Upper Limit 
 --------------------------------------------------------------------------------
-iqf                       3.11573e-01  3.11872e-01 -1.00000e+20  1.00000e+20
-iqd                      -4.96595e-01 -4.96504e-01 -1.00000e+20  1.00000e+20
+iqf                       3.12078e-01  3.11872e-01 -1.00000e+20  1.00000e+20
+iqd                      -4.97096e-01 -4.96504e-01 -1.00000e+20  1.00000e+20
 
 END MATCH SUMMARY
 
-VARIABLE "TAR" SET TO   7.05663813e-28
+VARIABLE "TAR" SET TO   8.23758756e-30
 value, IQF, IQD;
 
-iqf =        0.311573444 ;
-iqd =      -0.4965946975 ;
+iqf =        0.312077873 ;
+iqd =      -0.4970960884 ;
 
 
 
@@ -2112,59 +2112,59 @@ ptc_twiss, icase=5, no=4, deltap_dependency, closed_orbit, file=ptc_twiss_matche
        MODULATION  =  FALSE
        RAMPING     =  FALSE
        ACCELERATE  =  FALSE
- Closed orbit:   1.390464277522386E-015  1.267128000014072E-016  0.000000000000000E+000  0.000000000000000E+000  0.000000000000000E+000
-Deviation from symplecticity  0.7827072323607354E-12 %
-Deviation from symplecticity  0.7827072323607354E-12 %
+ Closed orbit:   1.368651970111778E-015  1.252502141271373E-016  0.000000000000000E+000  0.000000000000000E+000  0.000000000000000E+000
+Deviation from symplecticity  0.1576516694967722E-11 %
+Deviation from symplecticity  0.1576516694967722E-11 %
 
 ++++++ table: ptc_twiss_summary
 
             length            alpha_c          alpha_c_p         alpha_c_p2 
-       216.7199935      0.03839546328       -19.35831586           -1000000 
+       216.7199935      0.03817110784       -19.36095702           -1000000 
 
         alpha_c_p3              eta_c           gamma_tr                 q1 
-          -1000000      -0.9377403473        5.103405107             0.3504 
+          -1000000      -0.9379647028        5.118381083             0.3604 
 
                 q2                dq1                dq2                 qs 
-               0.2       -24.65606678       -41.75342054                  0 
+               0.2       -24.80598023       -41.81674091                  0 
 
         beta_x_min         beta_x_max         beta_y_min         beta_y_max 
-        4.82951228        16.29232934        8.637277569        24.84397567 
+        4.79885177        16.33569474        8.636628277        24.86390445 
 
          beta11min          beta11max          beta12min          beta12max 
-        4.82951228        16.29232934                  0                  0 
+        4.79885177        16.33569474                  0                  0 
 
          beta13min          beta13max          beta21min          beta21max 
                  0                  0                  0                  0 
 
          beta22min          beta22max          beta23min          beta23max 
-       8.637277569        24.84397567                  0                  0 
+       8.636628277        24.86390445                  0                  0 
 
          beta31min          beta31max          beta32min          beta32max 
                  0                  0                  0                  0 
 
          beta33min          beta33max           disp1min           disp1max 
-                 0                  0                  0        17.54687176 
+                 0                  0                  0        17.49784128 
 
           disp2min           disp2max           disp3min           disp3max 
-      -4.294184554        2.035577951                  0                  0 
+      -4.287608372        2.027517301                  0                  0 
 
           disp4min           disp4max             deltap            orbit_x 
-                 0                  0                  0    1.390464278e-15 
+                 0                  0                  0     1.36865197e-15 
 
           orbit_px            orbit_y           orbit_py           orbit_pt 
-      1.267128e-16                  0                  0                  0 
+   1.252502141e-16                  0                  0                  0 
 
          orbit_-cT             xcorms             ycorms            pxcorms 
-                 0    1.091427912e-15                  0    2.602836245e-16 
+                 0    1.089504539e-15                  0    2.600885619e-16 
 
            pycorms             tcorms            ptcorms             xcomax 
-                 0                  0                  0    1.472194034e-15 
+                 0                  0                  0    1.449438358e-15 
 
             ycomax            pxcomax            pycomax             tcomax 
-                 0    4.298881695e-16                  0                  0 
+                 0    4.784805046e-16                  0                  0 
 
            ptcomax             xcomin             ycomin            pxcomin 
-                 0   -1.776356839e-15                  0       1.267128e-16 
+                 0   -1.776356839e-15                  0    1.252502141e-16 
 
            pycomin             tcomin            ptcomin 
                  0                  0                  0 
@@ -2189,16 +2189,16 @@ orbit:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0
 ++++++ table: summ
 
             length             orbit5               alfa            gammatr 
-       216.7199935                 -0       0.0383926965        5.103588993 
+       216.7199935                 -0      0.03816834041        5.118566636 
 
                 q1                dq1            betxmax              dxmax 
-            4.3504       -24.65610225        16.29232934        17.54689701 
+            4.3604       -24.80601592        16.33569474        17.49786645 
 
              dxrms             xcomax             xcorms                 q2 
-       12.60491895                  0                  0                3.2 
+       12.55867446                  0                  0                3.2 
 
                dq2            betymax              dymax              dyrms 
-       -41.7534806        24.84397567                 -0                  0 
+      -41.81680107        24.86390445                 -0                  0 
 
             ycomax             ycorms             deltap            synch_1 
                  0                  0                  0                  0 

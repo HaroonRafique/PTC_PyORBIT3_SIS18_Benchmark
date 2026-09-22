@@ -140,14 +140,18 @@ is retained in the comparison report.
 
 Step 9 uses a local `config.json` and a seeded matched six-dimensional
 Gaussian bunch because the historical tomoscope file cannot be recovered. Its
-64-turn / 32-particle smoke completed on 2026-09-21 with a 504-node,
-216.7199934718 m PTC lattice, 504 frozen analytical-Gaussian SC nodes, and no
-losses. It records sampled `BunchTwissAnalysis` diagnostics, external
-read-only `output.mat` comparison hashes, labelled side-by-side and numeric
-overlay plots, and full official GSI Step 9 slides. The scientific reference
-is 1,000 particles at `(Qx, Qy) = (4.3504, 3.2)` for 100,000 turns; its
-published final horizontal-emittance estimate is 2.08 and is deliberately
-report-only pending manual review. The archival MAT curve is a distinct
-10,000-particle `(Qx, Qy) = (4.3604, 3.2)` tomoscope ensemble (final archived
-ratio 1.96456), so it must remain a diagnostic rather than a turn-by-turn
-equivalence criterion.
+64-turn / 32-particle two-rank MPI smoke completed on 2026-09-22 with a
+504-node, 216.7199934718 m PTC lattice, 504 frozen analytical-Gaussian SC
+nodes, balanced 16-particle local shares, a global count of 32, and no losses.
+The examples-style launcher defaults to four MPI ranks and assigns balanced
+local shares with a global-count macrosize. It records sampled
+`BunchTwissAnalysis` diagnostics, external read-only `output.mat` comparison
+hashes, labelled side-by-side and numeric overlay plots, and full official
+GSI Step 9 slides. The scientific reference is the empirical 1,000-particle
+website plot at `(Qx, Qy) = (4.3604, 3.2)` for 100,000 turns. The separate
+published 2.08 horizontal-emittance ratio is an analytical estimate at
+`Qx=4.3504`; it is deliberately report-only and is not the empirical plot's
+target. The archival MAT curve is a distinct 10,000-particle
+`(Qx, Qy) = (4.3604, 3.2)` tomoscope ensemble (final archived ratio 1.96456),
+so it must remain a diagnostic rather than a turn-by-turn equivalence
+criterion.

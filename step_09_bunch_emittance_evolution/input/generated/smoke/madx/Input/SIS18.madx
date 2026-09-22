@@ -231,7 +231,7 @@ match, use_macro;
   vary,   name=iqf, step=1.0E-6;
   vary,   name=iqd, step=1.0E-6;
   USE_MACRO, name=ptc_twiss_tune_macro_false_split;
-  CONSTRAINT, expr=  table(ptc_twiss_summary,Q1)= 0.3504;
+  CONSTRAINT, expr=  table(ptc_twiss_summary,Q1)= 0.3604;
   CONSTRAINT, expr=  table(ptc_twiss_summary,Q2)= 0.2;
   JACOBIAN,calls=10000,bisec=3,TOLERANCE=1.0E-21;
 ENDMATCH;

@@ -1,40 +1,14 @@
 import numpy as np
+from pathlib import Path
 
-from common.bunch_distribution import matched_gaussian_coordinates
 from common.madx import set_madx_bare_tunes
+from common.mpi import MPIContext, local_count_for_rank, local_counts_for_size
+from common.bunch_generation import MatchedGaussianConfig, make_configured_particle_bunch
 from step_09_bunch_emittance_evolution.run_bunch_emittance_evolution import (
     normalised_emittance_history,
     resolved_payload,
     sampled_turns,
 )
-
-
-def test_seeded_matched_gaussian_is_reproducible_and_respects_transverse_cut():
-    parameters = dict(
-        n_particles=32,
-        seed=20260909,
-        betax=12.0,
-        alphax=1.2,
-        betay=15.0,
-        alphay=-0.4,
-        etax=0.7,
-        etapx=0.03,
-        epsn_x=4.91e-7,
-        epsn_y=3.635e-7,
-        beta_rel=0.15448,
-        gamma_rel=1.012149995,
-        dpp_rms=2.5e-4 / 3.0,
-        bunch_length_rms_m=2.680419244,
-        particle_mass_GeV=0.9382720813,
-        transverse_cut_sigma=5.0,
-    )
-
-    first = matched_gaussian_coordinates(**parameters)
-    second = matched_gaussian_coordinates(**parameters)
-
-    np.testing.assert_allclose(first, second)
-    assert first.shape == (32, 6)
-    assert np.all(np.isfinite(first))
 
 
 def test_emittance_history_normalises_to_its_initial_sample_and_retains_final_turn():
@@ -51,6 +25,44 @@ def test_step_9_resolved_payload_includes_global_beam_settings():
     assert payload["beam"]["epsn_x"] == 4.91e-7
     assert payload["diagnostics"]["sample_stride_turns"] == 100
     assert payload["profiles"]["reference"]["n_macroparticles"] == 1000
+    assert payload["profiles"]["reference"]["qx"] == 4.3604
+
+
+def test_examples_style_mpi_partition_preserves_global_particle_count():
+    counts = local_counts_for_size(global_count=1_000, size=4)
+    context = MPIContext(comm=None, rank=3, size=4, enabled=False)
+
+    assert counts == [250, 250, 250, 250]
+    assert sum(counts) == 1_000
+    assert local_count_for_rank(1_000, context) == 250
+
+
+def test_examples_style_gaussian_bunch_applies_step9_longitudinal_five_sigma_cut():
+    class Start:
+        alpha_x = 1.2
+        beta_x = 12.0
+        alpha_y = -0.4
+        beta_y = 15.0
+        disp_x = 0.7
+        disp_px = 0.03
+        disp_y = 0.0
+        disp_py = 0.0
+        orbit_x = orbit_px = orbit_y = orbit_py = 0.0
+
+    config = MatchedGaussianConfig(
+        n_macroparticles=128,
+        seed=20260909,
+        eps_x_rms=4.91e-7 / (0.15448 * 1.012149995),
+        eps_y_rms=3.635e-7 / (0.15448 * 1.012149995),
+        z_rms=2.680419244,
+        dE_rms=(2.5e-4 / 3.0) * 1.012149995 * 0.9382720813 * 0.15448**2,
+        longitudinal_cut_sigma=5.0,
+    )
+
+    values = make_configured_particle_bunch(Start(), config).to_numpy()
+
+    assert np.max(np.abs(values[:, 4])) < 5.0 * config.z_rms
+    assert np.max(np.abs(values[:, 5])) < 5.0 * config.dE_rms
 
 
 def test_step_9_staged_madx_tunes_are_replaced_from_the_selected_profile(tmp_path):
@@ -65,3 +77,12 @@ def test_step_9_staged_madx_tunes_are_replaced_from_the_selected_profile(tmp_pat
 
     assert "Q1)= 0.3504;" in madx.read_text(encoding="utf-8")
     assert "Q2)= 0.2;" in madx.read_text(encoding="utf-8")
+
+
+def test_step_9_wrapper_uses_examples_style_mpi_launcher():
+    wrapper = Path(__file__).resolve().parents[1] / "step_09_bunch_emittance_evolution" / "run_example.sh"
+    text = wrapper.read_text(encoding="utf-8")
+
+    assert "MPI_LAUNCHER" in text
+    assert "MPI_PROCS" in text
+    assert "run_example.rank" in text
