@@ -41,8 +41,8 @@
 @ SYNCH_5          %le                   0
 @ TITLE            %30s " -- SIS18 with a sextupole -- "
 @ ORIGIN           %22s "MAD-X 5.02.00 Linux 64"
-@ DATE             %08s "12/09/26"
-@ TIME             %08s "10.16.43"
+@ DATE             %08s "20/09/26"
+@ TIME             %08s "11.50.56"
 * NAME               KEYWORD                             S                  L                  X                  Y               BETX               BETY               ALFX               ALFY                MUX                MUY                 DX                 DY                DPX                DPY 
 $ %s                 %s                                %le                %le                %le                %le                %le                %le                %le                %le                %le                %le                %le                %le                %le                %le 
  "SIS18$START"       "MARKER"                             0                  0                  0                  0        12.82252289        13.47535592         1.29390347       0.4266012119                  0                  0        12.61156436                 -0       -2.107533695                 -0
