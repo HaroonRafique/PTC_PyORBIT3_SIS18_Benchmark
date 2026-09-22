@@ -1,0 +1,68 @@
+{
+  "code_revisions": {
+    "benchmark": "fbce09bcfd90790b7fa37ff7ba37d449cfd6305f",
+    "ptc": "979d47d3faab60e0c2608e08d259d217148e630e",
+    "pyorbit3": "2fa4be6f0b8d178511ebb4a02989975265c0b123"
+  },
+  "command": [
+    "run_bunch_emittance_evolution.py",
+    "--profile",
+    "reference"
+  ],
+  "comparison": {
+    "automated_acceptance": "report_only_manual_scientific_review",
+    "current_final_epsn_x_ratio": 1.9258790805860941,
+    "legacy_case": "10000 macroparticles, Qx=4.3604; unavailable tomoscope distribution",
+    "legacy_final_epsn_x_ratio": 1.9645576518909857,
+    "website_analytical_estimate": {
+      "epsn_x_ratio": 2.08,
+      "qx": 4.3504
+    },
+    "website_empirical_qx": 4.3604
+  },
+  "comparison_enabled": true,
+  "config_path": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/config.json",
+  "config_sha256": "af6f87e0cd679aa8b56d75df91ecb7cf0932f05d98f45539acf038cbdb6cb449",
+  "diagnostics": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/output/tables/bunch_diagnostics.csv",
+  "flat_file": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/input/generated/reference/madx/SIS_18_BENCHMARK.flt",
+  "flat_file_sha256": "8593b4db9d7f4fd191fd0d69a9630e1bb2332956a0982f9cfb8089475e68bdd4",
+  "lattice": {
+    "global_macroparticles": 1000,
+    "length_m": 216.71999347179633,
+    "local_macroparticles": 334,
+    "macrosize": 1950000.0,
+    "nodes": 504,
+    "sc_nodes": 504,
+    "survivors_global": 1000,
+    "survivors_local": 334
+  },
+  "mpi_size": 3,
+  "packaged_inputs": {
+    "SIS18.madx": "dbe77f54ddc83bde3614308123234783a23d12af6168f40ba2fc45377d6ee370",
+    "SIS18.seq": "33b1ef751e12fe4bba7ecb42869b197e0441b5f5a3983b693dcb468193a813b1",
+    "print_flat_file.ptc": "06d261a0ae3858fdfb95711ff4265f4f67d2d25cfc4295d527221898ec78d276",
+    "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
+    "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
+  },
+  "plots": [
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/output/plots/epsn_x_vs_synchrotron_oscillations.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/output/plots/legacy_epsn_x_vs_synchrotron_oscillations.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/output/plots/legacy_vs_current_epsn_x_side_by_side.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/output/plots/legacy_vs_current_epsn_x_numeric_overlay.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/output/plots/website_slides_and_current_grid.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_09_bunch_emittance_evolution/output/plots/legacy_multicode_overlay_vs_current.png"
+  ],
+  "profile": "reference",
+  "reference_artifacts": {
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/shared_inputs/reference_plots/step_09/gsi_step9_emittance_slide.png": "7424c3cef301898ea44f67c33b086573da900dd538882547f70e71fed4aeba48",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/shared_inputs/reference_plots/step_09/gsi_step9_estimate_slide.png": "f0d875b9c3dd950d48231126d880f1392c56aafe2eb548685dfda918b8b1d8e4",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step9/final_output/SIS18_Step9.png": "92359163f7d95083984649fc29385736895a5ccb22745a25e0ff5e7bd7eb0450",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step9/final_output/output.mat": "7c7e6fd65c403deeffd976f8ac32654a83205fa145a0c598436bf1458baf43c0",
+    "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step9/final_output/step9.png": "51061781add8c1a26eddc4e3a275a3666eca07babcde7f66aa292362303422f6"
+  },
+  "seed": 20260909,
+  "sextupole_enabled": true,
+  "space_charge": "analytical_frozen_gaussian",
+  "step": 9,
+  "turns": 100000
+}

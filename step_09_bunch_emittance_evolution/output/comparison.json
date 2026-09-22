@@ -1,0 +1,11 @@
+{
+  "automated_acceptance": "report_only_manual_scientific_review",
+  "current_final_epsn_x_ratio": 1.9258790805860941,
+  "legacy_case": "10000 macroparticles, Qx=4.3604; unavailable tomoscope distribution",
+  "legacy_final_epsn_x_ratio": 1.9645576518909857,
+  "website_analytical_estimate": {
+    "epsn_x_ratio": 2.08,
+    "qx": 4.3504
+  },
+  "website_empirical_qx": 4.3604
+}

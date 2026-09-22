@@ -1,0 +1,12 @@
+{
+  "global_macroparticles": 1000,
+  "length_m": 216.71999347179633,
+  "local_macroparticles": 334,
+  "macrosize": 1950000.0,
+  "n_macroparticles": 1000,
+  "nodes": 504,
+  "sc_nodes": 504,
+  "survivors_global": 1000,
+  "survivors_local": 334,
+  "turns": 100000
+}
