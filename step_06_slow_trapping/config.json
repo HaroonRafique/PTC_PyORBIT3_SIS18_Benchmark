@@ -1,10 +1,10 @@
 {
   "step": 6,
   "profiles": {
-    "reference": {"intensity": 2.95e10, "n_macroparticles": 1, "turns": 15000, "sextupole_enabled": true, "qx": 4.3504, "qy": 3.2, "restoring_force": -1.951e-11, "distribution": "single_particle", "launch": {"x_m": 0.005, "xp_rad": 0.0, "y_m": 0.0, "yp_rad": 0.0, "z_sigma": 2.5, "dE_GeV": 0.0}},
+    "reference": {"intensity": 2.95e10, "n_macroparticles": 1, "turns": 15000, "sextupole_enabled": true, "qx": 4.3504, "qy": 3.2, "restoring_force": -1.951e-11, "distribution": "single_particle", "launch": {"x_m": 0.00501, "xp_rad": 0.0, "y_m": 0.0, "yp_rad": 0.0, "z_sigma": 2.5, "dE_GeV": 0.0}},
     "smoke": {"turns": 64},
     "legacy_artifact": {"launch": {"x_m": 0.0, "xp_rad": 0.0, "y_m": 0.0, "yp_rad": 0.0, "z_sigma": 2.5, "dE_GeV": 0.0}},
-    "exploratory": {"launch": {"x_m": 0.00475, "xp_rad": 0.0, "y_m": 0.0, "yp_rad": 0.0, "z_sigma": 2.5, "dE_GeV": 0.0}}
+    "exploratory": {"launch": {"x_m": 0.004, "xp_rad": 0.0, "y_m": 0.0, "yp_rad": 0.0, "z_sigma": 2.5, "dE_GeV": 0.0}}
   },
   "physics": {"space_charge": "analytical_frozen_gaussian", "restoring_force": -1.951e-11, "aperture_m": 10.0},
   "reference_root_env": "SIS18_REFERENCE_ROOT"
