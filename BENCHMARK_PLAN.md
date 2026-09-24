@@ -161,7 +161,9 @@ its maximum absolute residuals include `x=6.6638e-2 m`, `xp=8.519e-3 rad`, and
 `z=4.5483e-1 m`. The full official GSI Step 8 slide is versioned with source and
 digest provenance, without digitizing it as numeric data; its heading states
 100,000 turns but its plotted x-axis reaches 200,000, so that source conflict
-is retained in the comparison report.
+is retained in the comparison report. The saved reference records regenerate a
+same-axes official-website-slide/current-action panel through `run_example.sh
+--profile reference --plot-only`, without rerunning tracking.
 
 Step 9 uses a local `config.json` and a seeded matched six-dimensional
 Gaussian bunch because the historical tomoscope file cannot be recovered. Its

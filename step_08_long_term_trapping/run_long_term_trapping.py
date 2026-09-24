@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from common.environment import prepare_pyorbit3_runtime, resolve_runtime_paths
-from common.legacy_plot_comparison import plot_labeled_comparison
+from common.legacy_plot_comparison import plot_labeled_comparison, plot_same_axes_references
 from common.madx import generate_flat_file
 from common.manifest import write_run_manifest
 from common.reference_artifacts import maybe_reference_root, sha256_file, stage_packaged_inputs
@@ -185,32 +185,29 @@ def _write_records(path: Path, records: np.ndarray) -> Path:
     return path
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--profile", choices=("smoke", "reference", "legacy_artifact"), default="smoke")
-    parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output")
-    parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
-    args = parser.parse_args(argv)
-    config_path = STEP_DIR / "config.json"
-    config = load_step_config(config_path, step=8, profile=args.profile)
-    print(format_resolved_config(config_path, step=8, profile=args.profile), flush=True)
-    payload = json.loads(config_path.read_text(encoding="utf-8"))
-    launch, longitudinal, diagnostics = payload["launch"], payload["longitudinal"], payload["diagnostics"]
-    coordinates = np.asarray((launch["x_m"], launch["xp_rad"], launch["y_m"], launch["yp_rad"], launch["z_sigma"] * longitudinal["bunch_length_rms_m"], launch["dE_GeV"]))
-    output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"
-    paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
-    staged = stage_packaged_inputs(source=STEP_DIR / "legacy_input", destination=inputs / "Input")
-    flat = generate_flat_file(madx=paths.madx, workdir=inputs, madx_input=inputs / "Input" / "SIS18.madx")
-    prepare_pyorbit3_runtime(paths, Path("/tmp/sis18_ptc_runtime"))
-    records, summary = _run(flat=flat, inputs=inputs, config=config, payload=payload, coordinates=coordinates)
-    plots, tables, trajectories = output / "plots", output / "tables", output / "trajectories"; trajectories.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(trajectories / "single_particle_turn_records.npz", records=records)
-    diagnostics_path = _write_records(tables / "turn_diagnostics.csv", records)
+def _saved_records(path: Path) -> np.ndarray:
+    """Load Step 8 records saved by a prior tracking run."""
+
+    if not path.is_file():
+        raise FileNotFoundError(f"Saved Step 8 trajectory is missing: {path}")
+    with np.load(path, allow_pickle=False) as archive:
+        if "records" not in archive:
+            raise ValueError(f"Saved Step 8 trajectory has no records array: {path}")
+        records = np.asarray(archive["records"])
+    if records.ndim != 2 or records.shape[0] < 2 or records.shape[1] != 7:
+        raise ValueError(f"Saved Step 8 records must have shape (turns, 7): {path}")
+    return records
+
+
+def _write_plots(*, records: np.ndarray, output: Path, reference: Path | None, config, payload: dict[str, object], profile: str) -> tuple[list[str], dict[str, str], dict[str, object]]:
+    """Render Step 8 current, legacy, and official-website visual comparisons."""
+
+    plots = output / "plots"
+    diagnostics, longitudinal = payload["diagnostics"], payload["longitudinal"]
     stride, period_turns = diagnostics["plot_sample_stride"], longitudinal["synchrotron_period_turns"]
     current = {"action": _plot_action(plots / "action_x_vs_synchrotron_oscillations.png", records, period_turns=period_turns, stride=stride), "z": _plot_series(plots / "z_vs_turn.png", records, stride=stride), "x_xp": _plot_phase_space(plots / "poincare_x_xp.png", records, longitudinal=False, stride=stride), "z_dE": _plot_phase_space(plots / "poincare_z_dE.png", records, longitudinal=True, stride=stride)}
-    reference = maybe_reference_root(args.reference_root, comparison_enabled=not args.skip_reference_comparison)
-    reference_artifacts: dict[str, str] = {}; generated_plots = [str(path) for path in current.values()]
-    comparison: dict[str, object] = {"published_case": args.profile == "reference", "website_case": "Qs=1e-3, 100000 turns, Step 7 launch", "legacy_duration_turns": payload["comparison"]["legacy_turns"], "website_slide_duration_discrepancy": "the slide heading says 100000 turns while its plotted horizontal axis reaches 200000 turns"}
+    generated_plots, reference_artifacts = [str(path) for path in current.values()], {}
+    comparison: dict[str, object] = {"published_case": profile == "reference", "website_case": "Qs=1e-3, 100000 turns, Step 7 launch", "legacy_duration_turns": payload["comparison"]["legacy_turns"], "website_slide_duration_discrepancy": "the slide heading says 100000 turns while its plotted horizontal axis reaches 200000 turns"}
     if reference is not None:
         reference_output = reference / "Step8" / "final_output"
         legacy_data = reference_output / "Particle_0.dat"
@@ -221,10 +218,53 @@ def main(argv: list[str] | None = None) -> int:
             generated_plots.append(str(_overlay(plots / f"legacy_vs_current_{observable}_numeric_overlay.png", observable=observable, legacy=legacy, current=records, period_turns=period_turns, stride=stride)))
         slide = WEBSITE_REFERENCE_DIR / payload["comparison"]["website_slide"]
         generated_plots.append(str(plot_labeled_comparison(slide, current["action"], plots / "website_slide_vs_current_action.png", title="SIS18 Step 8: official GSI slide and current action", left_label="Official GSI Step 8 slide", right_label="PTC-PyORBIT3")))
+        generated_plots.append(str(plot_same_axes_references(current=current["action"], references=(("Official GSI Step 8 slide", slide),), output=plots / "website_vs_current_action_same_axes.png")))
         reference_artifacts = {str(path): sha256_file(path) for path in (*legacy_images.values(), legacy_data, slide)}
         comparison["numeric"] = trajectory_comparison(legacy, records)
     (output / "comparison.json").write_text(json.dumps(comparison, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (output / "comparison.md").write_text("# Step 8 comparison\n\n- Published reference: Qs=1e-3, 100,000 turns, with the Step 7 launch.\n- The retained official slide labels the case as 100,000 turns but its plotted horizontal axis reaches 200,000 turns; this provenance conflict is retained in comparison.json.\n- Legacy artifact: 200,000 turns; the reference run compares its matching 100,000-turn prefix.\n- Any numeric disagreement is a benchmark blocker.\n", encoding="utf-8")
+    (output / "comparison.md").write_text("# Step 8 comparison\n\n- Published reference: Qs=1e-3, 100,000 turns, with the Step 7 launch.\n- The retained official slide labels the case as 100,000 turns but its plotted horizontal axis reaches 200,000 turns; this provenance conflict is retained in comparison.json.\n- Legacy artifact: 200,000 turns; the reference run compares its matching 100,000-turn prefix.\n- Website/current plots are regenerated from saved records without tracking.\n- Any numeric disagreement is a benchmark blocker.\n", encoding="utf-8")
+    return generated_plots, reference_artifacts, comparison
+
+
+def _record_plot_only_manifest(output: Path, *, plots: list[str], reference_artifacts: dict[str, str], comparison: dict[str, object], comparison_enabled: bool) -> None:
+    """Add Step 8 postprocessed evidence without replacing tracking provenance."""
+
+    manifest_path = output / "manifest.json"
+    if not manifest_path.is_file():
+        raise FileNotFoundError(f"Saved Step 8 run manifest is missing: {manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest.update({"plots": plots, "reference_artifacts": reference_artifacts, "comparison": comparison, "comparison_enabled": comparison_enabled, "plot_only_command": sys.argv})
+    write_run_manifest(manifest_path, manifest)
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--profile", choices=("smoke", "reference", "legacy_artifact"), default="smoke")
+    parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output")
+    parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--plot-only", action="store_true"); parser.add_argument("--madx", type=Path)
+    args = parser.parse_args(argv)
+    config_path = STEP_DIR / "config.json"
+    config = load_step_config(config_path, step=8, profile=args.profile)
+    print(format_resolved_config(config_path, step=8, profile=args.profile), flush=True)
+    payload = json.loads(config_path.read_text(encoding="utf-8"))
+    launch, longitudinal, diagnostics = payload["launch"], payload["longitudinal"], payload["diagnostics"]
+    coordinates = np.asarray((launch["x_m"], launch["xp_rad"], launch["y_m"], launch["yp_rad"], launch["z_sigma"] * longitudinal["bunch_length_rms_m"], launch["dE_GeV"]))
+    output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"
+    reference = maybe_reference_root(args.reference_root, comparison_enabled=not args.skip_reference_comparison)
+    if args.plot_only:
+        generated_plots, reference_artifacts, comparison = _write_plots(records=_saved_records(output / "trajectories" / "single_particle_turn_records.npz"), output=output, reference=reference, config=config, payload=payload, profile=args.profile)
+        _record_plot_only_manifest(output, plots=generated_plots, reference_artifacts=reference_artifacts, comparison=comparison, comparison_enabled=reference is not None)
+        print(f"Step 8 {args.profile} plots refreshed: {output / 'manifest.json'}")
+        return 0
+    paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
+    staged = stage_packaged_inputs(source=STEP_DIR / "legacy_input", destination=inputs / "Input")
+    flat = generate_flat_file(madx=paths.madx, workdir=inputs, madx_input=inputs / "Input" / "SIS18.madx")
+    prepare_pyorbit3_runtime(paths, Path("/tmp/sis18_ptc_runtime"))
+    records, summary = _run(flat=flat, inputs=inputs, config=config, payload=payload, coordinates=coordinates)
+    plots, tables, trajectories = output / "plots", output / "tables", output / "trajectories"; trajectories.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(trajectories / "single_particle_turn_records.npz", records=records)
+    diagnostics_path = _write_records(tables / "turn_diagnostics.csv", records)
+    generated_plots, reference_artifacts, comparison = _write_plots(records=records, output=output, reference=reference, config=config, payload=payload, profile=args.profile)
     (output / "tracking_summary.json").write_text(json.dumps({**summary, "turns": config.turns, "launch": launch}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     manifest = write_run_manifest(output / "manifest.json", {"step": 8, "profile": args.profile, "config_path": str(config_path), "config_sha256": sha256_file(config_path), "command": sys.argv, "turns": config.turns, "mpi_size": 1, "seed": config.seed, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {path.name: sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "comparison": comparison, "lattice": summary, "space_charge": payload["physics"]["space_charge"], "sextupole_enabled": config.sextupole_enabled, "code_revisions": {"benchmark": _revision(ROOT), "pyorbit3": _revision(paths.pyorbit3_root), "ptc": _revision(paths.pyorbit3_root.parent / "PTC")}, "plots": generated_plots, "diagnostics": str(diagnostics_path)})
     print(f"Step 8 {args.profile} complete: {manifest}")

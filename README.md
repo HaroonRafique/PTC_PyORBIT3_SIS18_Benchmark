@@ -136,7 +136,10 @@ is instead 200,000 turns long, so `reference` compares the matching
 100,000-turn prefix while `legacy_artifact` runs all 200,000 turns. The full
 official GSI Step 8 slide labels 100,000 turns but its plotted x-axis reaches
 200,000 turns; this source conflict is retained in the comparison report.
-Numeric trajectory data remains external and read-only.
+Numeric trajectory data remains external and read-only. Regenerate the current,
+legacy, and website-slide panels from saved records without tracking via
+`./step_08_long_term_trapping/run_example.sh --profile reference --plot-only`
+(with `SIS18_REFERENCE_ROOT` set for legacy panels).
 
 Step 9 is the full-bunch emittance-evolution case. Its website-authoritative
 `reference` profile tracks 1,000 seeded matched-Gaussian macroparticles for

@@ -48,6 +48,12 @@
     "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
     "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
   },
+  "plot_only_command": [
+    "run_long_term_trapping.py",
+    "--profile",
+    "reference",
+    "--plot-only"
+  ],
   "plots": [
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/action_x_vs_synchrotron_oscillations.png",
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/z_vs_turn.png",
@@ -61,7 +67,8 @@
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_x_xp_numeric_overlay.png",
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_z_dE_side_by_side.png",
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/legacy_vs_current_z_dE_numeric_overlay.png",
-    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/website_slide_vs_current_action.png"
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/website_slide_vs_current_action.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_08_long_term_trapping/output/plots/website_vs_current_action_same_axes.png"
   ],
   "profile": "reference",
   "reference_artifacts": {
