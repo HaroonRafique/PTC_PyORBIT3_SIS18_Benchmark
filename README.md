@@ -23,7 +23,7 @@ Primary historical references:
 | Step 4 resonance-crossing tune scan | reference run recorded; horizontal residual requires scientific review |
 | Step 5 phase-space island | reference run recorded; visual-topology review pending |
 | Step 6 slow trapping | published reference run recorded; legacy-artifact numeric run and visual review pending |
-| Step 7 fast trapping | reference run recorded; visual scientific review pending |
+| Step 7 fast trapping | 5.15-mm reference rerun recorded; first-oscillation action reaches 1.5006; visual scientific review pending |
 | Step 8 long-term trapping | reference run recorded; **blocked** by numeric disagreement and source-duration conflict |
 | Step 9 full-bunch emittance evolution | reference run recorded; report-only/manual scientific review pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
@@ -118,13 +118,16 @@ from the saved reference records, without tracking, via
 `SIS18_REFERENCE_ROOT` set for legacy panels).
 
 Step 7 is the fast-synchrotron counterpart: one particle launches at
-`x=5.1 mm`, `z=2.5 sigma_z` in the frozen-Gaussian model at `(Qx, Qy) =
+`x=5.15 mm`, `z=2.5 sigma_z` in the frozen-Gaussian model at `(Qx, Qy) =
 (4.3504, 3.2)` and restoring force `-4.38975e-09`. It tracks 2,000 turns,
 while its public comparison action plot shows the first 1,000 turns at the
-published axes. The historical artifacts contain only PNGs, so comparison is
-visual: a compact panel packages the original GSI SIMPSONS and MICROMAP
-rasters with the legacy PTC-PyORBIT2 and current plots. The expected fast
-regime is scattering rather than adiabatic trapping.
+published axes. The archived Step 7 script uses `x=5.1 mm`; the current
+5.15-mm launch is a documented exploratory retune. The rerun reaches a
+first-oscillation normalized-action maximum of `1.5006` without particle loss.
+The historical artifacts contain only PNGs, so comparison is visual: a compact
+panel packages the original GSI SIMPSONS and MICROMAP rasters with the legacy
+PTC-PyORBIT2 and current plots. The expected fast regime is scattering rather
+than adiabatic trapping.
 
 Step 8 extends the scattering/trapping study to the published 100,000-turn
 case at `Qs=1e-3`, using the published Step 7 launch `x=5 mm`,

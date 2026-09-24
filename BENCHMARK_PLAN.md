@@ -22,7 +22,8 @@ The detailed, task-level implementation plan is
   review pending).
 - [ ] Step 6: slow trapping (published reference run recorded;
   legacy-artifact numeric run and visual review pending).
-- [ ] Step 7: fast trapping (reference run recorded; visual scientific review pending).
+- [ ] Step 7: fast trapping (5.15-mm reference rerun recorded;
+  first-oscillation action reaches 1.5006; visual scientific review pending).
 - [ ] Step 8: long-term trapping (**blocked**: reference numeric comparison
   disagrees with the legacy prefix; source-duration conflict retained).
 - [ ] Step 9: bunch emittance evolution (reference run recorded; report-only
@@ -131,7 +132,7 @@ operation and does not rerun the simulation.
 
 Step 7 is the fast-synchrotron case: the sextupole-on `(Qx, Qy) = (4.3504,
 3.2)` lattice, frozen analytical-Gaussian SC, 10 m aperture, and restoring
-force `-4.38975e-09` track a single particle from `x=5.1 mm`,
+force `-4.38975e-09` track a single particle from `x=5.15 mm`,
 `xp=y=yp=dE=0`, `z=2.5 sigma_z`. The 64-turn smoke completed on 2026-09-16
 with a 504-node, 216.7199934718 m PTC lattice, 504 frozen-SC nodes, and no
 loss. The scientific profile retains the historical 2,000-turn duration; its
@@ -139,8 +140,11 @@ published action view is deliberately restricted to turns 0--1,000 with the
 GSI `0.9--1.6` normalized-action limits. The external Step 7 artifacts have
 only visual PNGs, not a particle table, so reference completion requires visual
 agreement with the GSI SIMPSONS/MICROMAP and legacy PTC-PyORBIT2 plots, showing
-the expected fast-regime scattering rather than adiabatic trapping. A tracked
-2,000-turn reference output exists; visual scientific review remains pending.
+the expected fast-regime scattering rather than adiabatic trapping. The tracked
+5.15-mm reference rerun completes 2,000 turns with no loss and reaches a
+first-oscillation normalized-action maximum of `1.500564956`. The archived
+Step 7 script uses `x=5.1 mm`, so retain the 5.15-mm launch as an exploratory
+retune; visual scientific review remains pending.
 
 Step 8 is the website-authoritative 100,000-turn long-term scattering/trapping
 case at `Qs=1e-3`, with the Step 7 published launch `x=5 mm`,
