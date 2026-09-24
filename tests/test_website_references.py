@@ -66,6 +66,18 @@ def test_step_5_website_reference_manifest_hashes_downloaded_images():
         assert sha256_file(directory / entry["file"]) == entry["sha256"]
 
 
+def test_official_thbw01_deck_contains_hashed_full_page_reference_set():
+    directory = ROOT / "shared_inputs" / "reference_slides" / "THBW01"
+    manifest = json.loads((directory / "reference_manifest.json").read_text(encoding="utf-8"))
+
+    assert manifest["source_url"].endswith("THBW01.pdf")
+    assert manifest["page_count"] == 22
+    assert sha256_file(directory / manifest["pdf"]["file"]) == manifest["pdf"]["sha256"]
+    assert [page["page_number"] for page in manifest["pages"]] == list(range(1, 23))
+    for page in manifest["pages"]:
+        assert sha256_file(directory / page["file"]) == page["sha256"]
+
+
 def test_step_6_website_reference_manifest_hashes_downloaded_image():
     directory = ROOT / "shared_inputs" / "reference_plots" / "step_06"
     manifest = json.loads((directory / "reference_manifest.json").read_text(encoding="utf-8"))

@@ -107,7 +107,9 @@ SIMPSONS, and Synergia visual references. The legacy Step 5 artifacts contain
 only plots, not a usable numeric particle table: reference completion therefore
 requires a visual review that confirms the physical extent, central orbit, and
 three resonance islands. The tracked reference output contains the 16-particle
-run with no losses; the required visual-topology review remains pending.
+run with no losses; the required visual-topology review remains pending. Its
+website and legacy panels can be regenerated from the saved trajectory with
+`run_example.sh --profile reference --plot-only`, without MAD-X/PTC tracking.
 
 Step 6 tracks one particle for one 15,000-turn synchrotron oscillation with
 the sextupole-on `(Qx, Qy) = (4.3504, 3.2)` lattice, frozen analytical-Gaussian
@@ -121,7 +123,11 @@ zero-launch trajectory for six-decimal numeric comparison; the `reference`
 profile remains authoritative for the GSI action plot. A tracked 15,000-turn
 published-reference output exists; completion still requires the
 `legacy_artifact` numeric run and published-plot review, with the provenance
-conflict retained in the manifest and comparison report.
+conflict retained in the manifest and comparison report. The saved reference
+records now regenerate both the original GSI website-raster comparison and an
+uncropped full-page comparison to page 15 of the versioned 22-page THBW01 deck
+via `run_example.sh --profile reference --plot-only`; this is a plotting-only
+operation and does not rerun the simulation.
 
 Step 7 is the fast-synchrotron case: the sextupole-on `(Qx, Qy) = (4.3504,
 3.2)` lattice, frozen analytical-Gaussian SC, 10 m aperture, and restoring

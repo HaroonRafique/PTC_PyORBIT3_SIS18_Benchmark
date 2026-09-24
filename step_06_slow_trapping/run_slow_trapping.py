@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from common.environment import prepare_pyorbit3_runtime, resolve_runtime_paths
-from common.legacy_plot_comparison import plot_legacy_comparison, plot_same_axes_references
+from common.legacy_plot_comparison import plot_labeled_comparison, plot_legacy_comparison, plot_same_axes_references
 from common.madx import generate_flat_file
 from common.manifest import write_run_manifest
 from common.reference_artifacts import maybe_reference_root, sha256_file, stage_packaged_inputs
@@ -185,20 +185,84 @@ def _write_records(path: Path, records: np.ndarray) -> Path:
     return path
 
 
+def _saved_records(path: Path) -> np.ndarray:
+    """Load single-particle records saved by a prior Step 6 tracking run."""
+
+    if not path.is_file():
+        raise FileNotFoundError(f"Saved Step 6 trajectory is missing: {path}")
+    with np.load(path, allow_pickle=False) as archive:
+        if "records" not in archive:
+            raise ValueError(f"Saved Step 6 trajectory has no records array: {path}")
+        records = np.asarray(archive["records"])
+    if records.ndim != 2 or records.shape[0] < 2 or records.shape[1] != 7:
+        raise ValueError(f"Saved Step 6 records must have shape (turns, 7): {path}")
+    return records
+
+
+def _write_plots(*, records: np.ndarray, output: Path, reference: Path | None, profile: str, payload: dict[str, object]) -> tuple[list[str], dict[str, str], dict[str, object]]:
+    """Render Step 6 plots and read-only visual references from saved records."""
+
+    plots = output / "plots"
+    current = {"action": _plot_action(plots / "action_x_vs_synchrotron_oscillations.png", records), "z": _plot_series(plots / "z_vs_turn.png", records), "x_xp": _plot_phase_space(plots / "poincare_x_xp.png", records, longitudinal=False), "z_dE": _plot_phase_space(plots / "poincare_z_dE.png", records, longitudinal=True)}
+    reference_artifacts: dict[str, str] = {}
+    generated_plots = [str(path) for path in current.values()]
+    comparison: dict[str, object] = {"published_case": profile == "reference", "legacy_artifact_discrepancy": "legacy source launches x=0 while GSI Step 6 specifies x=5 mm"}
+    if reference is not None:
+        reference_output = reference / "Step6" / "output"
+        legacy_data = reference_output / "Particles_all.dat"
+        legacy_images = {"action": reference_output / "Particle_trapping_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png", "z": reference_output / "Particle_trapping_z_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png", "x_xp": reference_output / "Poincare_x_xp_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png", "z_dE": reference_output / "Poincare_z_dE_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png"}
+        for observable, legacy_image in legacy_images.items():
+            generated_plots.append(str(plot_legacy_comparison(legacy_image, current[observable], plots / f"legacy_vs_current_{observable}_side_by_side.png", title=f"SIS18 Step 6 {observable}")))
+        reference_artifacts = {str(path): sha256_file(path) for path in (*legacy_images.values(), legacy_data) if path.is_file()}
+        website_manifest = json.loads((WEBSITE_REFERENCE_DIR / "reference_manifest.json").read_text(encoding="utf-8"))
+        website_image = WEBSITE_REFERENCE_DIR / website_manifest["plots"][0]["file"]
+        generated_plots.append(str(plot_same_axes_references(current=current["action"], references=(("Original GSI website reference", website_image), ("PTC-PyORBIT2", legacy_images["action"])), output=plots / "website_vs_current_action_same_axes.png")))
+        slide_path = ROOT / str(payload["comparison"]["website_slide_file"])
+        generated_plots.append(str(plot_labeled_comparison(slide_path, current["action"], plots / "website_slide_vs_current_action.png", title="SIS18 Step 6: official GSI slide and current action", left_label="Official GSI Step 6 slide", right_label="PTC-PyORBIT3")))
+        reference_artifacts[website_manifest["plots"][0]["file"]] = sha256_file(website_image)
+        reference_artifacts[slide_path.name] = sha256_file(slide_path)
+        comparison["website_slide_page_number"] = payload["comparison"]["website_slide_page_number"]
+        if profile == "legacy_artifact":
+            legacy = legacy_particle_records(legacy_data)
+            comparison["legacy_artifact_numeric"] = trajectory_comparison(legacy, records)
+            for observable in current:
+                generated_plots.append(str(_overlay(plots / f"legacy_vs_current_{observable}_numeric_overlay.png", observable=observable, legacy=legacy, current=records)))
+    (output / "comparison.json").write_text(json.dumps(comparison, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (output / "comparison.md").write_text("# Step 6 comparison\n\n- GSI published case: x=5 mm, z=2.5 sigma_z, Qx=4.3504, Qy=3.2.\n- Historical stored trajectory launches x=0 and is compared only by the legacy_artifact profile.\n- Visual references include the GSI website raster and uncropped official Step 6 slide.\n", encoding="utf-8")
+    return generated_plots, reference_artifacts, comparison
+
+
+def _record_plot_only_manifest(output: Path, *, plots: list[str], reference_artifacts: dict[str, str], comparison: dict[str, object], comparison_enabled: bool) -> None:
+    """Add postprocessed Step 6 evidence without replacing tracking provenance."""
+
+    manifest_path = output / "manifest.json"
+    if not manifest_path.is_file():
+        raise FileNotFoundError(f"Saved Step 6 run manifest is missing: {manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest.update({"plots": plots, "reference_artifacts": reference_artifacts, "comparison": comparison, "comparison_enabled": comparison_enabled, "plot_only_command": sys.argv})
+    write_run_manifest(manifest_path, manifest)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", choices=("smoke", "reference", "legacy_artifact", "exploratory"), default="smoke")
     parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output")
-    parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
+    parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--plot-only", action="store_true"); parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv)
     config_path = STEP_DIR / "config.json"
     config = load_step_config(config_path, step=6, profile=args.profile)
     print(format_resolved_config(config_path, step=6, profile=args.profile), flush=True)
-    turns = config.turns
+    payload = json.loads(config_path.read_text(encoding="utf-8")); turns = config.turns
     if turns < 1: raise ValueError("Step 6 requires at least one turn")
     launch = load_profile_payload(config_path, step=6, profile=args.profile)["launch"]
     coordinates = np.asarray((launch["x_m"], launch["xp_rad"], launch["y_m"], launch["yp_rad"], launch["z_sigma"] * BUNCH_LENGTH_RMS_M, launch["dE_GeV"]))
     output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"
+    reference = maybe_reference_root(args.reference_root, comparison_enabled=not args.skip_reference_comparison)
+    if args.plot_only:
+        generated_plots, reference_artifacts, comparison = _write_plots(records=_saved_records(output / "trajectories" / "single_particle_turn_records.npz"), output=output, reference=reference, profile=args.profile, payload=payload)
+        _record_plot_only_manifest(output, plots=generated_plots, reference_artifacts=reference_artifacts, comparison=comparison, comparison_enabled=reference is not None)
+        print(f"Step 6 {args.profile} plots refreshed: {output / 'manifest.json'}")
+        return 0
     paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
     staged = stage_packaged_inputs(source=STEP_DIR / "legacy_input", destination=inputs / "Input")
     flat = generate_flat_file(madx=paths.madx, workdir=inputs, madx_input=inputs / "Input" / "SIS18.madx")
@@ -208,25 +272,7 @@ def main(argv: list[str] | None = None) -> int:
     trajectories.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(trajectories / "single_particle_turn_records.npz", records=records)
     diagnostics = _write_records(tables / "turn_diagnostics.csv", records)
-    current = {"action": _plot_action(plots / "action_x_vs_synchrotron_oscillations.png", records), "z": _plot_series(plots / "z_vs_turn.png", records), "x_xp": _plot_phase_space(plots / "poincare_x_xp.png", records, longitudinal=False), "z_dE": _plot_phase_space(plots / "poincare_z_dE.png", records, longitudinal=True)}
-    reference = maybe_reference_root(args.reference_root, comparison_enabled=not args.skip_reference_comparison)
-    reference_artifacts: dict[str, str] = {}; generated_plots = [str(path) for path in current.values()]; comparison: dict[str, object] = {"published_case": args.profile == "reference", "legacy_artifact_discrepancy": "legacy source launches x=0 while GSI Step 6 specifies x=5 mm"}
-    if reference is not None:
-        reference_output = reference / "Step6" / "output"
-        legacy_data = reference_output / "Particles_all.dat"
-        legacy = legacy_particle_records(legacy_data)
-        legacy_images = {"action": reference_output / "Particle_trapping_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png", "z": reference_output / "Particle_trapping_z_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png", "x_xp": reference_output / "Poincare_x_xp_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png", "z_dE": reference_output / "Poincare_z_dE_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png"}
-        for observable, legacy_image in legacy_images.items(): generated_plots.append(str(plot_legacy_comparison(legacy_image, current[observable], plots / f"legacy_vs_current_{observable}_side_by_side.png", title=f"SIS18 Step 6 {observable}")))
-        reference_artifacts = {str(path): sha256_file(path) for path in (*legacy_images.values(), legacy_data)}
-        website_manifest = json.loads((WEBSITE_REFERENCE_DIR / "reference_manifest.json").read_text(encoding="utf-8"))
-        website_image = WEBSITE_REFERENCE_DIR / website_manifest["plots"][0]["file"]
-        generated_plots.append(str(plot_same_axes_references(current=current["action"], references=(("Original GSI reference", website_image), ("PTC-PyORBIT2", legacy_images["action"])), output=plots / "website_vs_current_action_same_axes.png")))
-        reference_artifacts[website_manifest["plots"][0]["file"]] = sha256_file(website_image)
-        if args.profile == "legacy_artifact" and turns == 15000:
-            comparison["legacy_artifact_numeric"] = trajectory_comparison(legacy, records)
-            for observable in current: generated_plots.append(str(_overlay(plots / f"legacy_vs_current_{observable}_numeric_overlay.png", observable=observable, legacy=legacy, current=records)))
-    (output / "comparison.json").write_text(json.dumps(comparison, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (output / "comparison.md").write_text("# Step 6 comparison\n\n- GSI published case: x=5 mm, z=2.5 sigma_z, Qx=4.3504, Qy=3.2.\n- Historical stored trajectory launches x=0 and is compared only by the legacy_artifact profile.\n", encoding="utf-8")
+    generated_plots, reference_artifacts, comparison = _write_plots(records=records, output=output, reference=reference, profile=args.profile, payload=payload)
     (output / "tracking_summary.json").write_text(json.dumps({**summary, "turns": turns, "launch": launch}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     manifest = write_run_manifest(output / "manifest.json", {"step": 6, "profile": args.profile, "config_path": str(config_path), "config_sha256": sha256_file(config_path), "command": sys.argv, "turns": turns, "mpi_size": 1, "seed": config.seed, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {path.name: sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "comparison": comparison, "lattice": summary, "space_charge": "analytical_frozen_gaussian", "sextupole_enabled": True, "code_revisions": {"benchmark": _revision(ROOT), "pyorbit3": _revision(paths.pyorbit3_root), "ptc": _revision(paths.pyorbit3_root.parent / "PTC")}, "plots": generated_plots, "diagnostics": str(diagnostics)})
     print(f"Step 6 {args.profile} complete: {manifest}")

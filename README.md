@@ -100,7 +100,9 @@ mrad over the historical `[-50, 50] mm × [-5, 5] mrad` window, alongside the
 legacy PTC-PyORBIT2 plots and original GSI MICROMAP, SIMPSONS, and Synergia
 rasters. There is no usable historical particle table, so reference completion
 requires visual agreement of the physical extent, central orbit, and the three
-resonance islands.
+resonance islands. Rebuild those plots from the saved reference trajectory
+without tracking via `./step_05_phase_space_island/run_example.sh --profile
+reference --plot-only` (with `SIS18_REFERENCE_ROOT` set for legacy panels).
 
 Step 6 follows one particle for one 15,000-turn synchrotron oscillation with
 the frozen-Gaussian slow-trapping model. Its published reference launch is
@@ -108,7 +110,12 @@ the frozen-Gaussian slow-trapping model. Its published reference launch is
 trajectory instead launches at `x=0`, so `--profile legacy_artifact` reproduces
 that incompatible artifact for numeric diagnostics while `--profile reference`
 remains the scientific benchmark. The original GSI action raster is packaged
-with URL and SHA-256 provenance.
+with URL and SHA-256 provenance. The complete 22-page official GSI THBW01
+deck is versioned under `shared_inputs/reference_slides/THBW01/`; its uncropped
+page 15 is compared alongside the Step 6 action plot. Rebuild all Step 6 plots
+from the saved reference records, without tracking, via
+`./step_06_slow_trapping/run_example.sh --profile reference --plot-only` (with
+`SIS18_REFERENCE_ROOT` set for legacy panels).
 
 Step 7 is the fast-synchrotron counterpart: one particle launches at
 `x=5.1 mm`, `z=2.5 sigma_z` in the frozen-Gaussian model at `(Qx, Qy) =

@@ -28,6 +28,12 @@
     "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
   },
   "particles": 16,
+  "plot_only_command": [
+    "run_phase_space_island.py",
+    "--profile",
+    "reference",
+    "--plot-only"
+  ],
   "plots": [
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/output/plots/poincare_full.png",
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_05_phase_space_island/output/plots/poincare_x_xp_zoom.png",

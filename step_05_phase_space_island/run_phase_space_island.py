@@ -87,6 +87,55 @@ def _surviving_ids(snapshot: np.ndarray) -> set[int]:
     return set(np.flatnonzero(np.isfinite(snapshot[:, 0])))
 
 
+def _saved_snapshots(path: Path) -> np.ndarray:
+    """Load Step 5 Poincare coordinates saved by a prior tracking run."""
+
+    if not path.is_file():
+        raise FileNotFoundError(f"Saved Step 5 trajectory is missing: {path}")
+    with np.load(path, allow_pickle=False) as archive:
+        if "coordinates" not in archive:
+            raise ValueError(f"Saved Step 5 trajectory has no coordinates array: {path}")
+        snapshots = np.asarray(archive["coordinates"])
+    if snapshots.ndim != 3 or snapshots.shape[0] < 2 or snapshots.shape[2] != 6:
+        raise ValueError(f"Saved Step 5 coordinates must have shape (turns, particles, 6): {path}")
+    return snapshots
+
+
+def _write_plots(*, snapshots: np.ndarray, output: Path, reference: Path | None) -> tuple[list[str], dict[str, str]]:
+    """Render Step 5 plots and read-only visual references from saved coordinates."""
+
+    plots = output / "plots"
+    full, zoom = plot_poincare_views(snapshots[1:], plots, horizontal_limits=phase_space_limits())
+    reference_artifacts: dict[str, str] = {}
+    plot_paths = [str(full), str(zoom)]
+    comparison_text = "# Step 5 comparison\n\n- Visual-only topology comparison: central orbit, three islands, and physical extent.\n"
+    if reference is not None:
+        reference_output = reference / "Step5" / "output"
+        full_reference = reference_output / "Poincare_Dist_SIS18_Step5.png"
+        zoom_reference = reference_output / "Poincare_Dist_SIS18_Step5_zoom.png"
+        full_comparison = plot_legacy_comparison(full_reference, full, plots / "legacy_vs_current_full.png", title="SIS18 Step 5 phase space")
+        zoom_comparison = plot_legacy_comparison(zoom_reference, zoom, plots / "legacy_vs_current_zoom.png", title="SIS18 Step 5 horizontal phase space")
+        website_manifest = json.loads((WEBSITE_REFERENCE_DIR / "reference_manifest.json").read_text(encoding="utf-8"))
+        website_references = [*((entry["label"], WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"]), ("PTC-PyORBIT2", zoom_reference)]
+        website_comparison = plot_same_axes_references(current=zoom, references=website_references, output=plots / "website_vs_current_horizontal_phase_space.png")
+        reference_artifacts = {path.name: sha256_file(path) for path in (full_reference, zoom_reference, *(path for _, path in website_references))}
+        plot_paths.extend((str(full_comparison), str(zoom_comparison), str(website_comparison)))
+        comparison_text += "- Public source: " + website_manifest["source_page"] + "\n- Synergia is contextual only because its source notes non-frozen longitudinal motion.\n"
+    (output / "comparison.md").write_text(comparison_text, encoding="utf-8")
+    return plot_paths, reference_artifacts
+
+
+def _record_plot_only_manifest(output: Path, *, plots: list[str], reference_artifacts: dict[str, str], comparison_enabled: bool) -> None:
+    """Add postprocessed plot evidence without replacing tracking provenance."""
+
+    manifest_path = output / "manifest.json"
+    if not manifest_path.is_file():
+        raise FileNotFoundError(f"Saved Step 5 run manifest is missing: {manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest.update({"plots": plots, "reference_artifacts": reference_artifacts, "comparison_enabled": comparison_enabled, "plot_only_command": sys.argv})
+    write_run_manifest(manifest_path, manifest)
+
+
 def _run(*, flat: Path, inputs: Path, config, particles: int, turns: int):
     lattice, bunch = load_sis18_lattice(flat)
     from ext.ptc_orbit.ptc_orbit import readScriptPTC
@@ -113,23 +162,24 @@ def _run(*, flat: Path, inputs: Path, config, particles: int, turns: int):
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke"); parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output"); parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--madx", type=Path)
+    parser.add_argument("--profile", choices=("smoke", "reference"), default="smoke"); parser.add_argument("--output-dir", type=Path, default=STEP_DIR / "output"); parser.add_argument("--reference-root", type=Path); parser.add_argument("--skip-reference-comparison", action="store_true"); parser.add_argument("--plot-only", action="store_true"); parser.add_argument("--madx", type=Path)
     args = parser.parse_args(argv); config_path = STEP_DIR / "config.json"; config = load_step_config(config_path, step=5, profile=args.profile); print(format_resolved_config(config_path, step=5, profile=args.profile), flush=True); particles, turns = config.n_macroparticles, config.turns
     if particles < 1 or turns < 1: raise ValueError("Step 5 requires at least one particle and one turn")
-    output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"; paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
+    output, inputs = args.output_dir.resolve(), STEP_DIR / "input" / "generated" / args.profile / "madx"
+    reference = maybe_reference_root(args.reference_root, comparison_enabled=not args.skip_reference_comparison)
+    if args.plot_only:
+        plot_paths, reference_artifacts = _write_plots(snapshots=_saved_snapshots(output / "trajectories" / "poincare_turn_by_particle.npz"), output=output, reference=reference)
+        _record_plot_only_manifest(output, plots=plot_paths, reference_artifacts=reference_artifacts, comparison_enabled=reference is not None)
+        print(f"Step 5 {args.profile} plots refreshed: {output / 'manifest.json'}")
+        return 0
+    paths = resolve_runtime_paths(madx=args.madx or Path("/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/ptc_pyorbit3_examples/tools/madx/madx-linux64_v5_02_00"))
     staged = stage_packaged_inputs(source=STEP_DIR / "legacy_input", destination=inputs / "Input"); flat = generate_flat_file(madx=paths.madx, workdir=inputs, madx_input=inputs / "Input" / "SIS18.madx"); prepare_pyorbit3_runtime(paths, Path("/tmp/sis18_ptc_runtime"))
     snapshots, coordinates, first_lost, summary = _run(flat=flat, inputs=inputs, config=config, particles=particles, turns=turns)
     trajectories_dir, tables, plots = output / "trajectories", output / "tables", output / "plots"; trajectories_dir.mkdir(parents=True, exist_ok=True); tables.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(trajectories_dir / "poincare_turn_by_particle.npz", coordinates=snapshots, turns=np.arange(turns + 1), launch_coordinates=coordinates)
     with (tables / "lost_particles.csv").open("w", newline="", encoding="utf-8") as stream:
         writer = csv.writer(stream); writer.writerow(("particle_id", "launch_x_m", "first_lost_turn")); [writer.writerow((particle_id, coordinates[particle_id, 0], first_lost[particle_id])) for particle_id in np.flatnonzero(first_lost >= 0)]
-    full, zoom = plot_poincare_views(snapshots[1:], plots, horizontal_limits=phase_space_limits()); reference = maybe_reference_root(args.reference_root, comparison_enabled=not args.skip_reference_comparison)
-    reference_artifacts: dict[str, str] = {}; plot_paths = [str(full), str(zoom)]; comparison_text = "# Step 5 comparison\n\n- Visual-only topology comparison: central orbit, three islands, and physical extent.\n"
-    if reference is not None:
-        reference_output = reference / "Step5" / "output"; full_reference = reference_output / "Poincare_Dist_SIS18_Step5.png"; zoom_reference = reference_output / "Poincare_Dist_SIS18_Step5_zoom.png"; full_comparison = plot_legacy_comparison(full_reference, full, plots / "legacy_vs_current_full.png", title="SIS18 Step 5 phase space"); zoom_comparison = plot_legacy_comparison(zoom_reference, zoom, plots / "legacy_vs_current_zoom.png", title="SIS18 Step 5 horizontal phase space")
-        website_manifest = json.loads((WEBSITE_REFERENCE_DIR / "reference_manifest.json").read_text(encoding="utf-8")); website_references = [*((entry["label"], WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"]), ("PTC-PyORBIT2", zoom_reference)]; website_comparison = plot_same_axes_references(current=zoom, references=website_references, output=plots / "website_vs_current_horizontal_phase_space.png")
-        reference_artifacts = {path.name: sha256_file(path) for path in (full_reference, zoom_reference, *(path for _, path in website_references))}; plot_paths.extend((str(full_comparison), str(zoom_comparison), str(website_comparison))); comparison_text += "- Public source: " + website_manifest["source_page"] + "\n- Synergia is contextual only because its source notes non-frozen longitudinal motion.\n"
-    (output / "comparison.md").write_text(comparison_text, encoding="utf-8"); (output / "tracking_summary.json").write_text(json.dumps({**summary, "lost_particles": int((first_lost >= 0).sum()), "launch_extent_sigma": reference_launch_extent_sigma(particles=particles)}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    plot_paths, reference_artifacts = _write_plots(snapshots=snapshots, output=output, reference=reference); (output / "tracking_summary.json").write_text(json.dumps({**summary, "lost_particles": int((first_lost >= 0).sum()), "launch_extent_sigma": reference_launch_extent_sigma(particles=particles)}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     manifest = write_run_manifest(output / "manifest.json", {"step": 5, "profile": args.profile, "command": sys.argv, "particles": particles, "turns": turns, "mpi_size": 1, "seed": config.seed, "flat_file": str(flat), "flat_file_sha256": sha256_file(flat), "packaged_inputs": {path.name: sha256_file(path) for path in staged}, "reference_artifacts": reference_artifacts, "comparison_enabled": reference is not None, "comparison": "visual_topology_only", "lattice": summary, "space_charge": "analytical_frozen_gaussian", "sextupole_enabled": True, "code_revisions": {"benchmark": _revision(ROOT), "pyorbit3": _revision(paths.pyorbit3_root), "ptc": _revision(paths.pyorbit3_root.parent / "PTC")}, "plots": plot_paths})
     print(f"Step 5 {args.profile} complete: {manifest}"); return 0
 

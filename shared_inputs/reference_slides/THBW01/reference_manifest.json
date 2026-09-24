@@ -1,0 +1,31 @@
+{
+  "source_url": "https://web-docs.gsi.de/~giuliano/research_activity/trapping_benchmarking/THBW01.pdf",
+  "description": "Official GSI HB2006 Benchmarking of Trapping slide deck; pages are full-page, uncropped 160-dpi PNG renders.",
+  "pdf": {"file": "THBW01.pdf", "sha256": "1958821fe5875e0f2a5f22dde3f09e67fc679cb8046a222e4b2deeaae9d310b2"},
+  "page_count": 22,
+  "render_command": "pdftoppm -r 160 -png THBW01.pdf pages/page",
+  "pages": [
+    {"page_number": 1, "file": "pages/page-01.png", "sha256": "7021519c7a2664511aa1daac05ff6c8b976e784f2396bdb8307f1eacd52edefc"},
+    {"page_number": 2, "file": "pages/page-02.png", "sha256": "84f9c7f2392256579c86cde7735ac7eb24f19ec0f4bd1bd6c2c80c1eb246d6b3"},
+    {"page_number": 3, "file": "pages/page-03.png", "sha256": "124e25525f99ecc6a9d99b71b2c83cbfeb0423cca3ed935a050297039523d3d4"},
+    {"page_number": 4, "file": "pages/page-04.png", "sha256": "19465cda33f41aae0977ba4554b14e06e2a9464d430d8041c1ca920b4eafeb64"},
+    {"page_number": 5, "file": "pages/page-05.png", "sha256": "356412e8573ad4b6d0490f8502240e839df7af9e5a58cd1f06d20e3415a39315"},
+    {"page_number": 6, "file": "pages/page-06.png", "sha256": "5104e1aec7ce5e592d164c44fe141756d361dfc268e574f5dfc05f4cebcd306d"},
+    {"page_number": 7, "file": "pages/page-07.png", "sha256": "d8f4db3ea5516fcffbab9143527d0d7d878c2531dc29ef95e64b8c80abeffc96"},
+    {"page_number": 8, "file": "pages/page-08.png", "sha256": "44d526f2f42bed8891e3778274ca467ec67b885d9f21362314ef11dea761b967"},
+    {"page_number": 9, "file": "pages/page-09.png", "sha256": "e8847e52698a7eaa2a3960700d19afbc237fb5926751c767d8fe9101e6e0ca6d"},
+    {"page_number": 10, "file": "pages/page-10.png", "sha256": "b794088cdce742d06ae403c5e381a2bd8578aa37f6f480466dd0d308394fe7ba"},
+    {"page_number": 11, "file": "pages/page-11.png", "sha256": "dcc94a7f3d03f7fa0d39b935d825553833742c94285555f6959c55159819f572"},
+    {"page_number": 12, "file": "pages/page-12.png", "sha256": "4805d757e785a2c17eba804d93ef8e522bc5d219f7c27c93b03e3e0d55eaf40c"},
+    {"page_number": 13, "file": "pages/page-13.png", "sha256": "382543538eb182342d0ce1875585a74896815e095746b3381910e7d97aec40bc"},
+    {"page_number": 14, "file": "pages/page-14.png", "sha256": "2b7930339e12489b63bbdf65afdf034463837b0b3440d63472101d6acf43902a"},
+    {"page_number": 15, "file": "pages/page-15.png", "sha256": "a28ab2b3b5851a7f3746129e48f9a42512d48e21bf3554591f45c2258053cc8c"},
+    {"page_number": 16, "file": "pages/page-16.png", "sha256": "e78a69be7f52b25ee4242ff576032ae877d77112b0b6b5b380f693731a52edea"},
+    {"page_number": 17, "file": "pages/page-17.png", "sha256": "dbfb7dda8fc7aae6e70dd620935ebd267d7fe5fa29a55732ff112e98d033241b"},
+    {"page_number": 18, "file": "pages/page-18.png", "sha256": "e25718dc0ec822024752fb4192b73cc894fddd85f8ae8cc33eec277d9507c2e8"},
+    {"page_number": 19, "file": "pages/page-19.png", "sha256": "7424c3cef301898ea44f67c33b086573da900dd538882547f70e71fed4aeba48"},
+    {"page_number": 20, "file": "pages/page-20.png", "sha256": "f0d875b9c3dd950d48231126d880f1392c56aafe2eb548685dfda918b8b1d8e4"},
+    {"page_number": 21, "file": "pages/page-21.png", "sha256": "d4fe2d22a85f1ca071fb0e2caf8dcc4075a3adc19ef46be0d2d7deb7f553fe3c"},
+    {"page_number": 22, "file": "pages/page-22.png", "sha256": "289db96438d3cc8cb14011b7336f739051b05943d9d93238a05d9c655acb8ba2"}
+  ]
+}

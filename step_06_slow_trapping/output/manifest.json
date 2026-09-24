@@ -11,7 +11,8 @@
   ],
   "comparison": {
     "legacy_artifact_discrepancy": "legacy source launches x=0 while GSI Step 6 specifies x=5 mm",
-    "published_case": true
+    "published_case": true,
+    "website_slide_page_number": 15
   },
   "comparison_enabled": true,
   "config_path": "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/config.json",
@@ -34,6 +35,12 @@
     "resplit.ptc": "484311f518f7cd570039e3e4ab144d2495653b4a8ca550abe5528cd822220ee4",
     "time.ptc": "37f07edca1793b48fce32c7c98fba488e5f89d68c86b8e384f74f706c13854af"
   },
+  "plot_only_command": [
+    "run_slow_trapping.py",
+    "--profile",
+    "reference",
+    "--plot-only"
+  ],
   "plots": [
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/action_x_vs_synchrotron_oscillations.png",
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/z_vs_turn.png",
@@ -43,7 +50,8 @@
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/legacy_vs_current_z_side_by_side.png",
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/legacy_vs_current_x_xp_side_by_side.png",
     "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/legacy_vs_current_z_dE_side_by_side.png",
-    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/website_vs_current_action_same_axes.png"
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/website_vs_current_action_same_axes.png",
+    "/home/hr/Codes/PTC_PyORBIT3_Codex_Merge_Jul26/PTC_PyORBIT3_SIS18_Benchmark/step_06_slow_trapping/output/plots/website_slide_vs_current_action.png"
   ],
   "profile": "reference",
   "reference_artifacts": {
@@ -52,6 +60,7 @@
     "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Particles_all.dat": "1743238a99d57587e70956c2273a132eb932b74a1e76c9a63b0529dd4360bdb9",
     "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Poincare_x_xp_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png": "bc6bc702c42b8295156c23fc3908fa4bc3c590a9149ad0be11c89002f381cb71",
     "/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark/Step6/output/Poincare_z_dE_15000synch_F=-4.38975e-09_5.0.5mm_1E5turns_SC_Manual.png": "c634cdd0ea5721f57c0eb37ccc6e6f3b46e27a50be4243de2622972bfffc6194",
+    "page-15.png": "a28ab2b3b5851a7f3746129e48f9a42512d48e21bf3554591f45c2258053cc8c",
     "trapping-ns-15000_sex-on-qx43504.jpg": "11b4c571dc2693ff1ca16eb756652370d5962a916a30ece35a7bdf811cee7140"
   },
   "seed": 20260908,
