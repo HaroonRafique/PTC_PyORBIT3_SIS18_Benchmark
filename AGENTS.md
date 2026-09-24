@@ -95,8 +95,20 @@ under `docs/superpowers/` before non-trivial work.
 - Step 1's retained historical output has no `.mat` particle data. Keep its
   comparison as labelled side-by-side PNG panels; do not rerun the legacy
   Python 2.7 PTC-PyORBIT stack to reconstruct data.
-- Update the root README and `BENCHMARK_PLAN.md` after every verified smoke,
-  reference, comparison, or blocking discovery.
+- Treat the root `README.md` and `BENCHMARK_PLAN.md` as evidence-triggered
+  operational documentation. Update both in the same logical change after any
+  verified smoke, reference, comparison, blocker, supported command/profile,
+  configuration, generated-input, or repository-layout change that makes a
+  reader-facing status or usage claim stale. Reconcile them after committing
+  regenerated benchmark evidence; do not defer this update to a later review.
+- Derive status claims first from the current tracked step manifests,
+  comparison results/reports, tracking summaries, and reproducibility
+  artifacts; then from the current local configuration and runners. Use the
+  live checklist to summarize that evidence, while treating historical design
+  and implementation documents as context rather than newer status evidence.
+  Never mark a step complete merely because it ran: state outstanding visual
+  review, manual scientific review, residual investigation, or disagreement
+  explicitly, and record disagreement as a blocker.
 
 ## Required reproducibility evidence
 

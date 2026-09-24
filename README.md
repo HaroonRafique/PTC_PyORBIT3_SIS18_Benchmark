@@ -18,14 +18,14 @@ Primary historical references:
 | Shared configuration and legacy manifests | complete |
 | PTC runtime and lattice smoke check | complete |
 | Step 1 smoke/reference comparison | complete |
-| Step 2 frozen-space-charge tune scan | smoke complete; reference pending |
-| Step 3 sextupole-on tune scan | smoke complete; reference pending |
-| Step 4 resonance-crossing tune scan | smoke complete; reference pending |
-| Step 5 phase-space island | smoke complete; reference pending |
-| Step 6 slow trapping | smoke complete; reference and legacy-artifact runs pending |
-| Step 7 fast trapping | smoke complete; reference and visual review pending |
-| Step 8 long-term trapping | smoke complete; reference and legacy-artifact runs pending |
-| Step 9 full-bunch emittance evolution | smoke complete; reference and legacy-artifact runs pending |
+| Step 2 frozen-space-charge tune scan | reference run and numeric comparison recorded; plot/scientific review pending |
+| Step 3 sextupole-on tune scan | reference run numerically agrees; plot regeneration/visual review pending |
+| Step 4 resonance-crossing tune scan | reference run recorded; horizontal residual requires scientific review |
+| Step 5 phase-space island | reference run recorded; visual-topology review pending |
+| Step 6 slow trapping | published reference run recorded; legacy-artifact numeric run and visual review pending |
+| Step 7 fast trapping | reference run recorded; visual scientific review pending |
+| Step 8 long-term trapping | reference run recorded; **blocked** by numeric disagreement and source-duration conflict |
+| Step 9 full-bunch emittance evolution | reference run recorded; report-only/manual scientific review pending |
 | Promotion audit for `ptc_pyorbit3_examples/common` | pending |
 
 ## Layout
@@ -34,8 +34,8 @@ Primary historical references:
 - `common/`: portable helpers designed against the active examples suite.
 - `step_01_*` through `step_09_*`: independently runnable benchmark cases;
   each owns authoritative `config.json`, versioned `legacy_input/`, versioned generated `input/`, and
-  ignored `output/` artifacts.
-- `BENCHMARK_PLAN.md`: live execution/checklist status.
+  step-local `output/` artifacts (normally ignored, with benchmark evidence retained when tracked).
+- `BENCHMARK_PLAN.md`: live execution/checklist status and documented blockers.
 - `docs/superpowers/`: approved design and detailed implementation plan.
 
 ## Runtime and reference policy
@@ -51,7 +51,7 @@ overridden in an example configuration. Every run writes its configuration,
 input hashes, command, MPI size, seed, code revisions, and reference hashes
 when used to its step-local manifest.
 
-The normal interface, once the runners exist, is:
+All nine step directories provide this normal interface:
 
 ```bash
 cd step_01_phase_space_stability
@@ -64,8 +64,11 @@ SIS18_REFERENCE_ROOT=/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark ./run_exa
 SIS18_REFERENCE_ROOT=/home/hr/Repositories/PTC_PyORBIT_SIS18_Benchmark ./run_example.sh --profile reference
 ```
 
-Use smoke profiles before reference profiles. Steps 8 and 9 remain gated until
-their prior steps have verified reference outputs.
+Use smoke profiles before reference profiles. Reference output does not itself
+complete a benchmark step: the required numeric or visual review must also be
+recorded, and disagreements remain blockers. The current detailed evidence and
+open review items are maintained in `BENCHMARK_PLAN.md` and each step's tracked
+`output/` manifest and comparison files.
 
 Step 2 requires the declared `PyNAFF` dependency. It tracks the horizontal and
 vertical frozen-space-charge scans sequentially, writes PyNAFF-compatible
