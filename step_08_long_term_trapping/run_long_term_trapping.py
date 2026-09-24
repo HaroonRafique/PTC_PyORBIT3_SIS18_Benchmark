@@ -218,7 +218,10 @@ def _write_plots(*, records: np.ndarray, output: Path, reference: Path | None, c
             generated_plots.append(str(_overlay(plots / f"legacy_vs_current_{observable}_numeric_overlay.png", observable=observable, legacy=legacy, current=records, period_turns=period_turns, stride=stride)))
         slide = WEBSITE_REFERENCE_DIR / payload["comparison"]["website_slide"]
         generated_plots.append(str(plot_labeled_comparison(slide, current["action"], plots / "website_slide_vs_current_action.png", title="SIS18 Step 8: official GSI slide and current action", left_label="Official GSI Step 8 slide", right_label="PTC-PyORBIT3")))
-        generated_plots.append(str(plot_same_axes_references(current=current["action"], references=(("Official GSI Step 8 slide", slide),), output=plots / "website_vs_current_action_same_axes.png")))
+        website_manifest = json.loads((WEBSITE_REFERENCE_DIR / "reference_manifest.json").read_text(encoding="utf-8"))
+        website_references = tuple((entry["label"], WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"][:-1])
+        generated_plots.append(str(plot_same_axes_references(current=current["action"], references=website_references, output=plots / "website_vs_current_action_same_axes.png")))
+        reference_artifacts.update({entry["file"]: sha256_file(WEBSITE_REFERENCE_DIR / entry["file"]) for entry in website_manifest["plots"][:-1]})
         reference_artifacts = {str(path): sha256_file(path) for path in (*legacy_images.values(), legacy_data, slide)}
         comparison["numeric"] = trajectory_comparison(legacy, records)
     (output / "comparison.json").write_text(json.dumps(comparison, indent=2, sort_keys=True) + "\n", encoding="utf-8")

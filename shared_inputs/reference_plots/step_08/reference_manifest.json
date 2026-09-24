@@ -1,6 +1,8 @@
 {
   "source_page": "https://web-docs.gsi.de/~giuliano/research_activity/trapping_benchmarking/THBW01.pdf",
   "plots": [
+    {"label": "MICROMAP, SIMPSONS, MADX+fsc3d", "file": "trapping-nt-5d5-ns-1000-qx43504.jpg", "url": "https://web-docs.gsi.de/~giuliano/research_activity/trapping_benchmarking/trapping-nt-5d5-ns-1000-qx43504.jpg", "sha256": "27e23c24c728c0fc62ff7d09a2bdac516905da05e207975ecbdaea9b6c4c7ff6"},
+    {"label": "MICROMAP", "file": "shinji-step8.jpg", "url": "https://web-docs.gsi.de/~giuliano/research_activity/trapping_benchmarking/shinji-step8.jpg", "sha256": "f293697886860d2a9cbe12dbd2959815ebe3f3fd892f528dedb6a55a6d160a12"},
     {
       "label": "Official GSI Step 8 slide (full page)",
       "file": "gsi_step8_full_slide.png",
